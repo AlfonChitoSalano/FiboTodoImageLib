@@ -1,0 +1,9 @@
+﻿.select-style {
+    background-color: transparent;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 5px;
+    border-radius: 5px;
+    outline: 0;
+    box-shadow: none;
+}

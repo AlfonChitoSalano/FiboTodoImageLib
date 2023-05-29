@@ -1,0 +1,76 @@
+﻿@page "/todo"
+@using PocCommon.Models;
+
+<PageTitle>To Do</PageTitle>
+
+<h2>To Do</h2>
+
+<div class="d-flex flex-column">
+    <div class="p-2">
+        <select @bind="_selectedValue" class="select-style">
+            <option value="@TaskModelStatus.New">@TaskModelStatus.New.ToString()</option>
+            <option value="@TaskModelStatus.Active">@TaskModelStatus.Active.ToString()</option>
+            <option value="@TaskModelStatus.Complete">@TaskModelStatus.Complete.ToString()</option>
+        </select>
+    </div>
+
+    <div class="p-2">
+        <DxButton RenderStyle="ButtonRenderStyle.Primary"
+                  Text="APPLY"
+                  CssClass="w-20"
+                  Click="Filter" />
+
+        <DxButton RenderStyle="ButtonRenderStyle.Primary"
+                  Text="CLEAR FILTER"
+                  CssClass="w-20"
+                  Click="ResetAsync" />
+    </div>
+
+    <div class="p-2">
+        <DxGrid @ref="_grid"
+                Data="@_toDoCollection"
+                KeyFieldName="Id"
+                ShowGroupPanel="true"
+                ValidationEnabled="false"
+                CustomizeEditModel="GridEdit"
+                EditModelSaving="GridEditingAsync"
+                DataItemDeleting="GridDeletingAsync"
+                EditMode="@CurrentEditMode"
+                style="height: 70vh;">
+            <Columns>
+                <DxGridCommandColumn Width="160px" />
+
+                <DxGridDataColumn FieldName="Id" Caption="Id" Width="30px" />
+
+                <DxGridDataColumn FieldName="Name" Caption="Name" SortIndex="0"
+                                  SortOrder="GridColumnSortOrder.Ascending" />
+
+                <DxGridDataColumn FieldName="Status" Caption="Status" Width="150px" GroupIndex="0" />
+            </Columns>
+
+            <EditFormTemplate Context="EditFormContext">
+                @{
+                    var taskModel = (TaskModel)EditFormContext.EditModel;
+                }
+
+                <DxFormLayout CssClass="w-100">
+                    <DxFormLayoutItem Caption="Name:" ColSpanMd="6">
+                        <DxTextBox @bind-Text="@taskModel.Name" />
+                    </DxFormLayoutItem>
+
+                    <DxFormLayoutItem Caption="Status:" ColSpanMd="6">
+                        <select @bind="@taskModel.Status" class="select-style">
+                            <option value="@TaskModelStatus.New">@TaskModelStatus.New.ToString()</option>
+                            <option value="@TaskModelStatus.Active">@TaskModelStatus.Active.ToString()</option>
+                            <option value="@TaskModelStatus.Complete">@TaskModelStatus.Complete.ToString()</option>
+                        </select>
+                    </DxFormLayoutItem>
+                </DxFormLayout>
+            </EditFormTemplate>
+
+            <GroupSummary>
+                <DxGridSummaryItem SummaryType="GridSummaryItemType.Count" FieldName="Status" />
+            </GroupSummary>
+        </DxGrid>
+    </div>
+</div>

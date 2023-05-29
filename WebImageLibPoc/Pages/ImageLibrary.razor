@@ -1,0 +1,58 @@
+﻿@page "/image-library"
+@using PocCommon.Models;
+
+<PageTitle>Image Library</PageTitle>
+
+<h1>Image Library</h1>
+
+<div class="d-flex flex-column">
+    <DxGrid @ref="_myGrid" Data="_imageModels" style="height: 70vh;"
+            DataItemDeleting="RemoveImage"
+            EditModelSaving="UpdateImageModel"
+            EditMode="@CurrentEditMode" 
+            ShowGroupPanel="true">
+        <Columns>
+            <DxGridCommandColumn NewButtonVisible="false" Width="160px" />
+
+            <DxGridDataColumn FieldName="Title" Caption="Title" Width="100px" />
+
+            <DxGridDataColumn FieldName="Category" Caption="Category" GroupIndex="0" Width="100px" />
+
+            <DxGridDataColumn FieldName="Description" Caption="Description" Width="200px" />
+
+            <DxGridDataColumn FieldName="Url" Caption="URL" />
+        </Columns>
+
+        <EditFormTemplate Context="EditFormContext">
+            @{
+                var taskModel = (ImageModel)EditFormContext.EditModel;
+            }
+            <DxFormLayout CssClass="w-100">
+                <DxFormLayoutItem Caption="Title:" ColSpanMd="6">
+                    <DxTextBox @bind-Text="taskModel.Title" />
+                </DxFormLayoutItem>
+
+                <DxFormLayoutItem Caption="Description:" ColSpanMd="6">
+                    <DxTextBox @bind-Text="taskModel.Description" />
+                </DxFormLayoutItem>
+
+                <DxFormLayoutItem Caption="Category:" ColSpanMd="6">
+                    <select @bind="@taskModel.Category" class="select-style">
+                        <option value="image/jpeg">@ImageCategory.JPG.ToString()</option>
+                        <option value="image/png">@ImageCategory.PNG.ToString()</option>
+                    </select>
+                </DxFormLayoutItem>
+            </DxFormLayout>
+        </EditFormTemplate>
+    </DxGrid>
+
+    <div class="p-1 mt-3" style="border-style:none;">
+        <InputFile id="fileInput"
+                OnChange="UploadImage"
+                    accept=".jpg,.jpeg,.png" hidden />
+
+        <div class="p-2 d-flex justify-content-center align-item-center upload-btn">
+            <label for="fileInput" style="cursor:pointer;">Upload</label>
+        </div>
+    </div>
+</div>

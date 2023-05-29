@@ -1,0 +1,13 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "StorageAccountConnectionString": "DefaultEndpointsProtocol=https;AccountName=pocstorageaccntfunc;AccountKey=6FgcItsD5VLGn519jM4ASl9hIGYa3lDdBBbQpSZ5BLwuV0+LJ7KQwi8e6Q644oQJHr2KOu7YB29w+AStvRebLg==;EndpointSuffix=core.windows.net",
+    "BlobStorageContainerName": "poccontainer"
+  },
+  "Host": {
+    "CORS": "*",
+    "CORSCredentials": false
+  }
+}

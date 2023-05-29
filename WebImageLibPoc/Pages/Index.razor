@@ -1,0 +1,24 @@
+﻿@page "/"
+
+<PageTitle>Fibonacci</PageTitle>
+
+<h2>Fibonacci Fun</h2>
+
+<div class="d-flex flex-column">
+
+    <div class="p-1 mt-3" style="border-style:none;">
+        <h3> @_fibonacciNumber </h3>
+    </div>
+
+    <div class="p-1 mt-3" style="border-style:none;">
+        <DxButton RenderStyle="ButtonRenderStyle.Primary"
+                  Text="Decrement"
+                  CssClass="w-20"
+                  Click="Decrement" />
+
+        <DxButton RenderStyle="ButtonRenderStyle.Primary"
+                  Text="Increment"
+                  CssClass="w-20"
+                  Click="Increment" />
+    </div>
+</div>
