@@ -7,8 +7,8 @@
 
 <div class="d-flex flex-column">
     <DxGrid @ref="_myGrid" Data="_imageModels" style="height: 70vh;"
-            DataItemDeleting="RemoveImage"
-            EditModelSaving="UpdateImageModel"
+            DataItemDeleting="RemoveImageAsync"
+            EditModelSaving="UpdateImageModelAsync"
             EditMode="@CurrentEditMode" 
             ShowGroupPanel="true">
         <Columns>
@@ -48,7 +48,7 @@
 
     <div class="p-1 mt-3" style="border-style:none;">
         <InputFile id="fileInput"
-                OnChange="UploadImage"
+                OnChange="UploadImageAsync"
                     accept=".jpg,.jpeg,.png" hidden />
 
         <div class="p-2 d-flex justify-content-center align-item-center upload-btn">

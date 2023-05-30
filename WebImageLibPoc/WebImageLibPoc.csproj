@@ -59,6 +59,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="DevExpress.Blazor.Server.WebAssembly.v22.2">
+      <HintPath>..\_DevExpress.DLLs\DevExpress.Blazor.Server.WebAssembly.v22.2.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Blazor.v22.2">
       <HintPath>..\_DevExpress.DLLs\DevExpress.Blazor.v22.2.dll</HintPath>
     </Reference>

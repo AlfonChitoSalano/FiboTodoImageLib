@@ -24,7 +24,7 @@ namespace WebImageLibPoc.Pages
             _imageModels = new ObservableCollection<ImageModel>(await ImageService.GetAllImageModelsAsync());
         }
 
-        private async void UploadImage(InputFileChangeEventArgs e)
+        private async void UploadImageAsync(InputFileChangeEventArgs e)
         {
             var fileToUpload = e.File;
 
@@ -37,7 +37,7 @@ namespace WebImageLibPoc.Pages
             _imageModels?.Add(imageModel);
         }
 
-        private async Task RemoveImage(GridDataItemDeletingEventArgs el)
+        private async Task RemoveImageAsync(GridDataItemDeletingEventArgs el)
         {
             var imageModel = el.DataItem as ImageModel;
 
@@ -50,7 +50,7 @@ namespace WebImageLibPoc.Pages
             _imageModels?.Remove(imageModel);
         }
 
-        private async Task UpdateImageModel(GridEditModelSavingEventArgs e)
+        private async Task UpdateImageModelAsync(GridEditModelSavingEventArgs e)
         {
             var editModel = (ImageModel)e.EditModel;
 
