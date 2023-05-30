@@ -1,0 +1,275 @@
+@import "mixins/common";
+@import "mixins/toolbar";
+
+.dxbl-toolbar {
+    --dxbl-toolbar-font-family: #{$dx-toolbar-font-family};
+    --dxbl-toolbar-font-size: #{$dx-toolbar-font-size};
+    --dxbl-toolbar-line-height: #{$dx-toolbar-line-height};
+    --dxbl-toolbar-bg: #{$dx-toolbar-bg};
+    --dxbl-toolbar-color: #{$dx-toolbar-color};
+    --dxbl-toolbar-separator-width: #{$dx-toolbar-separator-width};
+    --dxbl-toolbar-separator-color: #{$dx-toolbar-separator-color};
+    --dxbl-toolbar-title-color: #{$dx-toolbar-title-color};
+    --dxbl-toolbar-title-font-size: #{$dx-toolbar-title-font-size};
+    --dxbl-toolbar-title-line-height: #{$dx-toolbar-title-line-height};
+    --dxbl-toolbar-title-font-weight: #{$dx-toolbar-title-font-weight};
+    --dxbl-toolbar-title-padding-x: #{$dx-toolbar-title-padding-x};
+    --dxbl-toolbar-title-padding-y: #{$dx-toolbar-title-padding-y};
+    --dxbl-toolbar-group-spacing: #{$dx-toolbar-group-spacing};
+    --dxbl-toolbar-item-spacing: #{$dx-toolbar-item-spacing};
+    --dxbl-toolbar-group-large-spacing: #{$dx-toolbar-group-large-spacing};
+    --dxbl-toolbar-item-large-spacing: #{$dx-toolbar-item-large-spacing};
+    --dxbl-toolbar-btn-bg: #{$dx-toolbar-btn-bg};
+    --dxbl-toolbar-btn-color: #{$dx-toolbar-btn-color};
+    --dxbl-toolbar-btn-image-color: unset;
+    --dxbl-toolbar-btn-border-color: #{$dx-toolbar-btn-border-color};
+    --dxbl-toolbar-btn-border-style: #{$dx-toolbar-btn-border-style};
+    --dxbl-toolbar-btn-border-width: #{$dx-toolbar-btn-border-width};
+    --dxbl-toolbar-btn-border-radius: #{$dx-toolbar-btn-border-radius};
+    --dxbl-toolbar-btn-hover-bg: #{$dx-toolbar-btn-hover-bg};
+    --dxbl-toolbar-btn-hover-color: #{$dx-toolbar-btn-hover-color};
+    --dxbl-toolbar-btn-hover-image-color: unset;
+    --dxbl-toolbar-btn-active-bg: #{$dx-toolbar-btn-active-bg};
+    --dxbl-toolbar-btn-active-color: #{$dx-toolbar-btn-active-color};
+    --dxbl-toolbar-btn-active-image-color: unset;
+    --dxbl-toolbar-btn-active-hover-bg: #{$dx-toolbar-btn-active-hover-bg};
+    --dxbl-toolbar-btn-active-hover-color: #{$dx-toolbar-btn-active-hover-color};
+    --dxbl-toolbar-btn-active-hover-image-color: unset;
+    --dxbl-toolbar-btn-disabled-bg: #{$dx-toolbar-btn-disabled-bg};
+    --dxbl-toolbar-btn-disabled-color: #{$dx-toolbar-btn-disabled-color};
+    --dxbl-toolbar-btn-disabled-image-color: unset;
+    --dxbl-toolbar-btn-padding-x: #{$dx-toolbar-btn-padding-x};
+    --dxbl-toolbar-btn-padding-y: #{$dx-toolbar-btn-padding-y};
+
+    display: flex;
+    flex-wrap: nowrap;
+    user-select: none;
+    background-color: var(--dxbl-toolbar-bg);
+    color: var(--dxbl-toolbar-color);
+    font-family: var(--dxbl-toolbar-font-family);
+    font-size: var(--dxbl-toolbar-font-size);
+    line-height: var(--dxbl-toolbar-line-height);
+
+    @include safari-line-height("--dxbl-toolbar-line-height", $dx-toolbar-line-height-safari);
+
+    & > .dxbl-btn-toolbar.dxbl-btn-plain-toolbar > .dxbl-btn-group { // stylelint-disable-line selector-class-pattern
+        & > .dxbl-toolbar-btn > div > .dxbl-text {
+            --dxbl-text-padding-x: 0;
+            --dxbl-text-padding-y: 0;
+            --dxbl-text-border-width: 0;
+        }
+    }
+
+    .dxbl-btn.dxbl-disabled,
+    .dxbl-btn:disabled {
+        pointer-events: auto;
+    }
+
+    & > .dxbl-btn-toolbar {
+        display: flex;
+        flex-wrap: nowrap;
+
+        --dxbl-btn-toolbar-separator-width: var(--dxbl-toolbar-separator-width);
+        --dxbl-btn-toolbar-separator-color: var(--dxbl-toolbar-separator-color);
+        --dxbl-btn-toolbar-spacing: var(--dxbl-toolbar-group-spacing);
+
+        &.dxbl-btn-plain-toolbar > .dxbl-toolbar-group > *:not(:first-child):not(.dxbl-btn-first) {
+            --dxbl-btn-toolbar-spacing: var(--dxbl-toolbar-item-spacing);
+        }
+
+        &.dxbl-btn-toolbar-large-spacing {
+            --dxbl-btn-toolbar-spacing: var(--dxbl-toolbar-group-large-spacing);
+
+            &.dxbl-btn-plain-toolbar > .dxbl-toolbar-group-large-spacing {
+                &:not(:first-child):not(.dxbl-btn-group-first) {
+                    @include btn-plain-toolbar-group-separator();
+                }
+
+                & > .dxbl-btn-group {
+                    &::before {
+                        display: none;
+                    }
+                }
+            }
+
+            & > .dxbl-toolbar-group-large-spacing > *:not(:first-child):not(.dxbl-btn-first) {
+                --dxbl-btn-toolbar-spacing: var(--dxbl-toolbar-item-large-spacing);
+            }
+        }
+
+        & > .dxbl-toolbar-placeholder {
+            flex: 1;
+            margin: 0;
+        }
+
+        & > .dxbl-toolbar-title {
+            color: var(--dxbl-toolbar-title-color);
+            font-size: var(--dxbl-toolbar-title-font-size);
+            line-height: var(--dxbl-toolbar-title-line-height);
+            font-weight: var(--dxbl-toolbar-title-font-weight);
+            padding: var(--dxbl-toolbar-title-padding-y) var(--dxbl-toolbar-title-padding-x);
+        }
+
+        .dxbl-toolbar-btn.dxbl-btn,
+        .dxbl-toolbar-btn.dxbl-btn-split > .dxbl-btn,
+        .dxbl-toolbar-btn > .dxbl-btn,
+        .dxbl-toolbar-btn > .dxbl-btn-split > .dxbl-btn {
+            --dxbl-btn-font-family: var(--dxbl-toolbar-font-family);
+            --dxbl-btn-font-size: var(--dxbl-toolbar-font-size);
+            --dxbl-btn-line-height: var(--dxbl-toolbar-line-height);
+            --dxbl-btn-padding-x: var(--dxbl-toolbar-btn-padding-x);
+            --dxbl-btn-padding-y: var(--dxbl-toolbar-btn-padding-y);
+            --dxbl-btn-border-radius: var(--dxbl-toolbar-btn-border-radius);
+            --dxbl-btn-box-shadow: none;
+
+            text-decoration: none;
+
+            &.dxbl-btn-secondary {
+                --dxbl-btn-bg: var(--dxbl-toolbar-btn-bg);
+                --dxbl-btn-color: var(--dxbl-toolbar-btn-color);
+                --dxbl-btn-image-color: var(--dxbl-toolbar-btn-image-color);
+                --dxbl-btn-disabled-bg: var(--dxbl-toolbar-btn-disabled-bg);
+                --dxbl-btn-disabled-color: var(--dxbl-toolbar-btn-disabled-color);
+                --dxbl-btn-disabled-image-color: var(--dxbl-toolbar-btn-disabled-image-color);
+                --dxbl-btn-disabled-background: none;
+                --dxbl-btn-disabled-opacity: 1;
+            }
+
+            &.dxbl-btn-secondary,
+            &.dxbl-btn-outline-secondary {
+                --dxbl-btn-border-color: var(--dxbl-toolbar-btn-border-color);
+                --dxbl-btn-hover-border-color: var(--dxbl-toolbar-btn-border-color);
+                --dxbl-btn-active-border-color: var(--dxbl-toolbar-btn-border-color);
+                --dxbl-btn-disabled-border-color: var(--dxbl-toolbar-btn-border-color);
+                --dxbl-btn-border-style: var(--dxbl-toolbar-btn-border-style);
+                --dxbl-btn-border-width: var(--dxbl-toolbar-btn-border-width);
+            }
+
+            &.dxbl-btn-secondary,
+            &.dxbl-btn-outline-secondary,
+            &.dxbl-btn-text-secondary {
+                --dxbl-btn-hover-bg: var(--dxbl-toolbar-btn-hover-bg);
+                --dxbl-btn-hover-color: var(--dxbl-toolbar-btn-hover-color);
+                --dxbl-btn-hover-image-color: var(--dxbl-toolbar-btn-hover-image-color);
+                --dxbl-btn-active-bg: var(--dxbl-toolbar-btn-active-bg);
+                --dxbl-btn-active-color: var(--dxbl-toolbar-btn-active-color);
+                --dxbl-btn-active-image-color: var(--dxbl-toolbar-btn-active-image-color);
+                --dxbl-btn-active-hover-bg: var(--dxbl-toolbar-btn-active-hover-bg);
+                --dxbl-btn-active-hover-color: var(--dxbl-toolbar-btn-active-hover-color);
+                --dxbl-btn-active-hover-image-color: var(--dxbl-toolbar-btn-active-hover-image-color);
+            }
+        }
+    }
+
+    &.dxbl-toolbar-adaptive {
+        position: relative;
+        z-index: 0;
+        flex: 1 1 auto;
+        justify-content: flex-start;
+        transition: height ease 0.3s;
+        will-change: height;
+        white-space: nowrap;
+
+        & > .dxbl-btn-toolbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: auto;
+            padding: inherit;
+            justify-content: inherit;
+            align-items: flex-start;
+
+            & > div {
+                &,
+                & > .dxbl-btn,
+                & > .dxbl-btn-group {
+                    display: inline-flex;
+                    align-self: stretch;
+                }
+            }
+
+            &.dxbl-toolbar-no-item-text > .dxbl-btn-group {
+                &,
+                & > .dxbl-btn-group {
+                    & > .dxbl-btn > .dxbl-image {
+                        &:not(:only-child):not(.dxbl-toolbar-dropdown-toggle) {
+                            margin-left: 0;
+                            margin-right: 0;
+                        }
+
+                        & + span {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.dxbl-loading {
+            & > .dxbl-btn-toolbar {
+                position: relative;
+                overflow: hidden;
+                padding: 0;
+                width: 100%;
+
+                &.dxbl-btn-plain-toolbar > .dxbl-btn-group::before {
+                    display: none;
+                }
+
+                & > .dxbl-btn-group:not(.dxbl-toolbar-btn-ellipsis) {
+                    visibility: hidden;
+                    width: 1px;
+                }
+            }
+
+            &:not(.dxbl-ribbon-toolbar) > .dxbl-btn-toolbar > .dxbl-btn-group:last-child > .dxbl-btn:first-child {
+                visibility: visible !important; // stylelint-disable-line declaration-no-important
+                position: static !important; // stylelint-disable-line declaration-no-important
+                opacity: 0.3;
+                cursor: default;
+            }
+        }
+    }
+
+    .dxbl-toolbar-title {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    &.dxbl-sm {
+        --dxbl-toolbar-font-size: #{$dx-toolbar-font-size-sm};
+        --dxbl-toolbar-line-height: #{$dx-toolbar-line-height-sm};
+        --dxbl-toolbar-title-font-size: #{$dx-toolbar-title-font-size-sm};
+        --dxbl-toolbar-title-line-height: #{$dx-toolbar-title-line-height-sm};
+        --dxbl-toolbar-title-padding-x: #{$dx-toolbar-title-padding-x-sm};
+        --dxbl-toolbar-title-padding-y: #{$dx-toolbar-title-padding-y-sm};
+        --dxbl-toolbar-btn-border-radius: #{$dx-toolbar-btn-border-radius-sm};
+        --dxbl-toolbar-btn-padding-x: #{$dx-toolbar-btn-padding-x-sm};
+        --dxbl-toolbar-btn-padding-y: #{$dx-toolbar-btn-padding-y-sm};
+        --dxbl-toolbar-group-spacing: #{$dx-toolbar-group-spacing-sm};
+        --dxbl-toolbar-item-spacing: #{$dx-toolbar-item-spacing-sm};
+        --dxbl-toolbar-group-large-spacing: #{$dx-toolbar-group-large-spacing-sm};
+        --dxbl-toolbar-item-large-spacing: #{$dx-toolbar-item-large-spacing-sm};
+    }
+
+    &.dxbl-lg {
+        --dxbl-toolbar-font-size: #{$dx-toolbar-font-size-lg};
+        --dxbl-toolbar-line-height: #{$dx-toolbar-line-height-lg};
+        --dxbl-toolbar-title-font-size: #{$dx-toolbar-title-font-size-lg};
+        --dxbl-toolbar-title-line-height: #{$dx-toolbar-title-line-height-lg};
+        --dxbl-toolbar-title-padding-x: #{$dx-toolbar-title-padding-x-lg};
+        --dxbl-toolbar-title-padding-y: #{$dx-toolbar-title-padding-y-lg};
+        --dxbl-toolbar-btn-border-radius: #{$dx-toolbar-btn-border-radius-lg};
+        --dxbl-toolbar-btn-padding-x: #{$dx-toolbar-btn-padding-x-lg};
+        --dxbl-toolbar-btn-padding-y: #{$dx-toolbar-btn-padding-y-lg};
+        --dxbl-toolbar-group-spacing: #{$dx-toolbar-group-spacing-lg};
+        --dxbl-toolbar-item-spacing: #{$dx-toolbar-item-spacing-lg};
+        --dxbl-toolbar-group-large-spacing: #{$dx-toolbar-group-large-spacing-lg};
+        --dxbl-toolbar-item-large-spacing: #{$dx-toolbar-item-large-spacing-lg};
+    }
+}
+
+@import "toolbar.button";
+@import "toolbar.dropdown";
+@import "toolbar.edit";

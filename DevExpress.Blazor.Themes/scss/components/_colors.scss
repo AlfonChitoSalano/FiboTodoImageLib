@@ -1,0 +1,91 @@
+$dx-white: #fff !default;
+$dx-gray-100: #f8f9fa !default;
+$dx-gray-200: #e9ecef !default;
+$dx-gray-300: #dee2e6 !default;
+$dx-gray-400: #ced4da !default;
+$dx-gray-500: #adb5bd !default;
+$dx-gray-600: #6c757d !default;
+$dx-gray-700: #495057 !default;
+$dx-gray-800: #343a40 !default;
+$dx-gray-900: #212529 !default;
+$dx-black: #000 !default;
+
+$dx-primary: #0d6efd !default;
+$dx-secondary: #6c757d !default;
+$dx-success: #198754 !default;
+$dx-info: #0dcaf0 !default;
+$dx-warning: #ffc107 !default;
+$dx-danger: #dc3545 !default;
+$dx-light: #f8f9fa !default;
+$dx-dark: #212529 !default;
+
+$dx-theme-colors: (
+  "primary":    $dx-primary,
+  "secondary":  $dx-secondary,
+  "success":    $dx-success,
+  "info":       $dx-info,
+  "warning":    $dx-warning,
+  "danger":     $dx-danger,
+  "light":      $dx-light,
+  "dark":       $dx-dark
+) !default;
+
+$dx-min-contrast-ratio: 4.5 !default;
+$dx-color-contrast-light: white !default;
+
+$dx-bg: $dx-white !default;
+$dx-color: $dx-black !default;
+$dx-border-color: #dee2e6 !default;
+
+$dx-state-base-bg: #000 !default;
+$dx-state-primary-bg: $dx-primary !default;
+$dx-state-primary-color: $dx-white !default;
+
+$dx-state-hover-bg: unset !default;
+$dx-state-hover-bg-alpha: 5% !default;
+$dx-state-hover-secondary-bg: unset !default;
+$dx-state-hover-secondary-bg-alpha: 3% !default;
+$dx-state-selected-bg: unset !default;
+$dx-state-selected-bg-alpha: 10% !default;
+$dx-state-selected-hover-bg: unset !default;
+$dx-state-selected-hover-bg-alpha: 15% !default;
+$dx-state-selected-primary-bg: unset !default;
+$dx-state-selected-primary-bg-alpha: 90% !default;
+$dx-state-selected-primary-dark-bg: unset !default;
+$dx-state-selected-primary-dark-bg-alpha: 100% !default;
+$dx-state-selected-primary-hover-bg: unset !default;
+$dx-state-selected-primary-hover-bg-alpha: 100% !default;
+$dx-state-special-primary-bg: unset !default;
+$dx-state-special-primary-bg-alpha: 8% !default;
+$dx-state-disabled-bg: unset !default;
+$dx-state-disabled-bg-alpha: 2% !default;
+$dx-state-disabled-primary-bg: unset !default;
+$dx-state-disabled-primary-bg-alpha: 3% !default;
+
+$dx-state-hover-opacity: 80% !default;
+$dx-state-disabled-opacity: 60% !default;
+
+$dx-image-color: unset !default;
+$dx-image-color-alpha: 70% !default;
+$dx-image-hover-color: unset !default;
+$dx-image-hover-color-alpha: 95% !default;
+$dx-image-active-color: unset !default;
+$dx-image-active-color-alpha: 100% !default;
+$dx-image-disabled-color: unset !default;
+$dx-image-disabled-color-alpha: 40% !default;
+$dx-image-secondary-color: unset !default;
+$dx-image-secondary-color-alpha: 25% !default;
+$dx-image-secondary-hover-color: unset !default;
+$dx-image-secondary-hover-color-alpha: 50% !default;
+
+$dx-panel-base-bg: #000 !default;
+$dx-panel-header-bg: unset !default;
+$dx-panel-header-bg-alpha: 5% !default;
+$dx-panel-header-hover-bg: unset !default;
+$dx-panel-header-hover-bg-alpha: $dx-panel-header-bg-alpha + $dx-state-hover-bg-alpha !default;
+$dx-panel-header-selected-bg: unset !default;
+$dx-panel-header-selected-bg-alpha: $dx-panel-header-bg-alpha + $dx-state-selected-bg-alpha !default;
+$dx-panel-footer-bg: unset !default;
+$dx-panel-footer-bg-alpha: 3% !default;
+$dx-panel-footer-secondary-bg: unset !default;
+$dx-panel-footer-secondary-bg-alpha: 2% !default;

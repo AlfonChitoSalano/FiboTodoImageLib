@@ -1,0 +1,93 @@
+@import "common";
+@import "text-edit";
+
+@mixin btn-toolbar-separator {
+    background-color: var(--dxbl-btn-toolbar-separator-color);
+    background-origin: padding-box;
+    height: var(--dxbl-btn-toolbar-separator-height);
+    width: var(--dxbl-btn-toolbar-separator-width);
+    margin: var(--dxbl-btn-toolbar-separator-margin-y) 0 var(--dxbl-btn-toolbar-separator-margin-y) var(--dxbl-btn-toolbar-spacing);
+}
+
+@mixin btn-plain-toolbar-group-separator {
+    position: relative;
+
+    &::before {
+        content: "";
+        height: var(--dxbl-btn-toolbar-separator-height);
+        width: var(--dxbl-btn-toolbar-separator-width);
+        margin: var(--dxbl-btn-toolbar-separator-margin-y) 0;
+        background-color: var(--dxbl-btn-toolbar-separator-color);
+        margin-right: var(--dxbl-btn-toolbar-spacing);
+    }
+}
+
+@mixin btn-plain-toolbar-split {
+    & > .dxbl-btn:not(:first-child) {
+        @include hover-state() {
+            border-bottom-left-radius: 0 !important; // stylelint-disable-line declaration-no-important
+            border-top-left-radius: 0 !important; // stylelint-disable-line declaration-no-important
+        }
+
+        @include active-state() {
+            border-bottom-left-radius: 0 !important; // stylelint-disable-line declaration-no-important
+            border-top-left-radius: 0 !important; // stylelint-disable-line declaration-no-important
+        }
+    }
+
+    & > .dxbl-btn:not(:last-child) {
+        @include hover-state() {
+            border-bottom-right-radius: 0 !important; // stylelint-disable-line declaration-no-important
+            border-top-right-radius: 0 !important; // stylelint-disable-line declaration-no-important
+        }
+
+        @include active-state() {
+            border-bottom-right-radius: 0 !important; // stylelint-disable-line declaration-no-important
+            border-top-right-radius: 0 !important; // stylelint-disable-line declaration-no-important
+        }
+
+        margin-right: 0;
+    }
+
+    @include hover-state() {
+        & > .dxbl-btn {
+            @include not-hover-state() {
+                @include state-hover-secondary-style("--dxbl-btn-hover-bg", "--dxbl-btn-hover-color", "--dxbl-btn-border-width");
+            }
+        }
+
+        & > .dxbl-btn:not(:first-child) {
+            border-bottom-left-radius: 0 !important; // stylelint-disable-line declaration-no-important
+            border-top-left-radius: 0 !important; // stylelint-disable-line declaration-no-important
+        }
+
+        & > .dxbl-btn:not(:last-child) {
+            border-bottom-right-radius: 0 !important; // stylelint-disable-line declaration-no-important
+            border-top-right-radius: 0 !important; // stylelint-disable-line declaration-no-important
+        }
+    }
+}
+
+@mixin btn-plain-toolbar-edit-item {
+    & > .dxbl-text-edit {
+        @include text-edit-not-focus-state() {
+            border-color: transparent;
+            box-shadow: none;
+
+            & > .dxbl-btn-group > .dxbl-btn,
+            & > .dxbl-btn-group-vertical > .dxbl-btn {
+                border-color: transparent;
+            }
+
+            @include hover-state() {
+                border-color: var(--dxbl-text-edit-border-color);
+                box-shadow: var(--dxbl-text-edit-box-shadow);
+
+                & > .dxbl-btn-group > .dxbl-btn,
+                & > .dxbl-btn-group-vertical > .dxbl-btn {
+                    border-color: var(--dxbl-btn-border-color);
+                }
+            }
+        }
+    }
+}

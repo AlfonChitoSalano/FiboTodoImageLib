@@ -1,0 +1,96 @@
+@use "sass:math";
+
+@import "common";
+
+@mixin button-tool-paddings() {
+    --dxbl-btn-padding-x: #{$dx-btn-padding-x};
+    --dxbl-btn-padding-y: #{$dx-btn-padding-y};
+}
+
+@mixin button-tool-paddings-sm() {
+    --dxbl-btn-padding-x: #{$dx-btn-padding-x-sm};
+    --dxbl-btn-padding-y: #{$dx-btn-padding-y-sm};
+}
+
+@mixin button-tool-paddings-lg() {
+    --dxbl-btn-padding-x: #{$dx-btn-padding-x-lg};
+    --dxbl-btn-padding-y: #{$dx-btn-padding-y-lg};
+}
+
+@mixin button-secondary-tool-style-core() {
+    --dxbl-btn-color: #{$dx-color};
+    --dxbl-btn-disabled-opacity: 1;
+    --dxbl-btn-box-shadow: none;
+
+    @include embedded-image-color("--dxbl-btn-image-color", "--dxbl-btn-disabled-image-color", "--dxbl-btn-hover-image-color", "--dxbl-btn-active-image-color", "--dxbl-btn-active-hover-image-color");
+    @include embedded-text-opacity();
+}
+
+@mixin button-secondary-tool-state-styles-core($root-bg-color-var: null) {
+    --dxbl-btn-hover-color: #{$dx-color};
+    --dxbl-btn-hover-bg: transparent;
+    --dxbl-btn-hover-background: none;
+    --dxbl-btn-active-color: #{$dx-color};
+    --dxbl-btn-active-bg: transparent;
+    --dxbl-btn-active-background: none;
+    --dxbl-btn-disabled-color: #{$dx-color};
+
+    @include button-focus-style($dx-primary, "primary");
+
+    @include active-state () {
+        @include state-selected-style("--dxbl-btn-active-bg", "--dxbl-btn-active-color", "--dxbl-btn-border-width", $root-bg-color-var);
+
+        @include hover-state () {
+            @include state-selected-hover-style("--dxbl-btn-active-hover-bg", "--dxbl-btn-active-hover-color", "--dxbl-btn-border-width", $root-bg-color-var);
+        }
+    }
+
+    @include hover-state () {
+        @include state-hover-style("--dxbl-btn-hover-bg", "--dxbl-btn-hover-color", "--dxbl-btn-border-width", $root-bg-color-var);
+    }
+}
+
+@mixin button-secondary-tool-style() {
+    --dxbl-btn-bg: #{$dx-bg};
+    --dxbl-btn-disabled-bg: #{$dx-bg};
+    --dxbl-btn-border-color: #{$dx-border-color};
+    --dxbl-btn-disabled-border-color: #{$dx-border-color};
+    --dxbl-btn-disabled-background: none;
+
+    @include button-secondary-tool-style-core();
+}
+
+@mixin button-secondary-tool-state-styles() {
+    --dxbl-btn-root-bg: #{$dx-bg};
+
+    @include button-secondary-tool-state-styles-core("--dxbl-btn-root-bg");
+
+    --dxbl-btn-hover-border-color: #{$dx-border-color};
+    --dxbl-btn-active-border-color: #{$dx-border-color};
+}
+
+@mixin button-secondary-outline-tool-style() {
+    --dxbl-btn-border-color: #{$dx-border-color};
+    --dxbl-btn-disabled-border-color: #{$dx-border-color};
+    --dxbl-btn-disabled-background: none;
+
+    @include button-secondary-tool-style-core();
+}
+
+@mixin button-secondary-outline-tool-state-styles() {
+    @include button-secondary-tool-state-styles-core();
+
+    --dxbl-btn-hover-border-color: #{$dx-border-color};
+    --dxbl-btn-active-border-color: #{$dx-border-color};
+}
+
+@mixin button-secondary-text-tool-style() {
+    @include button-secondary-tool-style-core();
+}
+
+@mixin button-secondary-text-tool-state-styles() {
+    @include button-secondary-tool-state-styles-core();
+
+    --dxbl-btn-hover-border-color: transparent;
+    --dxbl-btn-active-border-color: transparent;
+}

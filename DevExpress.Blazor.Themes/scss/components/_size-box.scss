@@ -1,0 +1,87 @@
+@use "sass:math";
+
+$dx-size: 1.875rem !default;        // 30px
+$dx-size-sm: 1.625rem !default;     // 26px
+$dx-size-lg: 2.125rem !default;     // 34px
+
+$dx-borders-width: 0.125rem !default; // 2 * $dx-border-width
+
+$dx-borderless-size: $dx-size - $dx-borders-width !default;
+$dx-borderless-size-sm: $dx-size-sm - $dx-borders-width !default;
+$dx-borderless-size-lg: $dx-size-lg - $dx-borders-width !default;
+
+$dx-font-size: 0.875rem !default;
+$dx-font-size-sm: 0.75rem !default;
+$dx-font-size-lg: 1rem !default;
+$dx-line-height: 1.4285 !default;
+$dx-line-height-sm: 1.5 !default;
+$dx-line-height-lg: 1.375 !default;
+$dx-line-height-safari: 1.4286 !default;
+
+$dx-text-size: $dx-font-size * $dx-line-height !default;            // 20px/1.25rem
+$dx-text-size-sm: $dx-font-size-sm * $dx-line-height-sm !default;   // 18px/1.125rem
+$dx-text-size-lg: $dx-font-size-lg * $dx-line-height-lg !default;   // 22px/1.375rem
+
+$dx-image-size: 1rem !default;
+$dx-image-size-sm: 1rem !default;
+$dx-image-size-lg: 1rem !default;
+
+$dx-size-box-padding-x: math.div($dx-borderless-size - $dx-image-size, 2) !default;
+$dx-size-box-padding-y: math.div($dx-borderless-size - $dx-text-size, 2) !default;
+$dx-size-box-padding-x-sm: math.div($dx-borderless-size-sm - $dx-image-size-sm, 2) !default;
+$dx-size-box-padding-y-sm: math.div($dx-borderless-size-sm - $dx-text-size-sm, 2) !default;
+$dx-size-box-padding-x-lg: math.div($dx-borderless-size-lg - $dx-image-size-lg, 2) !default;
+$dx-size-box-padding-y-lg: math.div($dx-borderless-size-lg - $dx-text-size-lg, 2) !default;
+
+$dx-image-margin-x: 0 !default;
+$dx-image-margin-y: math.div($dx-text-size - $dx-image-size, 2) !default;
+$dx-image-margin-x-sm: 0 !default;
+$dx-image-margin-y-sm: math.div($dx-text-size-sm - $dx-image-size-sm, 2) !default;
+$dx-image-margin-x-lg: 0 !default;
+$dx-image-margin-y-lg: math.div($dx-text-size-lg - $dx-image-size-lg, 2) !default;
+
+$dx-image-spacing: 0.375rem !default;
+$dx-image-spacing-sm: 0.25rem !default;
+$dx-image-spacing-lg: 0.5rem !default;
+
+$dx-min-spacing: 0.0625rem !default;
+
+$dx-panel-base-padding: 0.75rem !default;               // 12px
+$dx-panel-base-padding-sm: 0.5rem !default;             // 8px
+$dx-panel-base-padding-lg: 1rem !default;               // 16px
+$dx-panel-header-size: 2.5rem !default;                 // 40px
+$dx-panel-header-size-sm: 2rem !default;                // 32px
+$dx-panel-header-size-lg: 3rem !default;                // 48px
+$dx-panel-header-font-size-ratio: 1.14286 !default;     // 16px
+$dx-panel-header-font-size-ratio-sm: 1.16667 !default;  // 14px
+$dx-panel-header-font-size-ratio-lg: 1.125 !default;    // 18px
+$dx-panel-header-font-size: $dx-panel-header-font-size-ratio * 1em !default;         // 16px
+$dx-panel-header-font-size-sm: $dx-panel-header-font-size-ratio-sm * 1em !default;   // 14px
+$dx-panel-header-font-size-lg: $dx-panel-header-font-size-ratio-lg * 1em !default;   // 18px
+$dx-panel-header-line-height: math.div($dx-line-height, $dx-panel-header-font-size-ratio) !default;
+$dx-panel-header-line-height-sm: math.div($dx-line-height-sm, $dx-panel-header-font-size-ratio-sm) !default;
+$dx-panel-header-line-height-lg: math.div($dx-line-height-lg, $dx-panel-header-font-size-ratio-lg) !default;
+$dx-panel-header-padding-x: $dx-panel-base-padding !default;
+$dx-panel-header-padding-y: math.div($dx-panel-header-size - $dx-size, 2) !default;
+$dx-panel-header-padding-x-sm: $dx-panel-base-padding-sm !default;
+$dx-panel-header-padding-y-sm: math.div($dx-panel-header-size-sm - $dx-size-sm, 2) !default;
+$dx-panel-header-padding-x-lg: $dx-panel-base-padding-lg !default;
+$dx-panel-header-padding-y-lg: math.div($dx-panel-header-size-lg - $dx-size-lg, 2) !default;
+$dx-panel-header-spacing: 0.625rem !default;
+$dx-panel-header-spacing-sm: 0.5rem !default;
+$dx-panel-header-spacing-lg: 0.75rem !default;
+$dx-panel-content-padding-x: $dx-panel-base-padding !default;
+$dx-panel-content-padding-y: $dx-panel-base-padding !default;
+$dx-panel-content-padding-x-sm: $dx-panel-base-padding-sm !default;
+$dx-panel-content-padding-y-sm: $dx-panel-base-padding-sm !default;
+$dx-panel-content-padding-x-lg: $dx-panel-base-padding-lg !default;
+$dx-panel-content-padding-y-lg: $dx-panel-base-padding-lg !default;
+$dx-panel-footer-padding-x: $dx-panel-base-padding !default;
+$dx-panel-footer-padding-y: math.div($dx-panel-header-size - $dx-size, 2) !default;
+$dx-panel-footer-padding-x-sm: $dx-panel-base-padding-sm !default;
+$dx-panel-footer-padding-y-sm: math.div($dx-panel-header-size-sm - $dx-size-sm, 2) !default;
+$dx-panel-footer-padding-x-lg: $dx-panel-base-padding-lg !default;
+$dx-panel-footer-padding-y-lg: math.div($dx-panel-header-size-lg - $dx-size-lg, 2) !default;
+
+$dx-btn-padding-x-ratio: 2 !default;        // used for standalone btn-like elements
+$dx-split-btn-padding-x-ratio: 2 !default;  // used for split btn element

@@ -1,0 +1,19 @@
+@import "common";
+
+@mixin tab-selected-element($selected-element-bg, $selected-element-height, $border-width) {
+    @if $selected-element-height > 0 {
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            background-color: #{$selected-element-bg};
+            height: #{$selected-element-height};
+            margin-bottom: -#{$border-width};
+            bottom: 0;
+            left: -#{$border-width};
+            right: -#{$border-width};
+        }
+    }
+}

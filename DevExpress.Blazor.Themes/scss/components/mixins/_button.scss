@@ -1,0 +1,105 @@
+@use "sass:math";
+
+@import "common";
+
+@mixin button-focus-state() {
+    &:not(.dxbl-disabled):not(:disabled):focus-visible,
+    &:not(.dxbl-disabled):not(:disabled).dxbl-focused {
+        @content;
+    }
+}
+
+@mixin button-style($color, $render-style) {
+    --dxbl-btn-bg: #{$color};
+    --dxbl-btn-border-color: #{$color};
+
+    @if $dx-theme {
+        --dxbl-btn-color: #{color-contrast($color)};
+    }
+
+    @else {
+        --dxbl-btn-color: #{get-external-theme-base-fore-color($render-style)};
+    }
+
+    @include button-active-style($color, $render-style);
+    @include button-hover-style($color, $render-style);
+    @include button-disabled-style($color, $render-style);
+    @include button-focus-style($color, $render-style);
+}
+
+@mixin button-outline-style($color, $render-style) {
+    --dxbl-btn-color: #{$color};
+    --dxbl-btn-border-color: #{$color};
+
+    @include button-active-style($color, $render-style);
+    @include button-hover-style($color, $render-style);
+    @include button-disabled-style($color, $render-style, false, true);
+    @include button-focus-style($color, $render-style);
+}
+
+@mixin button-text-style($color, $render-style) {
+    --dxbl-btn-color: #{$color};
+
+    @include button-active-style($color, $render-style);
+    @include button-hover-style($color, $render-style);
+    @include button-disabled-style($color, $render-style, false, false);
+    @include button-focus-style($color, $render-style);
+}
+
+@mixin button-active-style($color, $render-style) {
+    @include contextual-state-style(
+        "--dxbl-btn-active-bg", "--dxbl-btn-active-color", "--dxbl-btn-active-border-color", "--dxbl-btn-active-background",
+        $color, $render-style, $dx-btn-active-bg-tint-amount, $dx-btn-active-bg-shade-amount
+    );
+}
+
+@mixin button-hover-style($color, $render-style) {
+    @include contextual-state-style(
+        "--dxbl-btn-hover-bg", "--dxbl-btn-hover-color", "--dxbl-btn-hover-border-color", "--dxbl-btn-hover-background",
+        $color, $render-style, $dx-btn-hover-bg-tint-amount, $dx-btn-hover-bg-shade-amount
+    );
+}
+
+@mixin button-disabled-style($color, $render-style, $needBackground: true, $needBorder: true) {
+    @include contextual-disabled-style(
+        "--dxbl-btn-disabled-bg", "--dxbl-btn-disabled-color", "--dxbl-btn-disabled-border-color", "--dxbl-btn-disabled-background", "--dxbl-btn-disabled-opacity",
+        $color, $render-style, $dx-btn-disabled-bg-tint-amount, $dx-btn-disabled-bg-shade-amount,
+        $needBackground, $needBorder
+    );
+}
+
+@mixin button-focus-style($color, $render-style) {
+    @include contextual-focus-style(
+        "--dxbl-btn-focus-shadow-color", "--dxbl-btn-focus-shadow-spread", "--dxbl-btn-focus-shadow-blur", null,
+        $color, $render-style, $dx-btn-focus-shadow-size,
+        $dx-btn-focus-shadow-tint-amount, $dx-btn-focus-shadow-shade-amount, 0, 0
+    );
+}
+
+@mixin button-inner-focus-style($border-radius, $offset: 0px) { // stylelint-disable-line length-zero-no-unit
+    box-shadow: none !important;  // stylelint-disable-line declaration-no-important
+    position: relative;
+
+    &::after {
+        border-radius: #{$border-radius};
+        box-shadow: 0 0 var(--dxbl-btn-focus-shadow-blur) var(--dxbl-btn-focus-shadow-spread) var(--dxbl-btn-focus-shadow-color);
+        content: "";
+        position: absolute;
+        left: calc(var(--dxbl-btn-focus-shadow-spread) + var(--dxbl-btn-focus-shadow-blur) + #{$offset});
+        top: calc(var(--dxbl-btn-focus-shadow-spread) + var(--dxbl-btn-focus-shadow-blur) + #{$offset});
+        right: calc(var(--dxbl-btn-focus-shadow-spread) + var(--dxbl-btn-focus-shadow-blur) + #{$offset});
+        bottom: calc(var(--dxbl-btn-focus-shadow-spread) + var(--dxbl-btn-focus-shadow-blur) + #{$offset});
+        z-index: 1;
+        pointer-events: none;
+    }
+}
+
+@mixin link-buttons-style() {
+    &.dxbl-btn-link,
+    &.dxbl-btn-outline-link,
+    &.dxbl-btn-text-link {
+        @content;
+    }
+}
+
+@import "button.tool";

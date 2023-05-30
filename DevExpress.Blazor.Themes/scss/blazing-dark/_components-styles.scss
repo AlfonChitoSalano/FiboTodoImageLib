@@ -1,0 +1,48 @@
+@import "../components/mixins/button";
+
+// Buttons
+.dxbl-btn {
+    --dxbl-btn-box-shadow: none;
+
+    &.dxbl-btn-primary,
+    &.dxbl-btn-secondary,
+    &.dxbl-btn-info,
+    &.dxbl-btn-success,
+    &.dxbl-btn-warning,
+    &.dxbl-btn-danger,
+    &.dxbl-btn-dark,
+    &.dxbl-btn-light {
+        --dxbl-btn-box-shadow: #{$dx-btn-box-shadow};
+    }
+
+    @include link-buttons-style() {
+        --dxbl-btn-hover-color: #{$dx-primary-alt};
+    }
+
+    &.dxbl-btn-outline-primary {
+        --dxbl-btn-color: #{$dx-primary-alt};
+        --dxbl-btn-border-color: #{$dx-primary-alt};
+     }
+
+    &.dxbl-btn-outline-secondary {
+        --dxbl-btn-color: #{$gray-200};
+        --dxbl-btn-border-color: #{$gray-200};
+    }
+
+    &.dxbl-btn-outline-dark {
+        --dxbl-btn-color: #{$gray-300};
+        --dxbl-btn-border-color: #{$gray-300};
+    }
+
+    &.dxbl-btn-text-primary {
+        --dxbl-btn-color: #{$dx-primary-alt};
+    }
+
+    &.dxbl-btn-text-secondary {
+        --dxbl-btn-color: #{$gray-200};
+    }
+
+    &.dxbl-btn-text-dark {
+        --dxbl-btn-color: #{$gray-300};
+    }
+}

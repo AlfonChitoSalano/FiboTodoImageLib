@@ -1,0 +1,6 @@
+﻿@import "common";
+
+@mixin state-selected-range-style($bg-color-var, $color-var, $border-width-var: null, $root-bg-color-var: null) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-calendar-item-selected-range-bg,
+        $dx-state-base-bg, $dx-calendar-item-selected-range-bg-alpha, $border-width-var, $root-bg-color-var);
+}

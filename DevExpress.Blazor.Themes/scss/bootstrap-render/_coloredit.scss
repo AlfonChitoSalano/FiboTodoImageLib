@@ -1,0 +1,152 @@
+.dx-blazor-colorpicker {
+    padding: 0.5rem;
+    position: relative;
+    
+    .dx-blazor-colorpicker-custom-color-area {
+        margin-top: 0.5rem;
+
+        .btn {
+            width: 100%;
+        }
+
+        .dx-blazor-colorpicker-table {
+            margin-top: 0.5rem;
+        }
+    }
+}
+
+.dx-blazor-colorpicker-automatic-container {
+    display: flex;
+    padding-bottom: 0.5rem;
+    cursor: pointer;
+
+    .dx-blazor-colorpicker-cell {
+        flex-shrink: 0;
+    }
+}
+
+.dx-blazor-colorpicker-automatic-caption {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dx-blazor-colorpicker-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.dx-blazor-colorpicker-row {
+    display: flex;
+
+    &:not(:last-child) {
+        margin-bottom: 0.25rem;
+    }
+}
+
+.dx-blazor-colorpicker-cell {
+    height: 1.5rem;
+    width: 1.5rem;
+    cursor: pointer;
+
+    &:not(:last-child) {
+        margin-right: 0.25rem;
+    }
+
+    &.dx-balzor-colorpicker-selected-color {
+        outline: 2px solid var(--primary);
+        outline-offset: -1px;
+    }
+
+    &:hover {
+        outline: 2px solid var(--primary);
+        outline-offset: -1px;
+    }
+}
+
+
+.dx-blazor-colorpicker-pallete {
+    width: 12.5rem;
+    height: 12.5rem;
+    position: relative;
+    cursor: crosshair;
+}
+
+.dx-blazor-colorpicker-pallete-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.dx-blazor-colorpicker-pallete-gradient-white {
+    background-repeat: no-repeat;
+    background-image: -webkit-gradient(linear,right top,left top,from(rgba(255,255,255,0)),to(white));
+    background-image: linear-gradient(270deg,rgba(255,255,255,0),#fff);
+}
+
+.dx-blazor-colorpicker-pallete-gradient-black {
+    background-repeat: no-repeat;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,0)),to(black));
+    background-image: linear-gradient( 180deg,rgba(0,0,0,0),#000);
+}
+
+.dx-blazor-colorpicker-hue-scale-wrapper {
+    height: 12.5rem;
+    width: 1.75rem;
+    margin-left: 0.5rem;
+    position: relative;
+}
+
+.dx-blazor-colorpicker-hue-scale {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-image: -webkit-gradient(linear,left bottom,left top,from(red),color-stop(17%,#ff0),color-stop(33%,#0f0),color-stop(50%,#0ff),color-stop(67%,#00f),color-stop(83%,#f0f),to(red));
+    background-image: linear-gradient( 0deg,red 0,#ff0 17%,#0f0 33%,#0ff 50%,#00f 67%,#f0f 83%,red 100%);
+}
+
+.dx-blazor-colorpicker-custom-color {
+    display: flex;
+}
+
+.dx-blazor-colorpicker-hue-selection-rect {
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    height: 0.65rem;
+    box-shadow: 0 0 4px rgba(0,0,0,0.35);
+    border: 2px solid white;
+    z-index: 1;
+}
+
+.dx-blazor-colorpicker-color-selection {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    box-shadow: 0 0 4px rgba(0,0,0,0.35);
+    border: 2px solid white;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.dx-blazor-colorpicker-editors-container {
+    padding-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+
+    .dxbs-textbox:first-child {
+        padding-bottom: 0.35rem;
+    }
+}
+
+.dx-blazor-colorpicker-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 0.5rem;
+
+    .btn:first-child {
+        margin-right: 0.25rem;
+    }
+}

@@ -1,0 +1,122 @@
+@import "mixins/button";
+
+.dxbl-btn {
+    --dxbl-btn-font-family: #{$dx-btn-font-family};
+    --dxbl-btn-font-size: #{$dx-btn-font-size};
+    --dxbl-btn-line-height: #{$dx-btn-line-height};
+    --dxbl-btn-bg: #{$dx-btn-bg};
+    --dxbl-btn-color: #{$dx-btn-color};
+    --dxbl-btn-padding-x: #{$dx-btn-padding-x-ratio * $dx-btn-padding-x};
+    --dxbl-btn-padding-y: #{$dx-btn-padding-y};
+    --dxbl-btn-image-spacing: #{$dx-btn-image-spacing};
+    --dxbl-btn-border-color: #{$dx-btn-border-color};
+    --dxbl-btn-border-style: #{$dx-btn-border-style};
+    --dxbl-btn-border-width: #{$dx-btn-border-width};
+    --dxbl-btn-border-radius: #{$dx-btn-border-radius};
+    --dxbl-btn-box-shadow: #{$dx-btn-box-shadow};
+    --dxbl-btn-active-bg: var(--dxbl-btn-bg);
+    --dxbl-btn-active-color: var(--dxbl-btn-color);
+    --dxbl-btn-active-border-color: var(--dxbl-btn-border-color);
+    --dxbl-btn-hover-bg: var(--dxbl-btn-bg);
+    --dxbl-btn-hover-color: var(--dxbl-btn-color);
+    --dxbl-btn-hover-border-color: var(--dxbl-btn-border-color);
+    --dxbl-btn-disabled-bg: var(--dxbl-btn-bg);
+    --dxbl-btn-disabled-color: var(--dxbl-btn-color);
+    --dxbl-btn-disabled-border-color: var(--dxbl-btn-border-color);
+    --dxbl-btn-disabled-opacity: #{$dx-btn-disabled-bg-tint-amount};
+
+    @include button-focus-style($dx-primary, "primary");
+    @include safari-line-height("--dxbl-btn-line-height", $dx-btn-line-height-safari);
+
+    background-color: var(--dxbl-btn-bg);
+    border-radius: var(--dxbl-btn-border-radius);
+    border: var(--dxbl-btn-border-width) var(--dxbl-btn-border-style) var(--dxbl-btn-border-color);
+    box-shadow: var(--dxbl-btn-box-shadow);
+    color: var(--dxbl-btn-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--dxbl-btn-font-family);
+    font-size: var(--dxbl-btn-font-size);
+    line-height: var(--dxbl-btn-line-height);
+    padding: var(--dxbl-btn-padding-y) var(--dxbl-btn-padding-x);
+
+    & > .dxbl-image + *,
+    & > :not(.dxbl-image) + .dxbl-image:not(:first-child) {
+        margin-left: var(--dxbl-btn-image-spacing);
+    }
+
+    @include link-buttons-style() {
+        --dxbl-btn-hover-color: #{$dx-primary};
+        --dxbl-btn-box-shadow: none;
+
+        span:not(.dxbl-image) {
+            text-decoration: underline;
+        }
+    }
+
+    @include active-state() {
+        border-color: var(--dxbl-btn-active-border-color);
+        background: var(--dxbl-btn-active-background);
+        background-color: var(--dxbl-btn-active-bg);
+        color: var(--dxbl-btn-active-color);
+    }
+
+    @include hover-state() {
+        border-color: var(--dxbl-btn-hover-border-color);
+        background: var(--dxbl-btn-hover-background);
+        background-color: var(--dxbl-btn-hover-bg);
+        color: var(--dxbl-btn-hover-color);
+    }
+
+    @include disabled-state() {
+        border-color: var(--dxbl-btn-disabled-border-color);
+        background: var(--dxbl-btn-disabled-background);
+        background-color: var(--dxbl-btn-disabled-bg);
+        color: var(--dxbl-btn-disabled-color);
+        opacity: var(--dxbl-btn-disabled-opacity);
+        pointer-events: none;
+    }
+
+    @include button-focus-state() {
+        box-shadow: 0 0 var(--dxbl-btn-focus-shadow-blur) var(--dxbl-btn-focus-shadow-spread) var(--dxbl-btn-focus-shadow-color);
+        outline: 0;
+    }
+
+    &.dxbl-sm {
+        --dxbl-btn-font-size: #{$dx-btn-font-size-sm};
+        --dxbl-btn-line-height: #{$dx-btn-line-height-sm};
+        --dxbl-btn-padding-x: #{$dx-btn-padding-x-ratio * $dx-btn-padding-x-sm};
+        --dxbl-btn-padding-y: #{$dx-btn-padding-y-sm};
+        --dxbl-btn-image-spacing: #{$dx-btn-image-spacing-sm};
+        --dxbl-btn-border-radius: #{$dx-btn-border-radius-sm};
+    }
+
+    &.dxbl-lg {
+        --dxbl-btn-font-size: #{$dx-btn-font-size-lg};
+        --dxbl-btn-line-height: #{$dx-btn-line-height-lg};
+        --dxbl-btn-padding-x: #{$dx-btn-padding-x-ratio * $dx-btn-padding-x-lg};
+        --dxbl-btn-padding-y: #{$dx-btn-padding-y-lg};
+        --dxbl-btn-image-spacing: #{$dx-btn-image-spacing-lg};
+        --dxbl-btn-border-radius: #{$dx-btn-border-radius-lg};
+    }
+}
+
+@each $render-style, $value in $dx-theme-colors {
+    .dxbl-btn-#{$render-style} {
+        @include button-style($value, $render-style);
+    }
+
+    .dxbl-btn-outline-#{$render-style} {
+        @include button-outline-style($value, $render-style);
+    }
+
+    .dxbl-btn-text-#{$render-style} {
+        @include button-text-style($value, $render-style);
+    }
+}
+
+@import "button.container";
+@import "button.group";
+@import "button.tool";
+@import "button.split";

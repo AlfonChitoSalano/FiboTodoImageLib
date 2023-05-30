@@ -1,0 +1,161 @@
+$white: #ffffff !default;
+$blue: #fe7109 !default;
+$green: #10893e !default;
+$cyan: #0078d7 !default;
+$yellow: #ff9c00 !default;
+$red: #e81123 !default;
+
+$gray-100: #f7f8f9 !default;
+$gray-200: #f2f2f2 !default;
+$gray-300: #e5e5e5 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #a1a1a1 !default;
+$gray-700: #495057 !default;
+$gray-800: #222222 !default;
+$gray-900: #212529 !default;
+
+$secondary: $white !default;
+
+$link-color: #ff6c00 !default;
+
+$font-family-sans-serif: "Segoe UI", "Roboto", "Helvetica Neue", "-apple-system", "BlinkMacSystemFont", "Arial", "Noto Sans", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$font-size-base: 0.88rem !default;
+
+$min-contrast-ratio: 1.8 !default;
+
+// Custom Variables
+
+$dx-theme-btn-secondary-bg: $white !default;
+$dx-theme-btn-secondary-hover-bg: $gray-200 !default;
+
+$theme-custom-color: #444444 !default;
+
+$theme-font-weight-semibold: 600 !default;
+
+$theme-border-radius: 2px !default;
+$theme-border-radius-lg: 3px !default;
+
+$theme-box-shadow-sm: 0px 1px 4px 0px rgba(0, 0, 0, 0.2) !default;
+$theme-box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2) !default;
+$theme-box-shadow-lg: 0px 2px 6px 0px rgba(0, 0, 0, 0.3) !default;
+
+
+// Breadcrumbs
+
+$breadcrumb-border-radius: 0 !default;
+
+
+// Buttons + Forms
+
+$btn-padding-x: .75rem !default;
+$btn-padding-y-sm: 0.2359rem !default;
+$btn-box-shadow: $theme-box-shadow-sm !default;
+$btn-active-box-shadow: $theme-box-shadow-sm !default;
+$btn-border-radius: $theme-border-radius !default;
+$btn-border-radius-lg: $theme-border-radius !default;
+$btn-border-radius-sm: $theme-border-radius !default;
+
+
+// Cards
+
+$card-border-radius: $theme-border-radius !default;
+
+
+// Checkboxes
+
+$custom-control-indicator-size: 1.25rem !default;
+$custom-checkbox-indicator-border-radius: $theme-border-radius !default;
+$custom-control-indicator-bg-size: 100% 100% !default;
+$custom-radio-indicator-icon-checked: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9Jy00IC00IDggOCc+PGNpcmNsZSByPScyLjMnIGZpbGw9JyNmZTcxMDknLz48L3N2Zz4=") !default;
+$custom-checkbox-indicator-icon-checked: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 12 12'%3E%3Cpath fill='%23fff' d='M7,1L3,5L1,3L0,4l3,3l5-5L7,1z'/%3E%3C/svg%3E") !default;
+$custom-checkbox-indicator-icon-indeterminate: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 12 12' style='enable-background:new 0 0 12 12;' xml:space='preserve'%3E%3Cstyle type='text/css'%3E .st0%7Bfill:%23FFFFFF;%7D%0A%3C/style%3E%3Crect id='_x31_' x='2' y='5' class='st0' width='8' height='2'/%3E%3C/svg%3E%0A") !default;
+
+// Switches
+
+$custom-switch-width: 2.5rem !default;
+$custom-switch-indicator-size: 0.75rem !default;
+
+// Dropdowns
+
+$dropdown-item-padding-y: 0.2rem !default;
+$dropdown-item-padding-x: 1rem !default;
+
+
+// Forms
+
+$input-btn-padding-x: 0.6rem !default;
+$input-focus-width: 0 !default;
+$input-group-addon-bg: white !default;
+$input-group-addon-border-color: transparent !default;
+
+$input-border-radius: $theme-border-radius !default;
+$input-border-radius-lg: $theme-border-radius !default;
+$input-border-radius-sm: $theme-border-radius !default;
+
+$input-box-shadow: none !default;
+$input-focus-box-shadow: none !default;
+
+$custom-select-box-shadow: none !default;
+$custom-select-border-radius: $theme-border-radius !default;
+
+$custom-file-box-shadow: none !default;
+$custom-file-focus-box-shadow: none !default;
+
+
+// Jumbotron
+
+$jumbotron-padding: 1.5rem !default;
+
+
+// List group
+
+$list-group-item-padding-y: 0.65rem !default;
+$list-group-border-radius: $theme-border-radius !default;
+
+
+// Modals
+
+$modal-content-border-radius: $theme-border-radius !default;
+$modal-content-border-color: white !default;
+$modal-content-box-shadow-xs: $theme-box-shadow-lg !default;
+$modal-content-box-shadow-sm-up: $theme-box-shadow-lg !default;
+$modal-header-padding: 0.75rem !default;
+$modal-inner-padding: 0.75rem !default;
+
+
+// Navs
+
+$nav-pills-border-radius: $theme-border-radius !default;
+$nav-tabs-border-width: 2px !default;
+$nav-tabs-link-active-border-color: transparent transparent $gray-500 !default;
+$nav-tabs-link-hover-border-color: transparent transparent $gray-500 !default;
+$nav-divider-margin-y: 0.25rem !default;
+
+
+// Pagination
+
+$pagination-color: #444444 !default;
+$pagination-hover-color: darken($pagination-color, 15%) !default;
+$pagination-padding-x: 0.88rem !default;
+$pagination-padding-x-sm: 0.6rem !default;
+$pagination-padding-x-lg: 1.4rem !default;
+
+// Popovers
+
+$popover-box-shadow: $theme-box-shadow !default;
+$popover-border-radius: $theme-border-radius-lg !default;
+$popover-header-padding-x: 1rem !default;
+$popover-body-padding-y: 0.75rem !default;
+
+
+// Progress bars
+
+$progress-height: 1rem !default;
+$progress-border-radius: 0 !default;
+$progress-box-shadow: none !default;
+
+
+// Tables
+
+$table-cell-padding-sm: 0.3rem 0.5rem !default;

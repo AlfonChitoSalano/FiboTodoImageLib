@@ -1,0 +1,19 @@
+$dx-primary-rgb: var(--bs-primary-rgb) !default;
+$dx-secondary-rgb: var(--bs-secondary-rgb) !default;
+$dx-success-rgb: var(--bs-success-rgb) !default;
+$dx-info-rgb: var(--bs-info-rgb) !default;
+$dx-warning-rgb: var(--bs-warning-rgb) !default;
+$dx-danger-rgb: var(--bs-danger-rgb) !default;
+$dx-light-rgb: var(--bs-light-rgb) !default;
+$dx-dark-rgb: var(--bs-dark-rgb) !default;
+
+$dx-theme-rgb-colors: (
+  "primary":    $dx-primary-rgb,
+  "secondary":  $dx-secondary-rgb,
+  "success":    $dx-success-rgb,
+  "info":       $dx-info-rgb,
+  "warning":    $dx-warning-rgb,
+  "danger":     $dx-danger-rgb,
+  "light":      $dx-light-rgb,
+  "dark":       $dx-dark-rgb
+) !default;

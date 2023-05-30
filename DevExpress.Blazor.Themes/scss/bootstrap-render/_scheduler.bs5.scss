@@ -1,0 +1,27 @@
+.dxbs-scheduler {
+    &> .dxbs-sc-dayview > .dxbs-sc-scroll-container > .dxbs-sc-vertical-view > tbody > tr:first-child,
+    .dxbs-sc-timeline .dxbs-sc-headers-container > .dxbs-sc-timescale:not(:first-child) > tbody > tr:first-child,
+    .dxbs-sc-timecells-container > .dxbs-sc-horizontal-view > tbody > tr:first-child,
+    .dxbs-sc-timecells-container > .dxbs-sc-horizontal-view > tbody > tr.dxbs-sc-arm + tr {
+        border-top-width: 0;
+    }
+    .dxbs-sc-timecells-container > .dxbs-sc-horizontal-view > tbody > tr.dxbs-sc-arm {
+        border-width: 0;
+    }
+    &> .dxbs-sc-dayview > .dxbs-sc-scroll-container > .dxbs-sc-vertical-view > tbody > tr:last-child,
+    &> .dxbs-sc-month .dxbs-sc-timecells-container > .dxbs-sc-horizontal-view > tbody > tr:last-child {
+        border-bottom-width: 0;
+    }
+    &> .dxbs-sc-dayview > .dxbs-sc-scroll-container > .dxbs-sc-vertical-view > tbody > tr {
+        &:nth-child(2n+1) {
+            border-bottom-width: 0;
+            &> .dxbs-sc-minute-cell,
+            &> .dxbs-sc-time-cell {
+                border-bottom-width: 1px;
+            }
+        }
+        &:nth-child(2n) {
+            border-top-width: 0;
+        }
+    }
+}

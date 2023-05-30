@@ -1,0 +1,970 @@
+@import 'dx-blazor.params.scss';
+
+.dxbs-scheduler {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    // min-width: min-content; // TODO replace this
+
+    .dx-btn.btn-link {
+        &:focus,
+        &.focus,
+        &.active,
+        &:active {
+            box-shadow: none !important;
+        }
+    }
+    .dxbs-sc-scroll-container > .dxbs-sc-vertical-view > tbody > tr {
+        &:nth-last-of-type(2) > .dxbs-sc-hour-cell,
+        &:last-child > td {
+            border-bottom-width: 0;
+        }
+    }
+    .dxbs-sc-timecells-container > .dxbs-sc-horizontal-view > tbody > tr:last-child > td,
+    .dxbs-sc-scroll-container > .dxbs-sc-vertical-view > tbody > tr > .dxbs-sc-gr-sep-vertical {
+        border-bottom-width: 0;
+    }
+}
+
+.dxbs-scheduler .dx-spinner-container {
+    display: none;
+    z-index: 10000;
+    position: absolute;
+    width: 100%;
+    height: 100%
+}
+.dxbs-scheduler.dx-loading .dx-spinner-container {
+    display: flex;
+}
+.dxbs-scheduler.dx-loading .dxsc-main-container {
+    opacity: 0.3;
+}
+
+.dxbs-scheduler .dxsc-main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* toolbar */
+.dxbs-scheduler .dxbs-sc-tb-wrapper {
+    flex: 0 0 auto;
+    padding: 0.75rem;
+}
+.dxbl-dropdown > .dxbl-dropdown-dialog.dxsc-toolbar-dropdown-item > .dxbl-dropdown-body {
+    padding: 0;
+
+    & .dxbs-date-navigator > dxbl-calendar {
+        border: 0;
+    }
+
+    & .dxbl-text-edit {
+        border-top: 0;
+        border-right: 0;
+        border-left: 0;
+        border-radius: 0;
+    }
+}
+.dxbs-date-navigator .dxbs-calendar {
+    display: flex;
+    width: 100%;
+}
+@media (max-width: 375px) {
+    .dxbs-date-navigator .calendar-view .card-body {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+@media (max-height: 320px) {
+    .dxbs-date-navigator .calendar-view .card-body {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .dxbl-toolbar-dialog .dxbs-resource-navigator .dxbl-listbox {
+        max-height: 140px !important;
+    }
+}
+.dxbs-date-navigator .dxe-apt-labels-container {
+    font-size: 0px;
+}
+.dxbs-date-navigator .dxe-apt-labels-container > span {
+    display: inline-block;
+}
+.dxbs-date-navigator .dxe-apt-labels-container > span:nth-last-child(n+2) {
+    margin-right: 2px;
+}
+.dxbs-date-navigator .dxe-apt-labels-container {
+    height: 5px;
+    margin-bottom: -5px;
+}
+.dxbs-date-navigator .dxe-apt-labels-container > span {
+    width: 5px;
+    height: 5px;
+    margin-top: -2px;
+}
+.dxbs-date-navigator .dxbs-more-labels-container > .dxbs-h-line {
+    width: 5px;
+    top: 2px;
+    left: 0px;
+    border-width: 1px 0 0 0;
+    border-style: solid;
+}
+.dxbs-date-navigator .dxbs-more-labels-container > .dxbs-v-line {
+    height: 5px;
+    left: 2px;
+    border-width: 0 1px 0 0;
+    border-style: solid;
+}
+.dxbs-date-navigator .dxbs-more-labels-container {
+    position: relative;
+    opacity: 0.7;
+}
+.dxbs-date-navigator .dxbs-more-labels-container > span.dxbs-h-line,
+.dxbs-date-navigator .dxbs-more-labels-container > span.dxbs-v-line {
+    position: absolute;
+    display: inline-block;
+}
+.dxbs-resource-navigator .dxbs-textbox-w-icon {
+    position: relative;
+    display: flex;
+    overflow-x: hidden;
+
+    .dxbs-input-group-prepend,
+    .dxbs-input-group-append {
+        width: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    .dxbs-editor-input-container {
+        flex: 1 1 auto;
+    }
+}
+.dxbs-resource-navigator .dxbs-textbox-w-icon input {
+    padding-left: calc(2.25rem + 0.5rem);
+    padding-top: 0.625rem !important;
+    padding-bottom: 0.625rem !important;
+    padding-right: 0.5rem;
+    border-radius: 0;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    background-color: rgba(34, 34, 34, 0.03);
+    height: auto !important;
+}
+.dxbs-resource-navigator .dxbs-textbox-w-icon .dxbs-textbox-icon {
+    position: absolute;
+    top: 2px;
+    left: -2px;
+    padding-top: 0.375rem;
+    opacity: 0.5;
+}
+.dxbs-resource-navigator .dxbl-checkbox label {
+    padding-left: 0.5rem;
+}
+.dxbs-resource-navigator .dxbl-listbox {
+    width: 320px;
+    max-height: 300px;
+    border-radius: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+
+    .dxbl-listbox-item {
+        padding-left: 1rem!important;
+    }
+}
+.dxbs-resource-navigator .dxbs-rn-footer {
+    padding: 0.75rem;
+}
+.dxbs-resource-navigator .dxbs-rn-toolbar {
+    display: flex;
+    justify-content: flex-end;
+
+    & > button:first-child {
+        width: 56px;
+    }
+
+    & > button:last-child {
+        margin-left: 8px
+    }
+}
+/* View */
+.dxbs-scheduler .dxbs-sc-horizontal-view,
+.dxbs-scheduler .dxbs-sc-vertical-view {
+    table-layout: fixed;
+}
+.dxbs-scheduler .dxbs-sc-horizontal-view > tbody > tr > td:first-child,
+.dxbs-scheduler .dxbs-sc-vertical-view > tbody > tr > td:first-child {
+    border-left: 0px;
+}
+.dxbs-scheduler .dxbs-sc-vertical-view > tbody > tr > td {
+    border-top: 0px;
+}
+.dxbs-scheduler .table.dxbs-sc-horizontal-view,
+.dxbs-scheduler .table.dxbs-sc-vertical-view {
+    border-width: 0;
+}
+.dxbs-scheduler .table tr > td.dxsc-date-hr:nth-last-child(-2n+2),
+.dxbs-scheduler .table tr > td.dxsc-horizontal-rh:nth-last-child(-2n+2),
+.dxbs-scheduler .dxbs-sc-vertical-view > tbody > tr > td:last-child,
+.dxbs-scheduler .dxbs-sc-horizontal-view > tbody > tr > td:last-child {
+    border-right: 0px;
+}
+.dxbs-scheduler .dxbs-sc-all-day-area:before {
+    content: ".";
+    visibility: hidden;
+}
+.dxbs-scheduler .dxsc-v-resource-header,
+.dxbs-scheduler .dxbs-sc-resource-hr {
+    overflow: hidden;
+}
+.dxbs-scheduler .dxsc-v-resource-header .dxsc-resource-header-content > span {
+    transform: rotate( 180deg );
+    -ms-transform: rotate(180deg);
+    -webkit-transform: rotate( 180deg );
+    writing-mode: vertical-rl;
+    -ms-writing-mode: tb-rl;
+    -webkit-writing-mode: vertical-rl;
+}
+.dxbs-scheduler .dxsc-v-resource-header .dxsc-resource-header-content {
+    display: inline-flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.dxbs-scheduler .dxbs-sc-date-hr-today > div:first-child {
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    top: -1px;
+    left: 0;
+}
+.dxbs-scheduler .dxbs-sc-date-hr-today {
+    position: relative;
+}
+.dxbs-scheduler .dxbs-sc-gr-sep-vertical {
+    width: 16px;
+    padding: 0;
+}
+.dxbs-scheduler .dxbs-sc-minute-cell:before {
+    content: ".";
+    visibility: hidden;
+}
+.dxbs-scheduler .table tr > td.dxbs-sc-minute-cell {
+    border-left: 0px;
+    width: 3.5em;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.75em;
+    white-space: nowrap;
+}
+.dxbs-scheduler .table tr > td.dxbs-sc-hour-cell {
+    border-right: 0px;
+    width: 3.5em;
+    text-align: right;
+    white-space: nowrap;
+}
+.dxbs-scheduler .dxsc-hour-time-scale.table tr > td.dxbs-sc-hour-cell,
+.dxbs-scheduler .dxbs-sc-time-rulers-caption {
+    width: 6.13em;
+}
+.dxbs-scheduler .dxbs-sc-hour-min-text-compact {
+    display: none;
+}
+.dxbs-scheduler {
+    .dxbs-sc-date-hr-wrapper {
+        display: flex;
+        align-items: baseline;
+        overflow: hidden;
+    }
+
+    .dxbs-sc-date-hr-month,
+    .dxbs-sc-date-hr-day {
+        font-size: 1.25rem;
+        margin-right: 0.2225rem;
+    }
+
+    .dxbs-sc-dayview .dxbs-sc-date-hr {
+        padding-left: 0.4725rem;
+    }
+}
+@media (max-width: 560px) {
+    .dxbs-scheduler {
+        .table tr > td.dxbs-sc-hour-cell {
+            width: 1.85em;
+        }
+
+        .dxbs-sc-time-rulers-caption {
+            width: 4.48em;
+        }
+
+        .table tr > td {
+            &.dxbs-sc-hour-cell,
+            &.dxbs-sc-minute-cell,
+            &.dxbs-sc-time-rulers-caption {
+                font-size: 0.685rem;
+                padding: 0.125rem;
+            }
+        }
+
+        .table.dxsc-hour-time-scale tr > td.dxbs-sc-hour-cell,
+        .table tr > td.dxbs-sc-time-rulers-caption {
+            width: 3em;
+        }
+
+        .table:not(.dxsc-hour-time-scale) tr > td {
+            &.dxbs-sc-hour-cell,
+            &.dxbs-sc-minute-cell {
+                width: 1.5em;
+            }
+        }
+
+        .dxbs-sc-hour-min-text-compact {
+            display: initial;
+        }
+
+        .dxbs-sc-hour-text,
+        .dxbs-sc-minute-cell span {
+            display: none;
+        }
+
+        .dxbs-sc-dayview .dxbs-sc-date-hr {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .dxbs-sc-date-hr-wrapper {
+            flex-direction: column-reverse;
+            align-items: center;
+            font-size: 0.7rem;
+
+            .dxbs-sc-date-hr-month {
+                display: none;
+            }
+
+            .dxbs-sc-date-hr-month,
+            .dxbs-sc-date-hr-day {
+                margin-right: 0;
+            }
+
+            .dxbs-sc-date-hr-day {
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+.dxbs-scheduler .dxbs-sc-hour-boundary {
+    border-style: solid;
+}
+.dxbs-scheduler .dxbs-sc-time-marker-line {
+    width: 100%;
+    border-style: dashed;
+    border-width: 1px 0 0 0;
+}
+.dxbs-scheduler .dxbs-sc-time-marker {
+    display: flex;
+    align-items: center;
+    position: absolute;
+}
+.dxbs-scheduler .dxbs-sc-time-indicator {
+    position: absolute;
+}
+.dxbs-scheduler .dxbs-sc-time-indicator-line {
+    width: 100%;
+    height: 2px;
+}
+.dxbs-scheduler .dxbs-sc-time-marker-image {
+    height: 12px;
+    width: 12px;
+    border-radius: 100%;
+    border: 2px solid transparent;
+    z-index: 100;
+    flex-shrink: 0;
+}
+/* Timeline */
+.dxbs-scheduler .dxbs-sc-month,
+.dxbs-scheduler .dxbs-sc-timeline {
+    height: 100%;
+    overflow: hidden;
+}
+.dxbs-scheduler .dxbs-sc-empty-cell table,
+.dxbs-scheduler .dxbs-sc-v-scroll-spacer table,
+.dxbs-scheduler .dxbs-sc-horizontal-view,
+.dxbs-scheduler .dxbs-sc-resource-headers,
+.dxbs-scheduler .dxbs-sc-month .dxbs-sc-headers,
+.dxbs-scheduler .dxbs-sc-timeline .dxbs-sc-h-scroll-spacer table,
+.dxbs-scheduler .dxbs-sc-timeline .dxbs-sc-timescale {
+    table-layout: fixed;
+    margin-bottom: 0;
+}
+.dxbs-scheduler .dxbs-sc-month .dxbs-sc-headers,
+.dxbs-scheduler .dxbs-sc-month .dxbs-sc-horizontal-view,
+.dxbs-scheduler .dxbs-sc-month .dxbs-sc-resource-headers,
+.dxbs-scheduler .dxbs-sc-timescale,
+.dxbs-scheduler .dxbs-sc-timeline .dxbs-sc-horizontal-view,
+.dxbs-scheduler .dxbs-sc-timeline .dxbs-sc-resource-headers {
+    border-style: none;
+}
+.dxbs-scheduler .dxbs-sc-timescale:not(:last-child) > tbody > tr > td,
+.dxbs-scheduler .dxbs-sc-timeline .dxbs-sc-horizontal-view > tbody > tr > td,
+.dxbs-scheduler .dxbs-sc-timeline .dxbs-sc-resource-headers > tbody > tr > td {
+    border-left-style: none;
+    border-bottom-style: none;
+}
+.dxbs-scheduler .dxbs-sc-month .dxbs-sc-headers > tbody > tr > td:last-child,
+.dxbs-scheduler .dxbs-sc-timescale > tbody > tr > td:last-child,
+.dxbs-scheduler .dxbs-sc-timeline .dxbs-sc-horizontal-view > tbody > tr > td:last-child {
+    border-right-style: none;
+}
+.dxbs-scheduler .dxbs-sc-month .dxbs-sc-headers > tbody > tr > td,
+.dxbs-scheduler .dxbs-sc-timescale:last-child > tbody > tr > td {
+    border-left-style: none;
+}
+.dxbs-scheduler .dxbs-sc-timeline .dxbs-sc-horizontal-view > tbody > tr:first-child > td {
+    padding: 0;
+    border-style: none;
+}
+.dxbs-scheduler .dxbs-sc-month .dxbs-sc-horizontal-view > tbody > tr:first-child > td,
+.dxbs-scheduler .dxbs-sc-timeline .dxbs-sc-horizontal-view > tbody > tr:nth-child(2) > td {
+    border-top-style: none;
+}
+.dxbs-scheduler .dxbs-sc-timeline .dxbs-sc-horizontal-view > tbody > tr:not(:first-child) > td,
+.dxbs-scheduler .dxbs-sc-timeline .dxbs-sc-resource-headers > tbody > tr > td {
+    height: 150px;
+}
+.dxbs-scheduler .dxbs-sc-resources-container,
+.dxbs-scheduler .dxbs-sc-headers-container,
+.dxbs-scheduler .dxbs-sc-headers-scroll-area {
+    overflow: hidden;
+}
+.dxbs-scheduler .dxbs-sc-timecells-container {
+    position: relative;
+}
+.dxbs-scheduler .dxbs-sc-timecells-container,
+.dxbs-scheduler .dxbs-sc-resources-container {
+    height: 100%;
+}
+.dxbs-scheduler .dxbs-sc-timeline,
+.dxbs-scheduler .dxbs-sc-month,
+.dxbs-scheduler .dxbs-sc-resources-scroll-area {
+    display: flex;
+    flex-direction: column;
+}
+.dxbs-scheduler .dxbs-sc-month > div:last-child,
+.dxbs-scheduler .dxbs-sc-timeline > div:last-child {
+    height: 100%;
+    overflow: hidden
+}
+.dxbs-scheduler .dxbs-sc-month > div,
+.dxbs-scheduler .dxbs-sc-timeline > div,
+.dxbs-scheduler .dxbs-sc-headers-scroll-area {
+    display: flex;
+}
+.dxbs-scheduler .dxbs-sc-h-scroll-spacer,
+.dxbs-scheduler .dxbs-sc-v-scroll-spacer {
+    flex: 0 0 auto;
+    display: none;
+}
+.dxbs-scheduler .dxbs-sc-h-scroll-spacer table {
+    height: 100%;
+    border-style: none;
+}
+.dxbs-scheduler .dxbs-sc-h-scroll-spacer table td {
+    padding: 0;
+    border-left-style: none;
+    border-bottom-style: none;
+}
+.dxbs-scheduler .dxbs-sc-v-scroll-spacer table {
+    height: 100%;
+    border-right-style: none;
+}
+.dxbs-scheduler .dxbs-sc-v-scroll-spacer table td {
+    padding: 0;
+    border-right-style: none;
+}
+.dxbs-scheduler .dxbs-sc-empty-cell,
+.dxbs-scheduler .dxbs-sc-resources-scroll-area {
+    flex: 0 0 auto;
+    width: 29px;
+}
+.dxbs-scheduler .dxbs-sc-empty-cell table {
+    height: 100%;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+}
+.dxbs-scheduler .dxbs-sc-empty-cell td {
+    padding: 0;
+    border-left-style: none;
+    border-bottom-style: none;
+}
+.dxbs-scheduler .dxbs-sc-timeline .dxbs-sc-date-hr > div {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.dxbs-scheduler .dxbs-sc-timeline {
+    .dxbs-sc-headers-container > div {
+        position: relative;
+
+        .dxbs-sc-time-marker-image {
+            bottom: -6px;
+        }
+    }
+
+    .dxbs-sc-timecells-container > div {
+        position: relative;
+        height: 100%;
+
+        .dxbs-sc-time-marker-image {
+            top: -6px;
+        }
+    }
+
+    .dxbs-sc-time-marker-image,
+    .dxbs-sc-time-marker-line {
+        display: none;
+        position: absolute;
+    }
+
+    .dxbs-sc-time-marker-line {
+        width: unset;
+        top: 0;
+        bottom: 0;
+        border-width: 0 1px 0 0;
+    }
+}
+
+.dxbs-scheduler .dxbs-sc-month .dxbs-sc-time-cell {
+    height: 150px;
+}
+.dxbs-scheduler .dxsc-left-corner {
+    width: 33px;
+}
+.dxbs-scheduler .dxsc-rh-text-wrapper {
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.dxbs-scheduler .dxsc-rh-rotated-caption span {
+    transform: rotate( 180deg );
+    -ms-transform: rotate(180deg);
+    -webkit-transform: rotate( 180deg );
+    writing-mode: vertical-rl;
+    -ms-writing-mode: tb-rl;
+    -webkit-writing-mode: vertical-rl;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+/* Appointment */
+.dxbs-scheduler .dxbs-sc-apt {
+    position: absolute;
+    font-size: 0.9em;
+    z-index: 8;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.dxbs-scheduler .dxbs-sc-apt > div {
+    position: relative;
+    height: 100%;
+}
+.dxbs-scheduler .dxbs-sc-apt.dxbs-sc-vertical-apt {
+    padding: 2px 2px 1px 2px;
+}
+.dxbs-scheduler .dxbs-sc-apt.dxbs-sc-horizontal-apt {
+    padding: 4px 4px 0px 4px;
+}
+.dxbs-scheduler .dxbs-sc-apt-container {
+    height: 100%;
+}
+.dxbs-scheduler .dxbs-sc-apt .dxsc-apt-content {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+
+    display: flex;
+}
+.dxbs-scheduler .dxbs-sc-apt .dxsc-apt-bg {
+    opacity: 0.7;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+.dxbs-scheduler .dxbs-sc-apt.dxbs-apt-selected .dxsc-apt-bg {
+    opacity: 1;
+}
+.dxbs-scheduler .dxbs-apt-hovered .dxsc-apt-bg {
+    opacity: 0.7;
+}
+.dxbs-scheduler .dxbs-sc-apt.dxbs-apt-disable {
+    opacity: 0.5;
+}
+.dxbs-scheduler .dxbs-sc-apt .dxsc-top-handle,
+.dxbs-scheduler .dxbs-sc-apt .dxsc-bottom-handle {
+    cursor: n-resize;
+    height: 5px;
+    width: 100%;
+    position: absolute;
+    z-index: 10;
+}
+.dxbs-scheduler .dxbs-sc-apt .dxsc-left-handle,
+.dxbs-scheduler .dxbs-sc-apt .dxsc-right-handle {
+    cursor: e-resize;
+    padding: 3px;
+    z-index: 10;
+    position: absolute;
+    height: 100%;
+}
+.dxbs-scheduler .dxbs-sc-apt .dxsc-left-handle {
+    margin-right: -6px;
+}
+.dxbs-scheduler .dxbs-sc-apt .dxsc-right-handle {
+    margin-left: -6px;
+    right: 0;
+}
+.dxbs-scheduler .dxbs-sc-apt .dxsc-bottom-handle {
+    bottom: 0;
+}
+.dxbs-scheduler .dxbs-sc-apt .dxsc-apt-status-container {
+    background-color: $ColorWhite;
+    box-sizing: border-box;
+    border-width: 0;
+}
+.dxbs-scheduler .dxbs-sc-apt .dxsc-apt-status {
+    width: 0.4em;
+    height: 100%;
+}
+.dxbs-scheduler .dxbs-sc-apt .dxsc-apt-status-container:after {
+    content: " ";
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+    box-sizing: border-box;
+    background-color: transparent;
+    border: 1px solid white;
+    opacity: 0.4;
+    border-radius: inherit;
+}
+.dxbs-scheduler .dxbs-sc-apt .dxbs-sc-apt-status-container .dxsc-apt-status {
+    display: block;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+.dxbs-scheduler .dxbs-sc-apt .dxsc-content-wrapper {
+    padding: 0.2em 0.5em;
+    width: 100%;
+}
+.dxbs-scheduler .dxbs-sc-apt-time {
+    font-size: 0.7rem;
+    font-weight: 300;
+    opacity: 0.8;
+}
+.dxbs-scheduler .dxbs-sc-apt-description {
+    font-size: 0.8em;
+    opacity: .65;
+}
+
+.dxbs-scheduler .dxbs-sc-apt-images-container {
+    align-self: flex-end;
+    padding-right: 0.4em;
+    padding-bottom: 0.3em;
+}
+
+.dxbs-scheduler .dxbs-sc-apt-compact .dxsc-content-wrapper * {
+    display: none;
+}
+
+.dxbs-scheduler .dxbs-sc-horizontal-apt .dxbs-sc-apt-compact .dxsc-content-wrapper {
+    min-height: 2em;
+}
+
+/*Appointment edit dialog*/
+.dxbs-apt-edit-dialog {
+    & .dxsc-label-item {
+        margin-right: calc(1.5rem * 0.7);
+    }
+
+    & .dxbl-sc-fl-item {
+        display: flex;
+    }
+
+    & .dxbl-sc-fl-item-with-icon > .dxbl-text {
+        padding-left: calc(0.375rem * 2 + 1rem);
+    }
+
+    & .dxbl-sc-dialog-title {
+        margin-right: auto;
+    }
+
+    & div.dxbl-image {
+        width: var(--dxbl-image-width);
+        height: var(--dxbl-image-height);
+    }
+
+    & > .popover-body,
+    & > .dxbl-modal-content > .dxbl-modal-body > .dxbl-apt-edit-dialog-body {
+        > .dxbl-fl.dxbl-fl-with-paddings {
+            --dxbl-fl-padding-x: 0;
+            --dxbl-fl-padding-y: 0;
+        }
+    }
+}
+.dxbl-apt-edit-dialog-header {
+    border-top-left-radius: var(--dxbl-popup-border-radius);
+    border-top-right-radius: var(--dxbl-popup-border-radius);
+    display: flex;
+    align-items: center;
+    padding: var(--dxbl-popup-header-padding-y) var(--dxbl-popup-header-padding-x);
+}
+.dxbl-sc-fl-item-icon {
+    padding: 0.25003125rem calc(var(--dxbl-row-item-spacing-x) * 0.5);
+    padding-left: 0;
+}
+.dxbl-apt-edit-dialog-body {
+    padding: var(--dxbl-popup-body-padding-y) var(--dxbl-popup-body-padding-x);
+
+    & .dxbl-sc-fl-item-content {
+        flex-flow: row nowrap;
+        display: flex;
+        width: 100%;
+
+        & > button {
+            width: 75px;
+            margin-right: 0.75rem;
+            white-space: nowrap;
+        }
+    }
+}
+.dxbl-modal > .dxbl-modal-root > .dxbl-popup.dxbs-apt-edit-dialog > .dxbl-modal-content > .dxbl-modal-body {
+    padding: 0;
+}
+
+.dxsc-label-item {
+    padding: 4px;
+    margin: 0 .5rem .7rem .3rem;
+    border-radius: 50%;
+}
+
+.dx-color-items .dropdown-item {
+    padding-left: .25rem;
+    padding-right: .25rem;
+}
+.dxbs-scheduler-color-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-flow: row nowrap;
+
+    & .color {
+        margin: 0 .5rem;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+    }
+}
+.dxbs-recurrence-model {
+    .dxbs-recurrence-name .dxbs-edit-btn {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .dxbs-recurrence-settings {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+}
+.dxbs-apt-edit-dialog.dxbs-popup-scrollable .modal-content,
+.dxbs-apt-edit-dialog.dxbs-popup-scrollable .modal-content .modal-body {
+    overflow-y: inherit;
+}
+.dxbs-apt-edit-dialog .dxbl-fl > .row {
+    align-items: flex-end;
+}
+.dxbs-apt-edit-dialog .dxbl-fl > .row {
+    align-items: flex-end;
+}
+.dxbs-apt-edit-dialog .modal-body .dxbl-fl {
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+}
+.dxbs-apt-edit-dialog .modal-body {
+    padding-top: 0;
+}
+.dxbs-apt-edit-dialog .modal-body .modal-header {
+    margin-bottom: 1rem;
+}
+
+.dxbs-apt-edit-dialog .dxsc-week-button-container {
+    display: flex;
+    flex-wrap: wrap;
+
+    & > button {
+        margin-left: 0.375rem;
+    }
+}
+.dxbs-scheduler .dxsc-week-button {
+    width: 35px;
+    height: 35px;
+    margin-bottom: 5px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap-reverse;
+}
+
+.dx-hint {
+    width: max-content;
+}
+.dxbs-apt-edit-dialog .dxbl-apt-edit-dialog-header,
+.dx-hint .popover-header {
+    font-size: 1.4em;
+}
+.dxbs-apt-edit-dialog .modal-header > div {
+    padding: 0.6rem 1.2rem
+}
+.dx-hint .popover-header {
+    padding: 0.6rem 1.1rem;
+}
+
+.dx-hint .dxsc-subject {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+.dxbs-scheduler.dx-hint.dxbs-apt-edit-dialog {
+    min-width: 276px;
+    max-width: 450px;
+}
+@media (max-width: 450px) {
+    .dxbl-apt-edit-dialog {
+        min-width: 100vw;
+        width: auto;
+    }
+}
+.dxbl-apt-edit-dialog.modal {
+    display: flex;
+    justify-content: center;
+
+    &:before {
+        content: " ";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        opacity: 0.3;
+        z-index: -1;
+    }
+
+    .modal-dialog {
+        align-self: flex-end;
+        margin: 0;
+        bottom: -50%;
+        max-width: initial;
+        transition: bottom 0.5s ease;
+        -webkit-transition: bottom 0.5s ease;
+        -moz-transition: bottom 0.5s ease;
+        -khtml-transition: bottom 0.5s ease;
+        -o-transition: bottom 0.5s ease;
+    }
+
+    &.show .modal-dialog {
+        bottom: 0;
+    }
+
+    .modal-content {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+.dxbs-apt-edit-dialog.dxbs-scheduler.dxbs-sc-mobile {
+    margin: 0;
+    height: 100%;
+    width: initial;
+    max-width: initial;
+}
+.dxbs-apt-edit-dialog .dxsc-caption {
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.dxbs-apt-edit-dialog .dxsc-group-icon {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+}
+
+@media (max-width: 991px) {
+    .dxbs-apt-edit-dialog .form-group > div > div:not(.dxsc-no-icon):not(.dxsc-group-icon),
+    .dxbs-apt-edit-dialog .form-group > div > .dxbs-dropdown-edit:not(.dxsc-no-icon):not(.dxsc-group-icon) {
+        padding-left: calc(1.5rem * 0.5);
+    }
+}
+.dxbs-apt-edit-dialog .dxbl-fl .form-group.row > .dxbl-fl-ctrl {
+    display: flex;
+}
+.dxsc-tooltip.popover {
+    max-width: 370px;
+}
+.dxsc-tooltip .dxsc-label-item {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
+.dxbl-fl div:not(.dxsc-description-item) > .form-group .dxsc-group-icon > div:first-child {
+    display: flex;
+    align-items: flex-end;
+}
+
+/* Labels & Statuses color */
+.dxbl-scheduler-color .dx-blue-color,
+.dxbs-scheduler-blue-color {
+    background-color: $ColorBlue;
+}
+.dxbl-scheduler-color .dx-indigo-color,
+.dxbs-scheduler-indigo-color {
+    background-color: $ColorIndigo;
+}
+.dxbl-scheduler-color .dx-purple-color,
+.dxbs-scheduler-purple-color {
+    background-color: $ColorPurple;
+}
+.dxbl-scheduler-color .dx-pink-color,
+.dxbs-scheduler-pink-color {
+    background-color: $ColorPink;
+}
+.dxbl-scheduler-color .dx-red-color,
+.dxbs-scheduler-red-color {
+    background-color: $ColorRed;
+}
+.dxbl-scheduler-color .dx-orange-color,
+.dxbs-scheduler-orange-color {
+    background-color: $ColorOrange;
+}
+.dxbl-scheduler-color .dx-yellow-color,
+.dxbs-scheduler-yellow-color {
+    background-color: $ColorYellow;
+}
+.dxbl-scheduler-color .dx-green-color,
+.dxbs-scheduler-green-color {
+    background-color: $ColorGreen;
+}
+.dxbl-scheduler-color .dx-teal-color,
+.dxbs-scheduler-teal-color {
+    background-color: $ColorTeal;
+}
+.dxbl-scheduler-color .dx-cyan-color,
+.dxbs-scheduler-cyan-color {
+    background-color: $ColorCyan;
+}

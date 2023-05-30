@@ -1,0 +1,226 @@
+@import "popup.shared";
+
+.dxbl-window {
+    --dxbl-window-bg: #{$dx-window-bg};
+    --dxbl-window-color: #{$dx-window-color};
+    --dxbl-window-font-family: #{$dx-window-font-family};
+    --dxbl-window-font-size: #{$dx-window-font-size};
+    --dxbl-window-line-height: #{$dx-window-line-height};
+    --dxbl-window-box-shadow: #{$dx-window-box-shadow};
+    --dxbl-window-border-width: #{$dx-window-border-width};
+    --dxbl-window-border-style: #{$dx-window-border-style};
+    --dxbl-window-border-color: #{$dx-window-border-color};
+    --dxbl-window-border-radius: #{$dx-window-border-radius};
+    --dxbl-window-min-width: #{$dx-window-min-width};
+    --dxbl-window-header-font-size: #{$dx-window-header-font-size};
+    --dxbl-window-header-line-height: #{$dx-window-header-line-height};
+    --dxbl-window-header-bg: #{$dx-window-header-bg};
+    --dxbl-window-header-color: #{$dx-window-header-color};
+    --dxbl-window-header-font-weight: #{$dx-window-header-font-weight};
+    --dxbl-window-header-padding-y: #{$dx-window-header-padding-y};
+    --dxbl-window-header-padding-x: #{$dx-window-header-padding-x};
+    --dxbl-window-header-btn-bg: #{$dx-window-header-btn-bg};
+    --dxbl-window-header-btn-color: #{$dx-window-header-btn-color};
+    --dxbl-window-header-btn-hover-bg: #{$dx-window-header-btn-hover-bg};
+    --dxbl-window-header-btn-hover-color: #{$dx-window-header-btn-hover-color};
+    --dxbl-window-body-padding-y: #{$dx-window-body-padding-y};
+    --dxbl-window-body-padding-x: #{$dx-window-body-padding-x};
+    --dxbl-window-footer-bg: #{$dx-window-footer-bg};
+    --dxbl-window-footer-color: #{$dx-window-footer-color};
+    --dxbl-window-footer-padding-y: #{$dx-window-footer-padding-y};
+    --dxbl-window-footer-padding-x: #{$dx-window-footer-padding-x};
+
+    @include safari-line-height("--dxbl-window-line-height", $dx-window-line-height-safari);
+
+    &.dxbl-sm {
+        --dxbl-window-line-height: #{$dx-window-line-height-sm};
+        --dxbl-window-font-size: #{$dx-window-font-size-sm};
+        --dxbl-window-border-radius: #{$dx-window-border-radius-sm};
+        --dxbl-window-header-font-size: #{$dx-window-header-font-size-sm};
+        --dxbl-window-header-line-height: #{$dx-window-header-line-height-sm};
+        --dxbl-window-header-padding-y: #{$dx-window-header-padding-y-sm};
+        --dxbl-window-header-padding-x: #{$dx-window-header-padding-x-sm};
+        --dxbl-window-body-padding-y: #{$dx-window-body-padding-y-sm};
+        --dxbl-window-body-padding-x: #{$dx-window-body-padding-x-sm};
+        --dxbl-window-footer-padding-y: #{$dx-window-footer-padding-y-sm};
+        --dxbl-window-footer-padding-x: #{$dx-window-footer-padding-x-sm};
+    }
+
+    &.dxbl-lg {
+        --dxbl-window-line-height: #{$dx-window-line-height-lg};
+        --dxbl-window-font-size: #{$dx-window-font-size-lg};
+        --dxbl-window-border-radius: #{$dx-window-border-radius-lg};
+        --dxbl-window-header-font-size: #{$dx-window-header-font-size-lg};
+        --dxbl-window-header-line-height: #{$dx-window-header-line-height-lg};
+        --dxbl-window-header-padding-y: #{$dx-window-header-padding-y-lg};
+        --dxbl-window-header-padding-x: #{$dx-window-header-padding-x-lg};
+        --dxbl-window-body-padding-y: #{$dx-window-body-padding-y-lg};
+        --dxbl-window-body-padding-x: #{$dx-window-body-padding-x-lg};
+        --dxbl-window-footer-padding-y: #{$dx-window-footer-padding-y-lg};
+        --dxbl-window-footer-padding-x: #{$dx-window-footer-padding-x-lg};
+    }
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: unset;
+
+    &:not(:defined) {
+        display: none;
+    }
+
+    &[x-drop-alignment="top"] {
+        > .dxbl-window-dialog {
+            > .dxbl-window-top-sizegrip-area {
+                display: block;
+            }
+        }
+    }
+
+    &[x-drop-alignment="bottom"] {
+        > .dxbl-window-dialog {
+            > .dxbl-window-bottom-sizegrip-area {
+                display: block;
+            }
+        }
+    }
+
+    > .dxbl-window-dialog {
+        font-family: var(--dxbl-window-font-family);
+        font-size: var(--dxbl-window-font-size);
+        line-height: var(--dxbl-window-line-height);
+        color: var(--dxbl-window-color);
+        background-color: var(--dxbl-window-bg);
+        border: var(--dxbl-window-border-width) var(--dxbl-window-border-style) var(--dxbl-window-border-color);
+        border-radius: var(--dxbl-window-border-radius);
+        box-shadow: var(--dxbl-window-box-shadow);
+        flex: 1 1 auto;
+        display: flex;
+        position: relative;
+        z-index: 0;
+        min-width: var(--dxbl-window-min-width);
+        min-height: 0;
+        top: 0;
+        left: 0;
+        flex-direction: column;
+        justify-content: flex-start;
+        outline: 0;
+
+        &.dxbl-window-scrollable {
+            > .dxbl-window-body {
+                overflow-y: auto;
+                min-height: 0;
+            }
+        }
+
+        > .dxbl-window-header {
+            cursor: default;
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: space-between;
+            font-size: var(--dxbl-window-header-font-size);
+            line-height: var(--dxbl-window-header-line-height);
+            font-weight: var(--dxbl-window-header-font-weight);
+            border-bottom: var(--dxbl-window-border-width) var(--dxbl-window-border-style) var(--dxbl-window-border-color);
+            padding: var(--dxbl-window-header-padding-y) var(--dxbl-window-header-padding-x);
+
+            @include panel-header-style("--dxbl-window-header-bg", "--dxbl-window-header-color");
+
+            .dxbl-window-header-default {
+                flex: 1 1 auto;
+                flex-flow: row nowrap;
+                display: flex;
+            }
+
+            .dxbl-window-title {
+                display: flex;
+                font-size: inherit;
+                line-height: inherit;
+                align-items: center;
+                padding-left: 0;
+                white-space: nowrap;
+                flex: 1 1 auto;
+            }
+
+            .dxbl-window-header-button {
+                --dxbl-btn-bg: var(--dxbl-window-header-btn-bg);
+                --dxbl-btn-color: var(--dxbl-window-header-btn-color);
+                --dxbl-btn-border-color: transparent;
+                --dxbl-btn-hover-border-color: transparent;
+                --dxbl-btn-box-shadow: inset 0 0 0 rgb(0 0 0 / 0%);
+                --dxbl-btn-border-radius: 50%;
+
+                margin-left: auto;
+
+                @include embedded-image-color("--dxbl-window-header-btn-color", null, "--dxbl-window-header-btn-hover-color");
+
+                @include hover-state() {
+                    @include state-hover-style("--dxbl-window-header-btn-hover-bg", "--dxbl-window-header-btn-hover-color");
+                }
+
+                @include button-focus-state() {
+                    @include button-inner-focus-style(var(--dxbl-btn-border-radius));
+                }
+            }
+
+            &.dxbl-drag {
+                cursor: default;
+            }
+        }
+
+        > .dxbl-window-body {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            flex: 1 1 auto;
+            min-height: 0;
+            padding: var(--dxbl-window-body-padding-y) var(--dxbl-window-body-padding-x);
+            overflow: auto;
+
+            > * {
+                min-height: 0;
+            }
+
+            & > .dxbl-fl.dxbl-fl-with-paddings {
+                --dxbl-fl-padding-x: 0;
+                --dxbl-fl-padding-y: 0;
+            }
+        }
+
+        > .dxbl-window-footer {
+            display: flex;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: flex-end;
+            padding: var(--dxbl-window-footer-padding-y) var(--dxbl-window-footer-padding-x);
+            border-top: var(--dxbl-window-border-width) var(--dxbl-window-border-style) var(--dxbl-window-border-color);
+            margin-top: auto;
+
+            @include panel-footer-style("--dxbl-window-footer-bg", "--dxbl-window-footer-color");
+        }
+
+        > .dxbl-window-sizegrip-area {
+            display: none;
+        }
+    }
+
+    > .dxbl-window-sizegrip {
+        @include disable-accessibility-border();
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 1rem;
+        height: 1rem;
+        color: inherit;
+        background-color: transparent;
+
+        > .dxbl-window-sizegrip-image {
+            width: 12px;
+            height: 12px;
+            fill-opacity: 60%;
+        }
+    }
+}

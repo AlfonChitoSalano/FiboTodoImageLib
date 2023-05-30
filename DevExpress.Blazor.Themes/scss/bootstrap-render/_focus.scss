@@ -1,0 +1,18 @@
+.dxbs-focus-hidden .dxbs-edit-btn.inc:focus,
+.dxbs-focus-hidden .dxbs-clear-btn:focus,
+.dxbs-focus-hidden .dxbs-edit-btn.dec:focus,
+.dxbs-combobox .dxbs-focus-hidden .dxbs-dropdown-toggle:focus,
+.dxbs-date-edit.dxbs-focus-hidden .dxbs-dropdown-toggle:focus,
+.dxbs-calendar.card .dxbs-focus-hidden .dxbs-month-title:focus {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border-color: transparent;
+}
+
+.dxbs-focus-hidden .dxbs-clear-btn:focus, [data-toggle="gridview-column-sort"]:focus {
+    outline: 0;
+}
+
+.dxbs-focus-hidden .dxbs-clear-btn {
+    background: none;
+}

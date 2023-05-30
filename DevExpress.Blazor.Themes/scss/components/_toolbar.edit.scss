@@ -1,0 +1,371 @@
+@import "mixins/toolbar";
+
+%image-container {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--back-color);
+    width: var(--dxbl-toolbar-coloredit-image-container-width);
+    height: var(--dxbl-toolbar-coloredit-image-container-height);
+    border: #{$dx-toolbar-coloredit-image-border-width} #{$dx-toolbar-coloredit-image-border-style} #{$dx-toolbar-coloredit-image-border-color}; // stylelint-disable-line max-line-length
+}
+
+%empty-image-placeholder {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: calc(-50%);
+    right: 0;
+    transform: rotate(-45deg) translateY(-1px);
+    transform-origin: 100% 0;
+    border-top: #{$dx-toolbar-coloredit-image-placeholder-border-width} #{$dx-toolbar-coloredit-image-placeholder-border-style} #{$dx-toolbar-coloredit-image-placeholder-border-color}; // stylelint-disable-line max-line-length
+}
+
+%item-off-screen {
+
+    // stylelint-disable declaration-no-important
+    visibility: hidden !important;
+    position: relative;
+    transform: translate(-10000px, -10000px) !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-style: none !important;
+
+    // stylelint-enable declaration-no-important
+}
+
+%item-out-of-layout {
+
+    // stylelint-disable declaration-no-important
+    visibility: hidden !important;
+    position: absolute;
+    top: -10000px !important;
+    left: -10000px !important;
+
+    // stylelint-enable declaration-no-important
+}
+
+@mixin adaptive-items() {
+    &.dxbl-loaded .dxbl-toolbar-btn-ellipsis .dxbl-toolbar-adaptive-item-preview-image.dxbl-toolbar-hidden-item {
+        @content;
+
+        & + .dxbl-toolbar-adaptive-item-text {
+            @content;
+        }
+    }
+}
+
+@mixin toolbar-adaptive-items() {
+    @include adaptive-items() {
+        @content;
+    }
+
+    .dxbl-toolbar-hidden-item:not(.dxbl-toolbar-adaptive-item-preview-image) {
+        &:not(.dxbl-toolbar-btn-ellipsis) {
+            @content;
+        }
+
+        &.dxbl-toolbar-btn-ellipsis {
+            visibility: hidden !important; // stylelint-disable-line declaration-no-important
+        }
+    }
+}
+
+@mixin ribbon-adaptive-items() {
+    @include adaptive-items() {
+        @content;
+    }
+
+    .dxbl-toolbar-hidden-item:not(.dxbl-toolbar-adaptive-item-preview-image) {
+        @content;
+    }
+}
+
+.dxbl-ribbon-toolbar {
+    &.dxbl-toolbar {
+        .dxbl-btn-toolbar {
+            &:not(.dxbl-btn-plain-toolbar) > .dxbl-toolbar-edit:not(:last-child) {
+                margin-right: #{$dx-ribbon-toolbar-item-spacing};
+            }
+
+            &.dxbl-btn-plain-toolbar {
+                & > .dxbl-btn-group {
+                    & > .dxbl-toolbar-btn:not(:first-child),
+                    & > .dxbl-toolbar-btn-ellipsis {
+                        margin-left: #{$dx-ribbon-toolbar-item-spacing};
+                    }
+                }
+            }
+        }
+
+        & > .dxbl-btn-toolbar {
+            position: static;
+            padding: unset;
+            flex: 1;
+        }
+
+        &.dxbl-loading > .dxbl-btn-toolbar {
+            position: static;
+            overflow: unset;
+
+            &.dxbl-btn-toolbar > .dxbl-btn-group:not(.dxbl-toolbar-btn-ellipsis) {
+                visibility: unset;
+                width: auto;
+            }
+        }
+    }
+
+    & > .dxbl-btn-toolbar > .dxbl-btn-group > .dxbl-btn-group.dxbl-toolbar-btn-ellipsis > .dxbl-btn:not(:active):not(.dxbl-active):not(:hover)::before {
+        opacity: 0;
+    }
+
+    &.dxbl-loaded {
+        .dxbl-toolbar-layout-block-group.dxbl-toolbar-adaptive-item-hidden {
+            & ~ .dxbl-toolbar-layout-block-group > .dxbl-toolbar-layout-block-item.dxbl-toolbar-btn-ellipsis,
+            & > .dxbl-toolbar-layout-block-item.dxbl-toolbar-btn-ellipsis {
+                display: inline-flex;
+
+                .dxbl-toolbar-icon-more {
+                    --dxbl-btn-image-spacing: 0;
+                }
+            }
+        }
+
+        & > .dxbl-btn-toolbar > .dxbl-btn-group {
+            & > .dxbl-btn.dxbl-toolbar-adaptive-item-text-hidden > .dxbl-image:not(:only-child),
+            & > .dxbl-btn-group.dxbl-toolbar-adaptive-item-text-hidden > .dxbl-btn > .dxbl-image:not(:only-child) {
+                margin-right: 0;
+            }
+        }
+    }
+
+    .dxbl-btn-group {
+        position: static;
+    }
+}
+
+.dxbl-toolbar-coloredit-image-container {
+    --dxbl-toolbar-coloredit-image-container-width: #{$dx-toolbar-coloredit-image-container-size};
+    --dxbl-toolbar-coloredit-image-container-height: #{$dx-toolbar-coloredit-image-container-size};
+}
+
+.dxbl-sm .dxbl-toolbar-coloredit-image-container {
+    --dxbl-toolbar-coloredit-image-container-width: #{$dx-toolbar-coloredit-image-container-size-sm};
+    --dxbl-toolbar-coloredit-image-container-height: #{$dx-toolbar-coloredit-image-container-size-sm};
+}
+
+.dxbl-lg .dxbl-toolbar-coloredit-image-container {
+    --dxbl-toolbar-coloredit-image-container-width: #{$dx-toolbar-coloredit-image-container-size-lg};
+    --dxbl-toolbar-coloredit-image-container-height: #{$dx-toolbar-coloredit-image-container-size-lg};
+}
+
+.dxbl-toolbar {
+    &:not(.dxbl-ribbon-toolbar) > .dxbl-btn-toolbar > .dxbl-btn-group > .dxbl-btn-group.dxbl-toolbar-btn-ellipsis {
+        display: none;
+    }
+
+    &.dxbl-loaded {
+        .dxbl-toolbar-adaptive-item-hidden {
+            .dxbl-toolbar-layout-block-group.dxbl-toolbar-adaptive-item-all-hidden {
+                &,
+                & ~ .dxbl-toolbar-layout-block-group {
+                    & > .dxbl-toolbar-layout-block-item > .dxbl-btn {
+                        & > .dxbl-image + span:not(.dxbl-image),
+                        & > span:not(.dxbl-image) {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        .dxbl-toolbar-layout-block-group {
+            &.dxbl-toolbar-adaptive-item-all-hidden .dxbl-toolbar-adaptive-item-hidden {
+                & > .dxbl-toolbar-layout-block-item > .dxbl-btn > span:not(.dxbl-image),
+                & + .dxbl-toolbar-placeholder ~ .dxbl-toolbar-layout-block-group > .dxbl-toolbar-layout-block-item > .dxbl-btn > .dxbl-image + span:not(.dxbl-image),
+                & ~ .dxbl-toolbar-layout-block-group > .dxbl-toolbar-layout-block-item > .dxbl-btn > .dxbl-image + span:not(.dxbl-image) {
+                    display: none;
+                }
+            }
+
+            &.dxbl-toolbar-adaptive-item-text-hidden {
+                & + .dxbl-toolbar-placeholder ~ .dxbl-toolbar-layout-block-group > .dxbl-toolbar-layout-block-item:not(.dxbl-toolbar-btn-ellipsis) {
+                    & > .dxbl-image + span:not(.dxbl-image),
+                    & > .dxbl-btn > .dxbl-image + span:not(.dxbl-image) {
+                        display: none;
+                    }
+                }
+
+                & ~ .dxbl-toolbar-layout-block-group > .dxbl-toolbar-layout-block-item:not(.dxbl-toolbar-btn-ellipsis) {
+                    & > .dxbl-image + span:not(.dxbl-image),
+                    & > .dxbl-btn > .dxbl-image + span:not(.dxbl-image) {
+                        display: none;
+                    }
+                }
+            }
+
+            & > .dxbl-toolbar-layout-block-item.dxbl-toolbar-adaptive-item-text-hidden ~ .dxbl-toolbar-layout-block-item:not(.dxbl-toolbar-btn-ellipsis) {
+                & > .dxbl-image + span:not(.dxbl-image),
+                & > .dxbl-btn > .dxbl-image + span:not(.dxbl-image) {
+                    display: none;
+                }
+            }
+        }
+
+        & > .dxbl-btn-toolbar {
+            &.dxbl-toolbar-adaptive-item-text-hidden .dxbl-toolbar-layout-block-group > .dxbl-toolbar-layout-block-item:not(.dxbl-toolbar-btn-ellipsis):not(:only-child) {
+                & > .dxbl-image + span:not(.dxbl-image),
+                & > .dxbl-btn > .dxbl-image + span:not(.dxbl-image) {
+                    display: none;
+                }
+            }
+
+            & > .dxbl-btn-group > .dxbl-toolbar-adaptive-item-text-hidden {
+                &.dxbl-btn,
+                &.dxbl-btn-group > .dxbl-btn,
+                &.dxbl-btn-split > .dxbl-btn {
+                    & > .dxbl-image + span {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    &.dxbl-ribbon-toolbar {
+        @include ribbon-adaptive-items() {
+            @extend %item-out-of-layout;
+        }
+
+        &[data-dx-ribbon-toolbar-loaded] {
+            @include ribbon-adaptive-items() {
+                @extend %item-off-screen;
+            }
+        }
+    }
+
+    &:not(.dxbl-ribbon-toolbar) {
+        @include toolbar-adaptive-items() {
+            @extend %item-off-screen;
+        }
+    }
+}
+
+.dxbl-toolbar-edit {
+    & > .dxbl-toolbar-menu-item > div:not(.dxbl-btn-split),
+    & > div {
+        padding-right: #{$dx-btn-container-padding-x};
+        display: flex;
+        align-items: center;
+        padding-top: 0;
+        padding-bottom: 0;
+        width: 100%;
+        height: 100%;
+        white-space: nowrap;
+
+        & > .dxbl-image {
+            flex-shrink: 0;
+        }
+
+        @include btn-plain-toolbar-edit-item();
+    }
+
+    &.dxbl-office-bar-spinedit {
+        & > .dxbl-toolbar-menu-item > div:not(.dxbl-btn-split),
+        & > div {
+            & > .dxbl-text-edit:not(:first-child) {
+                margin-left: #{$dx-toolbar-edit-item-spacing};
+
+                &::before {
+                    content: "";
+                    margin-left: #{$dx-toolbar-edit-item-spacing};
+                }
+            }
+        }
+    }
+
+    &.dxbl-toolbar-coloredit {
+        & > .dxbl-btn:first-child {
+            > .dxbl-toolbar-coloredit-image-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                position: relative;
+
+                & + span {
+                    margin-left: #{$dx-toolbar-edit-item-spacing};
+                }
+
+                &:not(.dxbl-toolbar-coloredit-image-hidden)::after {
+                    content: " ";
+                    height: 2px;
+                    background-color: var(--back-color);
+                    min-width: var(--dxbl-toolbar-coloredit-image-container-width);
+                    opacity: 1;
+                    position: absolute;
+                    bottom: 0;
+                }
+            }
+
+            .dxbl-toolbar-coloredit-image-container {
+                @include embedded-image-color(
+                    "--dxbl-btn-image-color", "--dxbl-btn-disabled-image-color", "--dxbl-btn-hover-image-color",
+                    "--dxbl-btn-active-image-color", "--dxbl-btn-active-hover-image-color"
+                );
+            }
+
+            @include disabled-state() {
+                .dxbl-toolbar-coloredit-image-container {
+                    @include embedded-image-color(
+                        "--dxbl-btn-image-color", "--dxbl-btn-disabled-image-color", "--dxbl-btn-hover-image-color", "--dxbl-btn-active-image-color", "--dxbl-btn-active-hover-image-color",
+                        false, false, $dx-image-disabled-color-alpha
+                    );
+                }
+            }
+        }
+
+        & > .dxbl-btn > .dxbl-toolbar-coloredit-image-container.dxbl-toolbar-coloredit-image-hidden {
+            @extend %image-container;
+
+            &.dxbl-toolbar-coloredit-empty::before {
+                @extend %empty-image-placeholder;
+            }
+        }
+    }
+
+    &.dxbl-toolbar-combobox .dxbl-text-edit input[readonly] {
+        cursor: pointer;
+    }
+}
+
+.dxbl-toolbar-dropdown-item {
+    padding: 0;
+    display: flex;
+
+    .dxbl-image + span,
+    .dxbl-toolbar-coloredit-image-container + span {
+        margin-left: #{$dx-toolbar-edit-item-spacing};
+    }
+
+    &.dxbl-toolbar-coloredit {
+        & > .dxbl-toolbar-menu-item > .dxbl-dropdown-item > .dxbl-btn > .dxbl-toolbar-coloredit-image-container,
+        & .dxbl-office-bar-coloredit > .dxbl-toolbar-coloredit-image-container {
+            @extend %image-container;
+
+            &.dxbl-toolbar-coloredit-empty::before {
+                @extend %empty-image-placeholder;
+            }
+        }
+    }
+
+    &.dxbl-toolbar-edit > .dxbl-toolbar-menu-item > div > .dxbl-text-edit {
+        margin-left: auto;
+    }
+
+    & > .dxbl-toolbar-menu-item > div {
+        & > .dxbl-text > span {
+            margin-left: var(--dxbl-toolbar-dropdown-btn-padding-x);
+        }
+    }
+}

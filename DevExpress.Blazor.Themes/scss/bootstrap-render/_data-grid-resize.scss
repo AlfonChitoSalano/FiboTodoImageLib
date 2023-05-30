@@ -1,0 +1,145 @@
+@import 'dx-blazor.params.scss';
+
+@mixin userSelectNone {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+
+th:focus
+{
+    outline: 0;
+}
+table.dx-resize thead tr th > button,
+table.dx-resize .dxbs-fixed-header-content
+{
+    width: calc(100% - 7px);
+}
+.dxAndroidMobilePlatform table.dx-resize thead tr th > button,
+.dxAndroidMobilePlatform .dxbs-fixed-header-content,
+.dxMacOSMobilePlatform table.dx-resize thead tr th > button,
+.dxMacOSMobilePlatform .dxbs-fixed-header-content
+{
+    width: calc(100% - 1px);
+}
+th:focus > button:before,
+th:focus .dxbs-fixed-header-content:before
+{
+    content: "";
+    position: absolute;
+    width: inherit;
+    height: 100%;
+}
+table.dx-resize
+{
+    table-layout: fixed;
+}
+table.dx-resize th
+{
+    position: relative;
+}
+table.dx-resize tr th span,
+table.dx-resize tr th:not(.dxbs-toggle-cell):not(.dxbs-grid-group-cell-offset) span,
+table.dx-resize tr td:not(.dxbs-toggle-cell):not(.dxbs-grid-group-cell-offset):not(.dxbs-grid-edit-form) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dxMacOSMobilePlatform table.dx-resize thead
+{
+    @include userSelectNone;
+}
+
+.dxAndroidMobilePlatform .dxColumnResizeAnchor:before,
+.dxMacOSMobilePlatform .dxColumnResizeAnchor:before
+{
+    background-color: transparent;
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 21px;
+    right: -10px;
+}
+
+.dxAndroidMobilePlatform .dxColumnResizeAnchor,
+.dxMacOSMobilePlatform .dxColumnResizeAnchor,
+.dxAndroidMobilePlatform th:focus .dxColumnResizeAnchor,
+.dxMacOSMobilePlatform th:focus .dxColumnResizeAnchor
+{
+    width: 1px;
+    opacity: 0;
+}
+.dxAndroidMobilePlatform th:focus:before,
+.dxMacOSMobilePlatform th:focus:before
+{
+    content: none!important;
+}
+.dxColumnResizeAnchor {
+    @include userSelectNone;
+    top: 0;
+    right: 0;
+    width: 7px;
+    height: 100%;
+    position: absolute;
+    cursor: col-resize;
+    z-index: 1;
+    opacity: 0;
+}
+
+th:focus .dxColumnResizeAnchor
+{
+    top: 3px;
+    right: 3px;
+    height: calc(100% - 6px);
+    box-shadow: 0 0 0 1px var(--dx-accent-shadow-color, rgba(128,128,128,.25));
+    border-radius: 2px;
+    opacity: 1;
+}
+.dxColumnResizeAnchor:active:before
+{
+    background-color: transparent;
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 45px;
+    left: -20px;
+}
+th:focus .dxColumnResizeAnchor::after
+{
+    content: " ";
+    width: 3px;
+    height: 10px;
+    border-left: 1px solid var(--dx-accent-color, $ColorPrimary);
+    border-right: 1px solid var(--dx-accent-color, $ColorPrimary);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+.table th:focus:before
+{
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 2px;
+    box-shadow: 0 0 0 2px var(--dx-accent-color, $ColorPrimary);
+    z-index: 0;
+    height: calc(100% - 6px);
+    width: calc(100% - 6px);
+    transform: translate3d(-.25rem, -.25rem, 0);
+    top: 7px;
+    left: 7px;
+    opacity: 0.5;
+}
+.card-body.dxbs-grid-pager.dx-resize
+{
+    overflow-x: auto;
+}
+.dxbs-gridview table.dx-resize .dxbs-fixed > thead > tr > th
+{
+    overflow: unset;
+}

@@ -1,0 +1,15 @@
+.dx-pivotgrid {
+    tr:last-child > .dxpg-header,
+    tbody:not(:last-child) > tr:last-child > td,
+    thead:not(:last-child) > tr:last-child > th {
+        border-bottom-color: inherit;
+    }
+
+    th,
+    td {
+        &.table-active {
+            box-shadow: none;
+            background-color: rgba(0,0,0,.075);
+        }
+    }
+}

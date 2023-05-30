@@ -1,0 +1,36 @@
+@import "mixins/common";
+@import "mixins/button";
+
+.dxbl-btn-split {
+    display: flex;
+    flex-wrap: nowrap;
+
+    & > .dxbl-btn:not(:last-child) {
+        margin-right: -$dx-btn-border-width;
+
+        @include active-state() {
+            border-right-color: transparent;
+        }
+
+        @include hover-state() {
+            border-right-color: transparent;
+        }
+    }
+
+    & > .dxbl-btn-split-dropdown {
+        padding-left: calc(var(--dxbl-btn-padding-x) / #{$dx-split-btn-padding-x-ratio}) !important; // stylelint-disable-line declaration-no-important
+        padding-right: calc(var(--dxbl-btn-padding-x) / #{$dx-split-btn-padding-x-ratio}) !important; // stylelint-disable-line declaration-no-important
+    }
+
+    @include hover-state() {
+        & > .dxbl-btn {
+            border-color: var(--dxbl-btn-hover-border-color);
+
+            @include hover-state() {
+                background: var(--dxbl-btn-hover-background);
+                background-color: var(--dxbl-btn-hover-bg);
+                color: var(--dxbl-btn-hover-color);
+            }
+        }
+    }
+}

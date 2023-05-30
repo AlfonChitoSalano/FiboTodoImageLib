@@ -1,0 +1,50 @@
+.dxbl-invisible {
+    visibility: hidden !important; // stylelint-disable-line declaration-no-important
+}
+
+.dxbl-invisible-content {
+    & > * {
+        visibility: hidden !important; // stylelint-disable-line declaration-no-important
+    }
+}
+
+.dxbl-invisible-off-screen {
+    visibility: hidden !important; // stylelint-disable-line declaration-no-important
+    transform: translateX(-100000px) !important; // stylelint-disable-line declaration-no-important
+}
+
+.dxbl-visually-hidden {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.dxbl-display-none {
+    display: none !important; // stylelint-disable-line declaration-no-important
+}
+
+.dxbl-align-center {
+    text-align: center;
+}
+
+.dxbl-align-right {
+    text-align: right;
+}
+
+.dxbl-nowrap {
+    white-space: nowrap !important; // stylelint-disable-line declaration-no-important
+}
+
+.dxbl-prevent-safari-scrolling {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

@@ -1,0 +1,144 @@
+@import "common";
+
+@mixin checkbox-focus-state() {
+    &:focus-within,
+    &:has(:focus) {
+        @content;
+    }
+}
+
+@mixin checkbox-checked-focus-style($color, $render-style, $tint-amount: $dx-checkbox-focus-shadow-tint-amount, $shade-amount: $dx-checkbox-focus-shadow-shade-amount) {
+    @include contextual-focus-style(
+        "--dxbl-checkbox-checked-focus-shadow-color", "--dxbl-checkbox-checked-focus-shadow-spread", "--dxbl-checkbox-checked-focus-shadow-blur", null,
+        $color, $render-style, $dx-checkbox-focus-shadow-size, $tint-amount, $shade-amount, 0, 0
+    );
+}
+
+@mixin checkbox-unchecked-focus-style($color, $render-style, $tint-amount: $dx-checkbox-focus-shadow-tint-amount, $shade-amount: $dx-checkbox-focus-shadow-shade-amount) {
+    @include contextual-focus-style(
+        "--dxbl-checkbox-unchecked-focus-shadow-color", "--dxbl-checkbox-unchecked-focus-shadow-spread", "--dxbl-checkbox-unchecked-focus-shadow-blur", null,
+        $color, $render-style, $dx-checkbox-focus-shadow-size, $tint-amount, $shade-amount, 0, 0
+    );
+}
+
+@mixin checkbox-checked-hover-style($color, $render-style, $bg-color-var, $background-var) {
+    @include contextual-state-style(
+        $bg-color-var, null, null, $background-var,
+        $color, $render-style, $dx-checkbox-hover-bg-tint-amount, $dx-checkbox-hover-bg-shade-amount
+    );
+}
+
+@mixin radio-checked-hover-border-style($color, $render-style, $border-shade-amount, $shade-color-var) {
+    @if $dx-theme {
+        $shade-color: shade-color($color, $border-shade-amount);
+
+        #{$shade-color-var}: #{$shade-color};
+    }
+
+    @else {
+        $theme-color: get-external-theme-color($render-style);
+
+        #{$shade-color-var}: #{$theme-color};
+    }
+}
+
+@mixin checkbox-style-core($base-color, $bg-color-var, $border-color-var, $border-width-var, $alpha: 1) {
+    @if $bg-color-var {
+        background-color: var(#{$bg-color-var}, #{$base-color});
+        opacity: var(#{$bg-color-var}, #{$alpha});
+    }
+
+    @if $border-color-var and $border-width-var {
+        border: var(#{$border-width-var}) solid var(#{$border-color-var}, #{$base-color});
+        opacity: var(#{$border-color-var}, #{$alpha});
+    }
+}
+
+@mixin checkbox-style($bg-color-var, $border-color-var, $border-width-var, $alpha: 1) {
+    @include checkbox-style-core($dx-checkbox-base-color, $bg-color-var, $border-color-var, $border-width-var, $alpha);
+}
+
+@mixin checkbox-validation-styles($color) {
+    &:not(.dxbl-checkbox-switch):not(.dxbl-checkbox-radio) {
+        &.dxbl-checkbox-unchecked {
+            .dxbl-checkbox-check-element {
+                &::before {
+                    @include checkbox-style-core($color,
+                        "--dxbl-checkbox-check-element-unchecked-bg", "--dxbl-checkbox-check-element-unchecked-border-color",
+                        "--dxbl-checkbox-check-element-unchecked-border-width", $dx-checkbox-validation-alpha
+                    );
+                }
+            }
+
+            @include not-readonly-state() {
+                @include hover-state() {
+                    &::before {
+                        @include checkbox-style-core($color,
+                            "--dxbl-checkbox-check-element-unchecked-hover-bg", "--dxbl-checkbox-check-element-unchecked-hover-border-color",
+                            "--dxbl-checkbox-check-element-unchecked-border-width", $dx-checkbox-validation-hover-alpha
+                        );
+                    }
+                }
+            }
+        }
+
+        @include readonly-state() {
+            &.dxbl-checkbox-checked,
+            &.dxbl-checkbox-indeterminate {
+                .dxbl-checkbox-check-element {
+                    @include checkbox-style-core($color,
+                        "--dxbl-checkbox-check-element-readonly-bg", "--dxbl-checkbox-check-element-readonly-border-color",
+                        "--dxbl-checkbox-check-element-readonly-border-width", null
+                    );
+
+                    opacity: $dx-checkbox-checked-readonly-alpha;
+                }
+            }
+
+            &.dxbl-checkbox-unchecked .dxbl-checkbox-check-element {
+                @include checkbox-style-core($color, "--dxbl-checkbox-check-element-readonly-bg", null, null, null);
+
+                opacity: $dx-checkbox-unchecked-validation-readonly-alpha;
+
+                &::before {
+                    opacity: unset;
+                }
+            }
+        }
+    }
+
+    &.dxbl-checkbox-switch {
+        &.dxbl-checkbox-unchecked {
+            .dxbl-checkbox-check-element {
+                @include checkbox-style-core($color, "--dxbl-checkbox-switch-unchecked-bg", null, null, $dx-checkbox-validation-alpha);
+            }
+        }
+
+        @include readonly-state() {
+            &.dxbl-checkbox-checked,
+            &.dxbl-checkbox-indeterminate {
+                .dxbl-checkbox-check-element {
+                    @include checkbox-style-core($color, "--dxbl-checkbox-switch-unchecked-bg", null, null, $dx-checkbox-switch-checked-readonly-alpha);
+                }
+            }
+
+            &.dxbl-checkbox-unchecked {
+                .dxbl-checkbox-check-element {
+                    @include checkbox-style-core($color, "--dxbl-checkbox-switch-unchecked-bg", null, null, $dx-checkbox-unchecked-validation-readonly-alpha);
+                }
+            }
+        }
+
+        @include not-disabled-state() {
+            @include not-readonly-state() {
+                &.dxbl-checkbox-unchecked {
+                    .dxbl-checkbox-check-element {
+                        @include hover-state() {
+                            @include checkbox-style-core($color, "--dxbl-checkbox-switch-unchecked-hover-bg", null, null, $dx-checkbox-validation-hover-alpha);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

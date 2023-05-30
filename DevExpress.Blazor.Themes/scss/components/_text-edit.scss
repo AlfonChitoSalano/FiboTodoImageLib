@@ -1,0 +1,316 @@
+@import "mixins/common";
+@import "mixins/button";
+@import "mixins/text-edit";
+
+.dxbl-text-edit {
+    --dxbl-text-edit-font-size: #{$dx-text-edit-font-size};
+    --dxbl-text-edit-line-height: #{$dx-text-edit-line-height};
+    --dxbl-text-edit-bg: #{$dx-text-edit-bg};
+    --dxbl-text-edit-color: #{$dx-text-edit-color};
+    --dxbl-text-edit-padding-x: #{$dx-text-edit-padding-x};
+    --dxbl-text-edit-padding-y: #{$dx-text-edit-padding-y};
+    --dxbl-text-edit-border-color: #{$dx-text-edit-border-color};
+    --dxbl-text-edit-border-style: #{$dx-text-edit-border-style};
+    --dxbl-text-edit-border-width: #{$dx-text-edit-border-width};
+    --dxbl-text-edit-border-radius: #{$dx-text-edit-border-radius};
+    --dxbl-text-edit-box-shadow: #{$dx-text-edit-box-shadow};
+    --dxbl-text-edit-readonly-bg: #{$dx-text-edit-disabled-bg};
+    --dxbl-text-edit-readonly-color: #{$dx-text-edit-disabled-color};
+    --dxbl-text-edit-disabled-bg: #{$dx-text-edit-disabled-bg};
+    --dxbl-text-edit-disabled-color: #{$dx-text-edit-disabled-color};
+    --dxbl-text-edit-disabled-opacity: #{$dx-text-edit-disabled-opacity};
+    --dxbl-text-edit-btn-bg: #{$dx-text-edit-btn-bg};
+    --dxbl-text-edit-btn-color: #{$dx-text-edit-btn-color};
+    --dxbl-text-edit-btn-image-color: unset;
+    --dxbl-text-edit-btn-hover-bg: #{$dx-text-edit-btn-hover-bg};
+    --dxbl-text-edit-btn-hover-color: #{$dx-text-edit-btn-hover-color};
+    --dxbl-text-edit-btn-hover-image-color: unset;
+    --dxbl-text-edit-btn-disabled-bg: #{$dx-text-edit-btn-disabled-bg};
+    --dxbl-text-edit-btn-disabled-color: #{$dx-text-edit-btn-disabled-color};
+    --dxbl-text-edit-btn-disabled-image-color: unset;
+    --dxbl-text-edit-btn-padding-x: #{$dx-text-edit-btn-padding-x};
+    --dxbl-text-edit-btn-padding-y: #{$dx-text-edit-btn-padding-y};
+    --dxbl-text-edit-clear-btn-bg: #{$dx-text-edit-clear-btn-bg};
+    --dxbl-text-edit-clear-btn-color: #{$dx-text-edit-clear-btn-color};
+    --dxbl-text-edit-clear-btn-hover-bg: #{$dx-text-edit-clear-btn-hover-bg};
+    --dxbl-text-edit-clear-btn-hover-color: #{$dx-text-edit-clear-btn-hover-color};
+    --dxbl-text-edit-validation-valid-color: #{$dx-validation-valid-color};
+    --dxbl-text-edit-validation-invalid-color: #{$dx-validation-invalid-color};
+    --dxbl-text-edit-validation-status-padding-x: #{$dx-text-edit-validation-status-padding-x};
+    --dxbl-text-edit-validation-status-padding-y: #{$dx-text-edit-validation-status-padding-y};
+    --dxbl-text-edit-validation-status-spacing: #{$dx-text-edit-validation-status-spacing};
+    --dxbl-text-edit-preloader-padding-x: #{$dx-text-edit-preloader-padding-x};
+    --dxbl-text-edit-preloader-padding-y: #{$dx-text-edit-preloader-padding-y};
+    --dxbl-text-edit-preloader-image-size: #{$dx-image-size};
+    --dxbl-text-edit-preloader-image-margin-y: #{$dx-image-margin-y};
+
+    background-color: var(--dxbl-text-edit-bg);
+    border-radius: var(--dxbl-text-edit-border-radius);
+    border: var(--dxbl-text-edit-border-width) var(--dxbl-text-edit-border-style) var(--dxbl-text-edit-border-color);
+    box-shadow: var(--dxbl-text-edit-box-shadow);
+    color: var(--dxbl-text-edit-color);
+    font-size: var(--dxbl-text-edit-font-size);
+    line-height: var(--dxbl-text-edit-line-height);
+    display: flex;
+    align-items: stretch;
+    padding: 0;
+    position: relative;
+    z-index: 0;
+
+    @include safari-line-height("--dxbl-text-edit-line-height", $dx-text-edit-line-height-safari);
+
+    & > input,
+    & > textarea {
+        background-color: transparent;
+        border: 0;
+        border-radius: var(--dxbl-text-edit-border-radius);
+        color: inherit;
+        flex-grow: 1;
+        font-size: inherit;
+        line-height: inherit;
+        padding: var(--dxbl-text-edit-padding-y) var(--dxbl-text-edit-padding-x);
+        outline: 0;
+        box-shadow: none;
+        width: 100%;
+    }
+
+    & > input {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    @include readonly-state() {
+        --dxbl-text-edit-readonly-root-bg: var(--dxbl-text-edit-readonly-bg, #{$dx-bg});
+
+        @include text-edit-state-disabled-style("--dxbl-text-edit-readonly-bg", "--dxbl-text-edit-readonly-color", "--dxbl-text-edit-border-width", "--dxbl-text-edit-readonly-root-bg");
+    }
+
+    @include disabled-state() {
+        --dxbl-text-edit-disabled-root-bg: var(--dxbl-text-edit-disabled-bg, #{$dx-bg});
+
+        @include text-edit-state-disabled-style("--dxbl-text-edit-disabled-bg", "--dxbl-text-edit-disabled-color", "--dxbl-text-edit-border-width", "--dxbl-text-edit-disabled-root-bg");
+
+        & > * {
+            opacity: var(--dxbl-text-edit-disabled-opacity);
+        }
+    }
+
+    @include text-edit-focus-state() {
+        border-color: var(--dxbl-text-edit-focus-border-color);
+        box-shadow: var(--dxbl-text-edit-box-shadow), 0 0 var(--dxbl-text-edit-focus-shadow-blur) var(--dxbl-text-edit-focus-shadow-spread) var(--dxbl-text-edit-focus-shadow-color);
+        outline: 0;
+
+        & > .dxbl-btn,
+        & > .dxbl-btn-group > .dxbl-btn,
+        & > .dxbl-btn-group-vertical > .dxbl-btn {
+            border-color: var(--dxbl-text-edit-focus-border-color);
+        }
+    }
+
+    @include text-edit-focus-style($dx-primary, "primary");
+
+    & > .dxbl-btn,
+    & > .dxbl-btn-group > .dxbl-btn,
+    & > .dxbl-btn-group-vertical > .dxbl-btn {
+        --dxbl-btn-font-size: var(--dxbl-text-edit-font-size);
+        --dxbl-btn-line-height: var(--dxbl-text-edit-line-height);
+        --dxbl-btn-bg: var(--dxbl-text-edit-btn-bg);
+        --dxbl-btn-color: var(--dxbl-text-edit-btn-color);
+        --dxbl-btn-border-color: var(--dxbl-text-edit-border-color);
+        --dxbl-btn-box-shadow: none;
+        --dxbl-btn-hover-bg: var(--dxbl-text-edit-btn-hover-bg);
+        --dxbl-btn-hover-background: none;
+        --dxbl-btn-hover-color: var(--dxbl-text-edit-btn-hover-color);
+        --dxbl-btn-hover-border-color: var(--dxbl-text-edit-border-color);
+        --dxbl-btn-disabled-bg: var(--dxbl-text-edit-btn-disabled-bg);
+        --dxbl-btn-disabled-background: none;
+        --dxbl-btn-disabled-color: var(--dxbl-text-edit-btn-disabled-color);
+        --dxbl-btn-disabled-border-color: var(--dxbl-text-edit-border-color);
+        --dxbl-btn-border-radius: var(--dxbl-text-edit-border-radius);
+        --dxbl-btn-disabled-opacity: 1;
+
+        white-space: nowrap;
+
+        &:not(.dxbl-btn.dxbl-edit-btn-clear, .dxbl-btn.dxbl-btn-icon) {
+            margin-right: 0;
+
+            @include hover-state() {
+                @include state-hover-style("--dxbl-text-edit-btn-hover-bg", "--dxbl-text-edit-btn-hover-color");
+            }
+
+            @include disabled-state() {
+                @include state-disabled-style("--dxbl-text-edit-btn-disabled-bg", "--dxbl-text-edit-btn-disabled-color");
+            }
+        }
+
+        @include text-edit-custom-btn() {
+            @include button-focus-state() {
+                @include button-inner-focus-style(var(--dxbl-btn-border-radius), $dx-min-spacing);
+            }
+        }
+
+        @include text-edit-default-btn() {
+            &.dxbl-btn-icon {
+                @include button-focus-state() {
+                    box-shadow: none;
+                }
+            }
+        }
+
+        &.dxbl-btn-icon {
+            --dxbl-btn-bg: transparent;
+            --dxbl-btn-hover-bg: transparent;
+            --dxbl-btn-hover-color: var(--dxbl-btn-color);
+            --dxbl-btn-border-width: 0;
+
+            box-shadow: none;
+            cursor: default;
+
+            @include button-focus-state () {
+                box-shadow: none;
+            }
+
+            & + input[type="text"] {
+                padding-left: 0;
+            }
+        }
+
+        @include embedded-image-color("--dxbl-text-edit-btn-image-color", "--dxbl-text-edit-btn-disabled-image-color", "--dxbl-text-edit-btn-hover-image-color");
+    }
+
+    & > .dxbl-btn,
+    & > .dxbl-btn-group > .dxbl-btn {
+        border-top: 0;
+        border-bottom: 0;
+
+        --dxbl-btn-padding-x: var(--dxbl-text-edit-btn-padding-x);
+        --dxbl-btn-padding-y: var(--dxbl-text-edit-btn-padding-y);
+    }
+
+    & > .dxbl-btn-group-vertical > .dxbl-btn {
+        --dxbl-btn-padding-x: var(--dxbl-text-edit-btn-padding-x);
+        --dxbl-btn-padding-y: 0;
+
+        &:first-child {
+            border-top: 0;
+        }
+
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+
+    & > .dxbl-btn {
+        border-left: 0;
+        border-right: 0;
+    }
+
+    & > .dxbl-btn-group,
+    & > .dxbl-btn-group-vertical {
+        position: relative;
+        z-index: 0;
+        background-color: var(--dxbl-text-edit-btn-bg);
+    }
+
+    & > [class*="dxbl-btn-group-right"]:last-of-type {
+        border-top-right-radius: var(--dxbl-text-edit-border-radius);
+        border-bottom-right-radius: var(--dxbl-text-edit-border-radius);
+    }
+
+    & > [class*="dxbl-btn-group-left"]:first-of-type {
+        border-top-left-radius: var(--dxbl-text-edit-border-radius);
+        border-bottom-left-radius: var(--dxbl-text-edit-border-radius);
+    }
+
+    & > .dxbl-btn-group.dxbl-btn-group-left > .dxbl-btn,
+    & > .dxbl-btn-group-vertical.dxbl-btn-group-left > .dxbl-btn {
+        border-left: 0;
+    }
+
+    & > .dxbl-btn-group.dxbl-btn-group-right > .dxbl-btn,
+    & > .dxbl-btn-group-vertical.dxbl-btn-group-right > .dxbl-btn {
+        border-right: 0;
+    }
+
+    & > .dxbl-btn.dxbl-edit-btn-clear {
+        --dxbl-btn-bg: transparent;
+        --dxbl-btn-hover-bg: transparent;
+        --dxbl-btn-border-width: 0;
+        --dxbl-btn-color: white;
+        --dxbl-btn-hover-color: white;
+        --dxbl-btn-disabled-color: white;
+
+        box-shadow: none;
+
+        @include embedded-image-color("--dxbl-text-edit-clear-btn-color", "--dxbl-text-edit-clear-btn-color", "--dxbl-text-edit-clear-btn-hover-color");
+        @include embedded-image-bg("--dxbl-text-edit-clear-btn-bg", "--dxbl-text-edit-clear-btn-hover-bg");
+
+        @include button-focus-state () {
+            box-shadow: none;
+        }
+
+        & > .dxbl-image {
+            border-radius: 50%;
+        }
+    }
+
+    & > .dxbl-btn-group-vertical > .dxbl-spin-btn-inc,
+    & > .dxbl-btn-group-vertical > .dxbl-spin-btn-dec {
+        height: 50%;
+
+        & > .dxbl-image {
+            pointer-events: none;
+            margin-top: -2px;
+            margin-bottom: -2px;
+        }
+    }
+
+    & > .dxbl-btn-group-vertical > .dxbl-spin-btn-inc {
+        border-bottom: 0;
+        margin-bottom: 0;
+    }
+
+    & > .dxbl-btn-group-vertical > .dxbl-spin-btn-dec {
+        border-top: 0;
+
+        & > .dxbl-image {
+            margin-top: -3px;
+        }
+    }
+
+    @include text-edit-validation-status();
+    @include text-edit-preloader();
+
+    &.dxbl-sm {
+        --dxbl-text-edit-font-size: #{$dx-text-edit-font-size-sm};
+        --dxbl-text-edit-line-height: #{$dx-text-edit-line-height-sm};
+        --dxbl-text-edit-padding-x: #{$dx-text-edit-padding-x-sm};
+        --dxbl-text-edit-padding-y: #{$dx-text-edit-padding-y-sm};
+        --dxbl-text-edit-border-radius: #{$dx-text-edit-border-radius-sm};
+        --dxbl-text-edit-btn-padding-x: #{$dx-text-edit-btn-padding-x-sm};
+        --dxbl-text-edit-btn-padding-y: #{$dx-text-edit-btn-padding-y-sm};
+        --dxbl-text-edit-validation-status-padding-x: #{$dx-text-edit-validation-status-padding-x-sm};
+        --dxbl-text-edit-validation-status-padding-y: #{$dx-text-edit-validation-status-padding-y-sm};
+        --dxbl-text-edit-validation-status-spacing: #{$dx-text-edit-validation-status-spacing-sm};
+        --dxbl-text-edit-preloader-padding-x: #{$dx-text-edit-preloader-padding-x-sm};
+        --dxbl-text-edit-preloader-padding-y: #{$dx-text-edit-preloader-padding-y-sm};
+        --dxbl-text-edit-preloader-image-margin-y: #{$dx-image-margin-y-sm};
+    }
+
+    &.dxbl-lg {
+        --dxbl-text-edit-font-size: #{$dx-text-edit-font-size-lg};
+        --dxbl-text-edit-line-height: #{$dx-text-edit-line-height-lg};
+        --dxbl-text-edit-padding-x: #{$dx-text-edit-padding-x-lg};
+        --dxbl-text-edit-padding-y: #{$dx-text-edit-padding-y-lg};
+        --dxbl-text-edit-border-radius: #{$dx-text-edit-border-radius-lg};
+        --dxbl-text-edit-btn-padding-x: #{$dx-text-edit-btn-padding-x-lg};
+        --dxbl-text-edit-btn-padding-y: #{$dx-text-edit-btn-padding-y-lg};
+        --dxbl-text-edit-validation-status-padding-x: #{$dx-text-edit-validation-status-padding-x-lg};
+        --dxbl-text-edit-validation-status-padding-y: #{$dx-text-edit-validation-status-padding-y-lg};
+        --dxbl-text-edit-validation-status-spacing: #{$dx-text-edit-validation-status-spacing-lg};
+        --dxbl-text-edit-preloader-padding-x: #{$dx-text-edit-preloader-padding-x-lg};
+        --dxbl-text-edit-preloader-padding-y: #{$dx-text-edit-preloader-padding-y-lg};
+        --dxbl-text-edit-preloader-image-margin-y: #{$dx-image-margin-y-lg};
+    }
+}

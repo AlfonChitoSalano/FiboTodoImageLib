@@ -1,0 +1,494 @@
+@import "mixins/button";
+@import "mixins/grid";
+
+.dxbl-grid {
+    --dxbl-grid-font-family: #{$dx-grid-font-family};
+    --dxbl-grid-font-size: #{$dx-grid-font-size};
+    --dxbl-grid-line-height: #{$dx-grid-line-height};
+    --dxbl-grid-min-width: #{$dx-grid-min-width};
+    --dxbl-grid-bg: #{$dx-grid-bg};
+    --dxbl-grid-color: #{$dx-grid-color};
+    --dxbl-grid-border-color: #{$dx-grid-border-color};
+    --dxbl-grid-border-style: #{$dx-grid-border-style};
+    --dxbl-grid-border-width: #{$dx-grid-border-width};
+    --dxbl-grid-border-radius: #{$dx-grid-border-radius};
+    --dxbl-grid-highlighted-text-bg: #{$dx-grid-highlighted-text-bg};
+    --dxbl-grid-highlighted-text-color: #{$dx-grid-highlighted-text-color};
+    --dxbl-grid-empty-data-container-padding-x: #{$dx-grid-empty-data-container-padding-x};
+    --dxbl-grid-empty-data-container-padding-y: #{$dx-grid-empty-data-container-padding-y};
+    --dxbl-grid-text-cell-padding-x: #{$dx-grid-text-cell-padding-x};
+    --dxbl-grid-text-cell-padding-y: #{$dx-grid-text-cell-padding-y};
+    --dxbl-grid-editor-cell-padding-x: #{$dx-grid-text-cell-padding-x};
+    --dxbl-grid-editor-cell-padding-y: #{$dx-grid-text-cell-padding-y};
+    --dxbl-grid-group-panel-container-padding-x: #{$dx-grid-group-panel-container-padding-x};
+    --dxbl-grid-group-panel-container-padding-y: #{$dx-grid-group-panel-container-padding-y};
+    --dxbl-grid-group-panel-container-spacing: #{$dx-grid-group-panel-container-spacing};
+    --dxbl-grid-group-panel-header-padding-x: #{$dx-btn-padding-x-ratio * $dx-grid-text-cell-padding-x};
+    --dxbl-grid-group-panel-header-padding-y: #{$dx-grid-text-cell-padding-y};
+    --dxbl-grid-group-panel-header-shadow: #{$dx-grid-group-panel-header-shadow};
+    --dxbl-grid-group-indent-cell-width: #{$dx-grid-group-indent-cell-width};
+    --dxbl-grid-search-box-container-width: #{$dx-grid-search-box-container-width};
+    --dxbl-grid-search-box-container-padding-x: #{$dx-grid-search-box-container-padding-x};
+    --dxbl-grid-search-box-container-padding-y: #{$dx-grid-search-box-container-padding-y};
+    --dxbl-grid-empty-header-panel-padding-x: #{$dx-grid-empty-header-panel-padding-x};
+    --dxbl-grid-empty-header-panel-padding-y: #{$dx-grid-empty-header-panel-padding-y};
+    --dxbl-grid-edit-form-padding-x: #{$dx-grid-edit-form-padding-x};
+    --dxbl-grid-edit-form-padding-y: #{$dx-grid-edit-form-padding-y};
+    --dxbl-grid-inplace-edit-border-width: #{$dx-grid-inplace-edit-border-width};
+    --dxbl-grid-detail-cell-padding-x: #{$dx-grid-detail-cell-padding-x};
+    --dxbl-grid-detail-cell-padding-y: #{$dx-grid-detail-cell-padding-y};
+    --dxbl-grid-expand-btn-bg: #{$dx-grid-expand-btn-bg};
+    --dxbl-grid-expand-btn-color: #{$dx-grid-expand-btn-color};
+    --dxbl-grid-expand-btn-hover-bg: #{$dx-grid-expand-btn-hover-bg};
+    --dxbl-grid-expand-btn-hover-color: #{$dx-grid-expand-btn-hover-color};
+    --dxbl-grid-expand-btn-padding-x: #{$dx-grid-expand-btn-padding-x};
+    --dxbl-grid-expand-btn-padding-y: #{$dx-grid-expand-btn-padding-y};
+    --dxbl-grid-header-font-weight: #{$dx-grid-header-font-weight};
+    --dxbl-grid-header-bg: #{$dx-grid-header-bg};
+    --dxbl-grid-header-color: #{$dx-grid-header-color};
+    --dxbl-grid-header-spacing: #{$dx-grid-text-cell-spacing};
+    --dxbl-grid-footer-font-weight: #{$dx-grid-footer-font-weight};
+    --dxbl-grid-footer-bg: #{$dx-grid-footer-bg};
+    --dxbl-grid-footer-color: #{$dx-grid-footer-color};
+    --dxbl-grid-group-footer-font-weight: #{$dx-grid-group-footer-font-weight};
+    --dxbl-grid-group-footer-bg: #{$dx-grid-group-footer-bg};
+    --dxbl-grid-group-footer-color: #{$dx-grid-group-footer-color};
+    --dxbl-grid-selection-bg: #{$dx-grid-selection-bg};
+    --dxbl-grid-selection-color: #{$dx-grid-selection-color};
+    --dxbl-grid-focus-bg: #{$dx-grid-focus-bg};
+    --dxbl-grid-focus-color: #{$dx-grid-focus-color};
+    --dxbl-grid-selection-focus-bg: #{$dx-grid-selection-focus-bg};
+    --dxbl-grid-selection-focus-color: #{$dx-grid-selection-focus-color};
+    --dxbl-grid-touch-bg: #{$dx-grid-touch-bg};
+    --dxbl-grid-touch-color: #{$dx-grid-touch-color};
+
+    background-color: var(--dxbl-grid-bg);
+    border-radius: var(--dxbl-grid-border-radius);
+    border: var(--dxbl-grid-border-width) var(--dxbl-grid-border-style) var(--dxbl-grid-border-color);
+    color: var(--dxbl-grid-color);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--dxbl-grid-font-family);
+    font-size: var(--dxbl-grid-font-size);
+    line-height: var(--dxbl-grid-line-height);
+    min-width: var(--dxbl-grid-min-width);
+    width: 100%;
+
+    @include safari-line-height("--dxbl-grid-line-height", $dx-grid-line-height-safari);
+
+    & > .dxbl-grid-top-panel,
+    & > .dxbl-grid-bottom-panel {
+        flex-shrink: 0;
+        flex-grow: 0;
+    }
+
+    & > .dxbl-grid-bottom-panel {
+        &:last-of-type {
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+        }
+
+        border-top: var(--dxbl-grid-border-width) var(--dxbl-grid-border-style) var(--dxbl-grid-border-color);
+    }
+
+    & > .dxbl-grid-top-panel {
+        border-bottom: var(--dxbl-grid-border-width) var(--dxbl-grid-border-style) var(--dxbl-grid-border-color);
+        display: flex;
+
+        &:first-of-type {
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+        }
+
+        & > .dxbl-grid-group-panel-container {
+            display: flex;
+            flex: 1;
+            flex-flow: row wrap;
+            padding: var(--dxbl-grid-group-panel-container-padding-y) var(--dxbl-grid-group-panel-container-padding-x) 0;
+
+            & > * {
+                margin-bottom: var(--dxbl-grid-group-panel-container-padding-y);
+            }
+
+            & > :not(:last-child) {
+                margin-right: var(--dxbl-grid-group-panel-container-spacing);
+            }
+
+            & > .dxbl-text {
+                --dxbl-text-padding-x: 0;
+            }
+
+            & .dxbl-grid-group-panel-free-space {
+                flex: 1 1;
+            }
+
+            .dxbl-grid-header {
+                border: var(--dxbl-grid-border-width) var(--dxbl-grid-border-style) var(--dxbl-grid-border-color);
+                border-radius: var(--dxbl-grid-border-radius);
+                padding: var(--dxbl-grid-group-panel-header-padding-y) var(--dxbl-grid-group-panel-header-padding-x);
+                box-shadow: var(--dxbl-grid-group-panel-header-shadow);
+            }
+        }
+
+        & > .dxbl-grid-search-box-container {
+            margin-left: auto;
+            width: var(--dxbl-grid-search-box-container-width);
+            padding: var(--dxbl-grid-search-box-container-padding-y) var(--dxbl-grid-search-box-container-padding-x);
+        }
+
+        &.dxbl-grid-multiple-panel {
+            flex-wrap: wrap-reverse;
+        }
+
+        @media (max-width: map-get($dx-window-breakpoints, "md")) {
+            & > .dxbl-grid-search-box-container {
+                width: 100%;
+            }
+
+            &.dxbl-grid-multiple-panel {
+                & > .dxbl-grid-search-box-container {
+                    padding-bottom: 0;
+                }
+            }
+        }
+    }
+
+    .dxbl-grid-search-box-container > .dxbl-grid-search-box > .dxbl-btn-icon > .dxbl-image {
+        opacity: 0.4;
+    }
+
+    .dxbl-grid-highlighted-text {
+        color: var(--dxbl-grid-highlighted-text-color);
+        background-color: var(--dxbl-grid-highlighted-text-bg);
+    }
+
+    .dxbl-grid-empty-data {
+        text-align: center;
+        padding: var(--dxbl-grid-empty-data-container-padding-y) var(--dxbl-grid-empty-data-container-padding-x);
+        border-top: 0;
+        border-bottom: 0;
+
+        & > span {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+    }
+
+    .dxbl-pager {
+        --dxbl-pager-font-family: var(--dxbl-grid-font-family);
+        --dxbl-pager-font-size: var(--dxbl-grid-font-size);
+    }
+
+    .dxbl-text-edit {
+        --dxbl-text-edit-font-family: var(--dxbl-grid-font-family);
+        --dxbl-text-edit-font-size: var(--dxbl-grid-font-size);
+    }
+
+    .dxbl-checkbox {
+        --dxbl-checkbox-font-family: var(--dxbl-grid-font-family);
+        --dxbl-checkbox-font-size: var(--dxbl-grid-font-size);
+    }
+
+    &.dxbl-sm {
+        --dxbl-grid-font-size: #{$dx-grid-font-size-sm};
+        --dxbl-grid-line-height: #{$dx-grid-line-height-sm};
+        --dxbl-grid-empty-data-container-padding-x: #{$dx-grid-group-panel-container-padding-x-sm};
+        --dxbl-grid-empty-data-container-padding-y: #{$dx-grid-group-panel-container-padding-y-sm};
+        --dxbl-grid-text-cell-padding-x: #{$dx-grid-text-cell-padding-x-sm};
+        --dxbl-grid-text-cell-padding-y: #{$dx-grid-text-cell-padding-y-sm};
+        --dxbl-grid-editor-cell-padding-x: #{$dx-grid-text-cell-padding-x-sm};
+        --dxbl-grid-editor-cell-padding-y: #{$dx-grid-text-cell-padding-y-sm};
+        --dxbl-grid-group-panel-container-padding-x: #{$dx-grid-group-panel-container-padding-x-sm};
+        --dxbl-grid-group-panel-container-padding-y: #{$dx-grid-group-panel-container-padding-y-sm};
+        --dxbl-grid-group-panel-container-spacing: #{$dx-grid-group-panel-container-spacing-sm};
+        --dxbl-grid-group-panel-header-padding-x: #{$dx-btn-padding-x-ratio * $dx-grid-text-cell-padding-x-sm};
+        --dxbl-grid-group-panel-header-padding-y: #{$dx-grid-text-cell-padding-y-sm};
+        --dxbl-grid-group-indent-cell-width: #{$dx-grid-group-indent-cell-width-sm};
+        --dxbl-grid-expand-btn-padding-x: #{$dx-grid-expand-btn-padding-x-sm};
+        --dxbl-grid-expand-btn-padding-y: #{$dx-grid-expand-btn-padding-y-sm};
+        --dxbl-grid-search-box-container-width: #{$dx-grid-search-box-container-width-sm};
+        --dxbl-grid-search-box-container-padding-x: #{$dx-grid-search-box-container-padding-x-sm};
+        --dxbl-grid-search-box-container-padding-y: #{$dx-grid-search-box-container-padding-y-sm};
+        --dxbl-grid-empty-header-panel-padding-x: #{$dx-grid-empty-header-panel-padding-x-sm};
+        --dxbl-grid-empty-header-panel-padding-y: #{$dx-grid-empty-header-panel-padding-y-sm};
+        --dxbl-grid-edit-form-padding-x: #{$dx-grid-edit-form-padding-x-sm};
+        --dxbl-grid-edit-form-padding-y: #{$dx-grid-edit-form-padding-y-sm};
+        --dxbl-grid-detail-cell-padding-x: #{$dx-grid-detail-cell-padding-x-sm};
+        --dxbl-grid-detail-cell-padding-y: #{$dx-grid-detail-cell-padding-y-sm};
+        --dxbl-grid-header-spacing: #{$dx-grid-text-cell-spacing-sm};
+    }
+
+    &.dxbl-lg {
+        --dxbl-grid-font-size: #{$dx-grid-font-size-lg};
+        --dxbl-grid-line-height: #{$dx-grid-line-height-lg};
+        --dxbl-grid-empty-data-container-padding-x: #{$dx-grid-group-panel-container-padding-x-lg};
+        --dxbl-grid-empty-data-container-padding-y: #{$dx-grid-group-panel-container-padding-y-lg};
+        --dxbl-grid-text-cell-padding-x: #{$dx-grid-text-cell-padding-x-lg};
+        --dxbl-grid-text-cell-padding-y: #{$dx-grid-text-cell-padding-y-lg};
+        --dxbl-grid-editor-cell-padding-x: #{$dx-grid-text-cell-padding-x-lg};
+        --dxbl-grid-editor-cell-padding-y: #{$dx-grid-text-cell-padding-y-lg};
+        --dxbl-grid-group-panel-container-padding-x: #{$dx-grid-group-panel-container-padding-x-lg};
+        --dxbl-grid-group-panel-container-padding-y: #{$dx-grid-group-panel-container-padding-y-lg};
+        --dxbl-grid-group-panel-container-spacing: #{$dx-grid-group-panel-container-spacing-lg};
+        --dxbl-grid-group-panel-header-padding-x: #{$dx-btn-padding-x-ratio * $dx-grid-text-cell-padding-x-lg};
+        --dxbl-grid-group-panel-header-padding-y: #{$dx-grid-text-cell-padding-y-lg};
+        --dxbl-grid-group-indent-cell-width: #{$dx-grid-group-indent-cell-width-lg};
+        --dxbl-grid-expand-btn-padding-x: #{$dx-grid-expand-btn-padding-x-lg};
+        --dxbl-grid-expand-btn-padding-y: #{$dx-grid-expand-btn-padding-y-lg};
+        --dxbl-grid-search-box-container-width: #{$dx-grid-search-box-container-width-lg};
+        --dxbl-grid-search-box-container-padding-x: #{$dx-grid-search-box-container-padding-x-lg};
+        --dxbl-grid-search-box-container-padding-y: #{$dx-grid-search-box-container-padding-y-lg};
+        --dxbl-grid-empty-header-panel-padding-x: #{$dx-grid-empty-header-panel-padding-x-lg};
+        --dxbl-grid-empty-header-panel-padding-y: #{$dx-grid-empty-header-panel-padding-y-lg};
+        --dxbl-grid-edit-form-padding-x: #{$dx-grid-edit-form-padding-x-lg};
+        --dxbl-grid-edit-form-padding-y: #{$dx-grid-edit-form-padding-y-lg};
+        --dxbl-grid-edit-form-buttons-padding-x: #{$dx-grid-edit-form-buttons-padding-x-lg};
+        --dxbl-grid-edit-form-buttons-padding-y: #{$dx-grid-edit-form-buttons-padding-y-lg};
+        --dxbl-grid-edit-form-buttons-spacing: #{$dx-grid-edit-form-buttons-spacing-lg};
+        --dxbl-grid-detail-cell-padding-x: #{$dx-grid-detail-cell-padding-x-lg};
+        --dxbl-grid-detail-cell-padding-y: #{$dx-grid-detail-cell-padding-y-lg};
+        --dxbl-grid-header-spacing: #{$dx-grid-text-cell-spacing-lg};
+    }
+}
+
+.dxbl-grid-header-content {
+    display: flex;
+    align-items: center;
+    font-weight: var(--dxbl-grid-header-font-weight);
+
+    & > :not(:last-child) {
+        margin-right: var(--dxbl-grid-header-spacing);
+    }
+}
+
+@keyframes dxbl-grid-selection-checkbox-background-position-animation {
+    0% {
+        background-position-x: -500%;
+    }
+
+    100% {
+        background-position-x: 600%;
+    }
+}
+
+.dxbl-grid-command-cell,
+.dxbl-grid-selection-cell {
+    .dxbl-checkbox.dxbl-grid-selection-check-wave-animated {
+        .dxbl-checkbox-check-element::after {
+            content: "";
+            position: absolute;
+            width: var(--dxbl-checkbox-check-element-size);
+            height: var(--dxbl-checkbox-check-element-size);
+            border-radius: #{$dx-checkbox-check-element-border-radius};
+            background-image: #{$dx-grid-selection-checkbox-wave-animation-color};
+            background-repeat: no-repeat;
+            background-size: 70% 100%;
+            animation: 1.5s linear infinite dxbl-grid-selection-checkbox-background-position-animation;
+        }
+    }
+
+    .dxbl-grid-focused-row > & {
+        & > .dxbl-checkbox {
+            @include grid-inplace-focus-row-check-box-style();
+        }
+    }
+
+    .dxbl-grid-header-content {
+        height: 100%;
+        overflow: hidden;
+        justify-content: flex-start;
+        margin: calc(var(--dxbl-grid-text-cell-padding-y) * -1) 0;
+        padding: var(--dxbl-grid-text-cell-padding-y) 0;
+
+        & > .dxbl-checkbox {
+            @include grid-inplace-checkbox-style();
+        }
+
+        &.dxbl-align-center {
+            justify-content: center;
+        }
+
+        &.dxbl-align-right {
+            justify-content: flex-end;
+        }
+
+        & > .dxbl-grid-select-all-split-btn-container {
+            --dxbl-grid-select-all-split-btn-container-btn-width: #{$dx-grid-select-all-split-btn-container-btn-width};
+            --dxbl-grid-header-spacing: 0;
+
+            .dxbl-btn-split {
+                align-items: center;
+                margin-right: calc(var(--dxbl-grid-select-all-split-btn-container-btn-width) * -1);
+
+                & > .dxbl-btn {
+                    --dxbl-btn-bg: transparent;
+                    --dxbl-btn-hover-bg: transparent;
+                    --dxbl-btn-hover-background: none;
+                    --dxbl-btn-border-width: 0;
+                    --dxbl-btn-padding-y: 0;
+                    --dxbl-btn-box-shadow: none;
+
+                    &:not(.dxbl-btn-split-dropdown) {
+                        --dxbl-btn-focus-shadow-blur: 0;
+                        --dxbl-btn-focus-shadow-spread: 0;
+
+                        margin-right: 0;
+
+                        & > .dxbl-checkbox {
+                            --dxbl-checkbox-border-width: 0;
+
+                            @include grid-inplace-checkbox-style();
+                        }
+                    }
+
+                    &.dxbl-btn-split-dropdown {
+                        --dxbl-btn-padding-x: 0;
+
+                        width: var(--dxbl-grid-select-all-split-btn-container-btn-width);
+
+                        @include embedded-image-color(null, null, null, null, null, true);
+                    }
+                }
+            }
+
+            &.dxbl-sm {
+                --dxbl-grid-select-all-split-btn-container-btn-width: #{$dx-grid-select-all-split-btn-container-btn-width-sm};
+            }
+
+            &.dxbl-lg {
+                --dxbl-grid-select-all-split-btn-container-btn-width: #{$dx-grid-select-all-split-btn-container-btn-width-lg};
+            }
+        }
+    }
+}
+
+.dxbl-grid-draggable-header {
+    --dxbl-grid-draggable-header-font-size: #{$dx-grid-font-size};
+    --dxbl-grid-draggable-header-line-height: #{$dx-grid-line-height};
+    --dxbl-grid-draggable-header-bg: #{$dx-grid-bg};
+    --dxbl-grid-draggable-header-color: #{$dx-grid-color};
+    --dxbl-grid-draggable-header-border-color: #{$dx-grid-border-color};
+    --dxbl-grid-draggable-header-border-style: #{$dx-grid-border-style};
+    --dxbl-grid-draggable-header-border-width: #{$dx-grid-border-width};
+    --dxbl-grid-draggable-header-border-radius: #{$dx-grid-border-radius};
+    --dxbl-grid-draggable-header-shadow: #{$dx-grid-group-panel-header-shadow};
+
+    font-size: var(--dxbl-grid-draggable-header-font-size);
+    line-height: var(--dxbl-grid-draggable-header-line-height);
+    background-color: var(--dxbl-grid-draggable-header-bg);
+    border-radius: var(--dxbl-grid-draggable-header-border-radius);
+    border: var(--dxbl-grid-draggable-header-border-width) var(--dxbl-grid-draggable-header-border-style) var(--dxbl-grid-draggable-header-border-color);
+    box-shadow: var(--dxbl-grid-draggable-header-shadow);
+    visibility: hidden;
+    position: absolute;
+    justify-content: center;
+    flex-direction: row;
+    z-index: 20000;
+    cursor: move;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    vertical-align: middle;
+
+    .dxbl-grid-header-content {
+        width: 100%;
+    }
+}
+
+.dxbl-grid-draggable-header::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: move;
+}
+
+.dxbl-grid-edit-form {
+    overflow: visible;
+    padding: var(--dxbl-grid-edit-form-padding-y) var(--dxbl-grid-edit-form-padding-x);
+
+    & > form > .dxbl-fl.dxbl-fl-with-paddings {
+        --dxbl-fl-padding-x: 0;
+        --dxbl-fl-padding-y: 0;
+    }
+}
+
+.dxbl-grid-edit-form-buttons {
+    --dxbl-grid-edit-form-buttons-padding-x: #{$dx-grid-edit-form-buttons-padding-x};
+    --dxbl-grid-edit-form-buttons-padding-y: #{$dx-grid-edit-form-buttons-padding-y};
+    --dxbl-grid-edit-form-buttons-spacing: #{$dx-grid-edit-form-buttons-spacing};
+
+    padding: var(--dxbl-grid-edit-form-buttons-padding-y) var(--dxbl-grid-edit-form-buttons-padding-x) 0;
+    display: flex;
+    justify-content: flex-end;
+
+    & > .dxbl-btn {
+        min-width: $dx-grid-edit-form-btn-min-width;
+    }
+
+    & > .dxbl-btn:not(:last-child) {
+        margin-right: var(--dxbl-grid-edit-form-buttons-spacing);
+    }
+}
+
+.dxbl-sm .dxbl-grid-edit-form-buttons {
+    --dxbl-grid-edit-form-buttons-padding-x: #{$dx-grid-edit-form-buttons-padding-x-sm};
+    --dxbl-grid-edit-form-buttons-padding-y: #{$dx-grid-edit-form-buttons-padding-y-sm};
+    --dxbl-grid-edit-form-buttons-spacing: #{$dx-grid-edit-form-buttons-spacing-sm};
+}
+
+.dxbl-lg .dxbl-grid-edit-form-buttons {
+    --dxbl-grid-edit-form-buttons-padding-x: #{$dx-grid-edit-form-buttons-padding-x-lg};
+    --dxbl-grid-edit-form-buttons-padding-y: #{$dx-grid-edit-form-buttons-padding-y-lg};
+    --dxbl-grid-edit-form-buttons-spacing: #{$dx-grid-edit-form-buttons-spacing-lg};
+}
+
+.dxbl-grid-confirm-dialog-buttons {
+    --dxbl-grid-confirm-dialog-buttons-spacing-x: #{$dx-grid-confirm-dialog-buttons-spacing-x};
+    --dxbl-grid-confirm-dialog-buttons-spacing-y: #{$dx-grid-confirm-dialog-buttons-spacing-y};
+
+    padding: var(--dxbl-grid-confirm-dialog-buttons-spacing-y) 0 0;
+    display: flex;
+    justify-content: center;
+
+    & > .dxbl-btn {
+        min-width: $dx-grid-confirm-dialog-btn-min-width;
+    }
+
+    & > .dxbl-btn:not(:last-child) {
+        margin-right: var(--dxbl-grid-confirm-dialog-buttons-spacing-x);
+    }
+}
+
+.dxbl-sm .dxbl-grid-confirm-dialog-buttons {
+    --dxbl-grid-confirm-dialog-buttons-spacing-x: #{$dx-grid-confirm-dialog-buttons-spacing-x-sm};
+    --dxbl-grid-confirm-dialog-buttons-spacing-y: #{$dx-grid-confirm-dialog-buttons-spacing-y-sm};
+}
+
+.dxbl-lg .dxbl-grid-confirm-dialog-buttons {
+    --dxbl-grid-confirm-dialog-buttons-spacing-x: #{$dx-grid-confirm-dialog-buttons-spacing-x-lg};
+    --dxbl-grid-confirm-dialog-buttons-spacing-y: #{$dx-grid-confirm-dialog-buttons-spacing-y-lg};
+}
+
+.dxbl-grid-sort-asc,
+.dxbl-grid-sort-desc {
+    margin-left: auto;
+    display: flex;
+}
+
+.dxbl-grid-dragging-up-target,
+.dxbl-grid-dragging-down-target {
+    display: flex;
+    position: absolute;
+    z-index: 19999;
+    transition: 0.1s;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+@import "grid.table";
+@import "grid.column-chooser";
+@import "grid.utils";

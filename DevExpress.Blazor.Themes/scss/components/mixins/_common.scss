@@ -1,0 +1,411 @@
+@mixin active-state() {
+    &:not(.dxbl-disabled):not(:disabled).dxbl-active {
+        @content;
+    }
+}
+
+@mixin not-active-state() {
+    &:not(.dxbl-active) {
+        @content;
+    }
+}
+
+@mixin hover-state() {
+    &:not(.dxbl-disabled):not(:disabled):hover {
+        @content;
+    }
+}
+
+@mixin not-hover-state() {
+    &:not(:hover) {
+        @content;
+    }
+}
+
+@mixin disabled-state() {
+    &.dxbl-disabled,
+    &:disabled {
+        @content;
+    }
+}
+
+@mixin not-disabled-state() {
+    &:not(.dxbl-disabled):not(:disabled) {
+        @content;
+    }
+}
+
+@mixin readonly-state() {
+    &.dxbl-readonly {
+        @content;
+    }
+}
+
+@mixin not-readonly-state() {
+    &:not(.dxbl-readonly) {
+        @content;
+    }
+}
+
+@mixin non-editable-state() {
+    @include readonly-state() { @content; }
+
+    @include disabled-state() { @content; }
+}
+
+@mixin valid-state() {
+    &.valid.modified {
+        @content;
+    }
+}
+
+@mixin invalid-state() {
+    &.invalid {
+        @content;
+    }
+}
+
+$unset-var: "--dxbl-unset";
+
+@mixin embedded-image-color-core($color-var, $internal-color-var, $opacity, $internal-image-only: true) {
+    $tag: if($internal-image-only, "svg", "");
+    & > #{$tag}.dxbl-image {
+        @if not $color-var {
+            $color-var: $unset-var;
+        }
+
+        @if not $internal-color-var {
+            $internal-color-var: $unset-var;
+        }
+
+        color: var(#{$color-var}, var(#{$internal-color-var}, currentcolor));
+        opacity: var(#{$color-var}, var(#{$internal-color-var}, #{$opacity}));
+    }
+}
+
+@mixin embedded-image-color(
+    $color-var: null, $color-disabled-var: null, $color-hover-var: null, $color-active-var: null, $color-active-hover-var: null,
+    $has-default-hover-state: false, $has-default-active-state: false,
+    $opacity: $dx-image-color-alpha, $disabled-opacity: $dx-image-disabled-color-alpha, $hover-opacity: $dx-image-hover-color-alpha,
+    $active-opacity: $dx-image-active-color-alpha, $active-hover-opacity: $active-opacity) {
+    @include embedded-image-color-core($color-var, "--dxbl-image-color", $opacity);
+
+    @include active-state() {
+        @if $has-default-active-state {
+            @include embedded-image-color-core($color-active-var, "--dxbl-image-active-color", $active-opacity);
+
+            @if $has-default-hover-state {
+                @include hover-state() {
+                    @include embedded-image-color-core($color-active-hover-var, "--dxbl-image-active-hover-color", $active-hover-opacity);
+                }
+            }
+        }
+
+        @else {
+            @include embedded-image-color-core($color-active-var, "--dxbl-image-color", $opacity);
+
+            @include hover-state() {
+                @include embedded-image-color-core($color-active-hover-var, "--dxbl-image-color", $opacity);
+            }
+        }
+    }
+
+    @include hover-state() {
+        @if $has-default-hover-state {
+            @include embedded-image-color-core($color-hover-var, "--dxbl-image-hover-color", $hover-opacity);
+        }
+
+        @else {
+            @include embedded-image-color-core($color-hover-var, "--dxbl-image-color", $opacity);
+        }
+    }
+
+    @include disabled-state() {
+        @include embedded-image-color-core($color-disabled-var, "--dxbl-image-disabled-color", $disabled-opacity, false);
+    }
+}
+
+@mixin embedded-image-bg-core($bg-color-var, $internal-bg-color-var, $alpha) {
+    & > .dxbl-image {
+        @if not $bg-color-var {
+            $bg-color-var: $unset-var;
+        }
+
+        @if not $bg-color-var {
+            $internal-bg-color-var: $unset-var;
+        }
+
+        background-color: var(#{$bg-color-var}, var(#{$internal-bg-color-var}, rgba(0 0 0 / #{$alpha})));
+    }
+}
+
+@mixin embedded-image-bg($bg-color-var: null, $bg-color-hover-var: null, $alpha: $dx-image-secondary-color-alpha, $hover-alpha: $dx-image-secondary-hover-color-alpha) {
+    @include embedded-image-bg-core($bg-color-var, "--dxbl-image-secondary-color", $alpha);
+
+    @include hover-state() {
+        @include embedded-image-bg-core($bg-color-hover-var, "--dxbl-image-secondary-hover-color", $hover-alpha);
+    }
+}
+
+@mixin embedded-text-opacity-core($opacity: 1) {
+    & > :not(.dxbl-image) {
+        opacity: #{$opacity};
+    }
+}
+
+@mixin embedded-text-opacity($opacity: 1, $disabled-opacity: $dx-state-disabled-opacity, $active-opacity: $opacity) {
+    @include embedded-text-opacity-core($opacity);
+
+    @include active-state() {
+        @include embedded-text-opacity-core($active-opacity);
+    }
+
+    @include disabled-state() {
+        @include embedded-text-opacity-core($disabled-opacity);
+    }
+}
+
+@mixin contextual-focus-style($shadow-color-var, $shadow-spread-var, $shadow-blur-var, $border-color-var,
+    $color, $render-style, $shadow-size, $shadow-tint-amount, $shadow-shade-amount, $border-tint-amount, $border-shade-amount) {
+    @if $dx-theme {
+        $fore-color: color-contrast($color);
+        $shadow-color: if($fore-color == $dx-color-contrast-light, rgba($color, $shadow-tint-amount), rgba($color, $shadow-shade-amount));
+        $border-color: if($fore-color == $dx-color-contrast-light, tint-color($color, $border-tint-amount), shade-color($color, $border-shade-amount));
+
+        @include focus-style-core($shadow-color-var, $shadow-spread-var, $shadow-blur-var, $border-color-var, $shadow-color, $border-color, $shadow-size);
+    }
+
+    @else {
+        $rgb-color: get-external-theme-rgb-color($render-style);
+
+        @if $rgb-color {
+            $shadow-color: rgba($rgb-color, $shadow-shade-amount);
+            $border-color: rgba($rgb-color, $border-shade-amount);
+
+            @include focus-style-core($shadow-color-var, $shadow-spread-var, $shadow-blur-var, $border-color-var, $shadow-color, $border-color, $shadow-size);
+        }
+
+        @else {
+            $shadow-color: get-external-theme-color($render-style);
+
+            @include focus-style-blured($shadow-color-var, $shadow-spread-var, $shadow-blur-var, $border-color-var, $shadow-color, $shadow-size);
+        }
+    }
+}
+
+@mixin focus-style-core($shadow-color-var, $shadow-spread-var, $shadow-blur-var, $border-color-var, $shadow-color, $border-color, $shadow-size) {
+    #{$shadow-color-var}: #{$shadow-color};
+    #{$shadow-spread-var}: #{$shadow-size};
+    #{$shadow-blur-var}: 0rem; // stylelint-disable-line length-zero-no-unit
+
+    @if $border-color-var {
+        #{$border-color-var}: #{$border-color};
+    }
+}
+
+@mixin focus-style-blured($shadow-color-var, $shadow-spread-var, $shadow-blur-var, $border-color-var, $color, $shadow-size) {
+    #{$shadow-color-var}: #{$color};
+    #{$shadow-spread-var}: 0rem; // stylelint-disable-line length-zero-no-unit
+    #{$shadow-blur-var}: calc(#{$shadow-size} + 1px);
+
+    @if $border-color-var {
+        #{$border-color-var}: #{$color};
+    }
+}
+
+@mixin contextual-state-style($bg-color-var, $color-var, $border-color-var, $background-var, $color, $render-style, $tint-amount, $shade-amount) {
+    @if $dx-theme {
+        $fore-color: color-contrast($color);
+        $back-color: if($fore-color == $dx-color-contrast-light, shade-color($color, $shade-amount), tint-color($color, $tint-amount));
+
+        #{$bg-color-var}: #{$back-color};
+
+        @if $color-var {
+            #{$color-var}: #{$fore-color};
+        }
+
+        @if $border-color-var {
+            #{$border-color-var}: #{$back-color};
+        }
+    }
+
+    @else {
+        #{$bg-color-var}: #{$color};
+
+        @if $color-var {
+            #{$color-var}: #{get-external-theme-base-fore-color($render-style)};
+        }
+
+        @if $border-color-var {
+            #{$border-color-var}: #{$color};
+        }
+
+        @if $background-var {
+            #{$background-var}: #{linear-gradient(rgba(0, 0, 0, $shade-amount), rgba(0, 0, 0, $shade-amount))};
+        }
+    }
+}
+
+@mixin contextual-disabled-style($bg-color-var, $color-var, $border-color-var, $background-var, $opacity-var, $color, $render-style,
+    $tint-amount, $shade-amount, $needBackground: true, $needBorder: true) {
+    @if $dx-theme {
+        $back-color: tint-color($color, $tint-amount);
+        $fore-color: if($needBackground, color-contrast($color), $back-color);
+
+        #{$bg-color-var}: #{if($needBackground, $back-color, transparent)};
+        #{$color-var}: #{$fore-color};
+        #{$border-color-var}: #{if($needBorder, $back-color, transparent)};
+        #{$opacity-var}: 1;
+    }
+
+    @else {
+        $back-color: $color;
+        $fore-color: if($needBackground, #{get-external-theme-base-fore-color($render-style)}, $back-color);
+
+        #{$bg-color-var}: #{if($needBackground, $back-color, transparent)};
+        #{$color-var}: #{$fore-color};
+        #{$border-color-var}: #{if($needBorder, $back-color, transparent)};
+
+        @if $needBackground {
+            #{$background-var}: #{linear-gradient(rgba(255, 255, 255, $tint-amount), rgba(255, 255, 255, $tint-amount))};
+        }
+
+        @else {
+            #{$opacity-var}: $tint-amount;
+        }
+    }
+}
+
+// stylelint-disable length-zero-no-unit
+
+@mixin element-calculated-style($bg-color-var, $color-var, $bg-color, $base-bg-color, $alpha, $border-width-var: null, $root-bg-color-var: null) {
+    /* to make this works a parent should have position: relative and z-index: 0 */
+
+    /* http://www.independent-software.com/set-stacking-order-of-pseudo-elements-below-parent-element.html */
+
+    position: relative;
+    background-color: var(#{$bg-color-var}, #{$bg-color});
+    color: var(#{$color-var});
+
+    @if not $bg-color or $bg-color == unset {
+        $border-width: if($border-width-var, var(#{$border-width-var}, 0px), 0px);
+
+        @media (min-resolution: 144dpi) {
+            --dxbl-border-width-with-scaling: calc(#{$border-width} / 1.5);
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            left: calc(0px - var(--dxbl-border-width-with-scaling, #{$border-width}));
+            top: calc(0px - var(--dxbl-border-width-with-scaling, #{$border-width}));
+            right: calc(0px - var(--dxbl-border-width-with-scaling, #{$border-width}));
+            bottom: calc(0px - var(--dxbl-border-width-with-scaling, #{$border-width}));
+            border-radius: inherit;
+            background-color: #{$base-bg-color};
+            opacity: #{$alpha};
+        }
+
+        @if $root-bg-color-var {
+            &::after {
+                content: "";
+                position: absolute;
+                z-index: -2;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                border-radius: inherit;
+                background-color: var(#{$root-bg-color-var}, transparent);
+            }
+        }
+    }
+}
+
+// stylelint-enable length-zero-no-unit
+
+@mixin panel-header-style($bg-color-var, $color-var) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-panel-header-bg,
+        $dx-panel-base-bg, $dx-panel-header-bg-alpha);
+}
+
+@mixin panel-header-hover-style($bg-color-var, $color-var) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-panel-header-hover-bg,
+        $dx-panel-base-bg, $dx-panel-header-hover-bg-alpha);
+}
+
+@mixin panel-header-selected-style($bg-color-var, $color-var) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-panel-header-selected-bg,
+        $dx-panel-base-bg, $dx-panel-header-selected-bg-alpha);
+}
+
+@mixin panel-footer-style($bg-color-var, $color-var) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-panel-footer-bg,
+        $dx-panel-base-bg, $dx-panel-footer-bg-alpha);
+}
+
+@mixin panel-footer-secondary-style($bg-color-var, $color-var) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-panel-footer-secondary-bg,
+        $dx-panel-base-bg, $dx-panel-footer-secondary-bg-alpha);
+}
+
+@mixin state-hover-style($bg-color-var, $color-var, $border-width-var: null, $root-bg-color-var: null) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-state-hover-bg,
+        $dx-state-base-bg, $dx-state-hover-bg-alpha, $border-width-var, $root-bg-color-var);
+}
+
+@mixin state-hover-secondary-style($bg-color-var, $color-var, $border-width-var: null, $root-bg-color-var: null) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-state-hover-secondary-bg,
+        $dx-state-base-bg, $dx-state-hover-secondary-bg-alpha, $border-width-var, $root-bg-color-var);
+}
+
+@mixin state-selected-style($bg-color-var, $color-var, $border-width-var: null, $root-bg-color-var: null) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-state-selected-bg,
+        $dx-state-base-bg, $dx-state-selected-bg-alpha, $border-width-var, $root-bg-color-var);
+}
+
+@mixin state-selected-hover-style($bg-color-var, $color-var, $border-width-var: null, $root-bg-color-var: null) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-state-selected-hover-bg,
+        $dx-state-base-bg, $dx-state-selected-hover-bg-alpha, $border-width-var, $root-bg-color-var);
+}
+
+@mixin state-selected-primary-style($bg-color-var, $color-var, $border-width-var: null, $root-bg-color-var: null) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-state-selected-primary-bg,
+        $dx-state-primary-bg, $dx-state-selected-primary-bg-alpha, $border-width-var, $root-bg-color-var);
+}
+
+@mixin state-selected-primary-dark-style($bg-color-var, $color-var, $border-width-var: null, $root-bg-color-var: null) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-state-selected-primary-dark-bg,
+        $dx-state-primary-bg, $dx-state-selected-primary-dark-bg-alpha, $border-width-var, $root-bg-color-var);
+}
+
+@mixin state-selected-primary-hover-style($bg-color-var, $color-var, $border-width-var: null, $root-bg-color-var: null) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-state-selected-primary-hover-bg,
+        $dx-state-primary-bg, $dx-state-selected-primary-hover-bg-alpha, $border-width-var, $root-bg-color-var);
+}
+
+@mixin state-special-primary-style($bg-color-var, $color-var, $border-width-var: null, $root-bg-color-var: null) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-state-special-primary-bg,
+        $dx-state-primary-bg, $dx-state-special-primary-bg-alpha, $border-width-var, $root-bg-color-var);
+}
+
+@mixin state-disabled-style($bg-color-var, $color-var, $border-width-var: null, $root-bg-color-var: null) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-state-disabled-bg,
+        $dx-state-base-bg, $dx-state-disabled-bg-alpha, $border-width-var, $root-bg-color-var);
+}
+
+@mixin state-disabled-primary-style($bg-color-var, $color-var, $border-width-var: null, $root-bg-color-var: null) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-state-disabled-primary-bg,
+        $dx-state-primary-bg, $dx-state-disabled-primary-bg-alpha, $border-width-var, $root-bg-color-var);
+}
+
+@mixin disable-padding() { // stylelint-disable-line length-zero-no-unit
+    padding: 0 !important; // stylelint-disable-line declaration-no-important
+}
+
+@mixin safari-line-height($line-height-var, $line-height-safari) {
+    .dxSafari & { // stylelint-disable-line selector-class-pattern
+        #{$line-height-var}: #{$line-height-safari};
+    }
+}

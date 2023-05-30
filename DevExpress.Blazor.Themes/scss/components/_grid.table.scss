@@ -1,0 +1,559 @@
+@import "mixins/common";
+@import "mixins/grid";
+
+@keyframes dxbl-skeleton-opacity-animation {
+    0% {
+        opacity: 0.05;
+    }
+
+    50% {
+        opacity: 0.15;
+    }
+
+    100% {
+        opacity: 0.05;
+    }
+}
+
+.dxbl-grid {
+    & > .dxbl-scroll-viewer {
+        background-color: var(--dxbl-grid-bg);
+        flex-grow: 1;
+
+        & > .dxbl-scroll-viewer-content {
+            background-color: inherit;
+
+            & > .dxbl-grid-table {
+                background-color: inherit;
+
+                & > tfoot {
+                    background-color: inherit;
+                    position: sticky;
+                    bottom: 0;
+                    z-index: 1;
+                }
+
+                & > thead {
+                    background-color: inherit;
+                    top: 0;
+                    position: sticky;
+                    z-index: 2;
+                }
+
+                & > tbody {
+                    position: relative;
+                    z-index: 0;
+                }
+            }
+        }
+
+        &:first-child,
+        &:first-child > .dxbl-scroll-viewer-content,
+        &:first-child > .dxbl-scroll-viewer-content > .dxbl-grid-table,
+        &:first-child > .dxbl-scroll-viewer-content > .dxbl-grid-table > colgroup + thead,
+        &:first-child > .dxbl-scroll-viewer-content > .dxbl-grid-table > colgroup + thead > tr:first-child {
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+        }
+
+        &:first-child > .dxbl-scroll-viewer-content > .dxbl-grid-table > colgroup + thead > tr:first-child {
+            & > th:first-child {
+                border-top-left-radius: inherit;
+            }
+
+            & > th:last-child {
+                border-top-right-radius: inherit;
+            }
+        }
+
+        &:last-child,
+        &:last-child > .dxbl-scroll-viewer-content,
+        &:last-child > .dxbl-scroll-viewer-content > .dxbl-grid-table,
+        &:last-child > .dxbl-scroll-viewer-content > .dxbl-grid-table > tfoot,
+        &:last-child > .dxbl-scroll-viewer-content > .dxbl-grid-table > tfoot > tr:last-child {
+            border-bottom-left-radius: inherit;
+            border-bottom-right-radius: inherit;
+        }
+
+        &:last-child > .dxbl-scroll-viewer-content > .dxbl-grid-table > tfoot > tr:last-child {
+            & > td:first-child {
+                border-bottom-left-radius: inherit;
+            }
+
+            & > td:last-child {
+                border-bottom-right-radius: inherit;
+            }
+        }
+
+        .dxbl-scroll-viewer-content-calculating .dxbl-grid-editor-inplace-container > td {
+            overflow: hidden !important; // stylelint-disable-line declaration-no-important
+        }
+    }
+
+    .dxbl-grid-table {
+        border-collapse: separate;
+        border-color: var(--dxbl-grid-border-color);
+        border-style: var(--dxbl-grid-border-style);
+        border-width: 0;
+        border-spacing: 0;
+        table-layout: fixed;
+        width: 100%;
+
+        & > thead,
+        & > tbody,
+        & > tfoot {
+            border-color: inherit;
+            border-style: inherit;
+            border-width: 0;
+
+            & > tr {
+                border-color: inherit;
+                border-style: inherit;
+                border-width: 0;
+
+                & > th,
+                & > td {
+                    font-family: var(--dxbl-grid-font-family);
+                    font-size: var(--dxbl-grid-font-size);
+                    line-height: var(--dxbl-grid-line-height);
+                    border-color: inherit;
+                    border-style: inherit;
+                    border-width: 0;
+                    border-left-width: var(--dxbl-grid-border-width);
+                    border-top-width: var(--dxbl-grid-border-width);
+                    vertical-align: middle;
+                }
+
+                & > td {
+                    & > .dxbl-checkbox {
+                        @include grid-inplace-checkbox-style();
+                    }
+                }
+
+                &.dxbl-grid-focused-row > td {
+                    .dxbl-checkbox {
+                        @include grid-inplace-focus-row-check-box-style();
+                    }
+                }
+
+                /* stylelint-disable max-line-length */
+                & > th:not(.dxbl-grid-header-indent-cell):not(.dxbl-grid-empty-header),
+                &:not(.dxbl-grid-edit-row):not(.dxbl-grid-empty-row):not(.dxbl-grid-filter-row) > td:not(.dxbl-grid-indent-cell):not(.dxbl-grid-expand-button-cell):not(.dxbl-grid-empty-cell):not(.dxbl-grid-empty-data):not(.dxbl-grid-edit-form):not(.dxbl-grid-detail-cell) {
+                    padding: var(--dxbl-grid-text-cell-padding-y) var(--dxbl-grid-text-cell-padding-x);
+                }
+                /* stylelint-enable max-line-length */
+
+                &.dxbl-grid-edit-row > td,
+                &.dxbl-grid-filter-row > td {
+                    padding: var(--dxbl-grid-editor-cell-padding-y) var(--dxbl-grid-editor-cell-padding-x);
+                }
+
+                &.dxbl-grid-editor-inplace-container > td:not(.dxbl-grid-command-cell):not(.dxbl-grid-selection-cell) {
+                    overflow: visible;
+                    position: relative;
+
+                    & > .dxbl-text-edit {
+                        @include grid-inplace-text-edit-style();
+                    }
+                }
+
+                &.dxbl-grid-edit-row.dxbl-grid-editor-inplace-container > td:not(.dxbl-grid-empty-cell):not(.dxbl-grid-indent-cell) {
+                    @include state-special-primary-style("--dxbl-grid-edit-row-bg", "--dxbl-grid-edit-row-color");
+
+                    & > .dxbl-text-edit {
+                        @include grid-inplace-text-edit-style(true);
+                    }
+                }
+
+                & > td:first-child,
+                & > th:first-child {
+                    border-left-width: 0;
+                }
+
+                & > .dxbl-grid-command-cell,
+                & > .dxbl-grid-selection-cell {
+                    padding: 0;
+
+                    & > .dxbl-btn,
+                    & > .dxbl-grid-header-content > .dxbl-btn {
+                        @include grid-inplace-button-style(var(--dxbl-btn-border-radius), true);
+                    }
+                }
+            }
+
+            &:nth-child(2) > tr:first-child {
+                & > td,
+                & > th {
+                    border-top-width: 0;
+                }
+            }
+        }
+
+        & > thead > tr > th span,
+        & > tbody > tr > td,
+        & > tbody > tr.dxbl-grid-group-footer-row > td > div,
+        & > tfoot > tr > td > div {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            overflow-wrap: normal;
+        }
+
+        & > thead > tr > th {
+            position: relative;
+
+            & > .dxbl-grid-column-resize-anchor {
+                top: 0;
+                right: calc((var(--dxbl-grid-border-width) - 7px) / 2 - 1 * var(--dxbl-grid-border-width));
+                width: 7px;
+                height: 100%;
+                position: absolute;
+                cursor: col-resize;
+                z-index: 1;
+                opacity: 0;
+
+                & > div {
+                    pointer-events: none;
+                    width: 100%;
+
+                    &:focus {
+                        outline: 0;
+                    }
+                }
+
+                &.dxbl-touch {
+                    width: calc(2 * var(--dxbl-grid-text-cell-padding-x) + var(--dxbl-grid-border-width));
+                    right: calc(-1 * var(--dxbl-grid-text-cell-padding-x) - 1 * var(--dxbl-grid-border-width));
+                }
+
+                &.dxbl-last {
+                    width: 3px;
+                    right: 0;
+                }
+            }
+        }
+
+        & > * > tr > td.dxbl-grid-empty-cell {
+            border-top-width: 0;
+            border-right-width: 0;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        & > thead {
+            & > tr:last-child > th,
+            & > tr:last-child > td {
+                border-bottom-width: var(--dxbl-grid-border-width);
+            }
+
+            & > tr > th.dxbl-grid-empty-cell {
+                border-bottom-width: 0;
+            }
+
+            &.dxbl-grid-empty-head + tbody > tr:first-child > td {
+                border-top: 0;
+            }
+
+            & > .dxbl-grid-arm-row {
+                visibility: collapse;
+
+                & + tr > th {
+                    border-top: 0;
+                }
+
+                & > th {
+                    border: 0;
+                }
+            }
+
+            .dxbl-grid-header-row {
+                & > th:not(.dxbl-grid-empty-cell) {
+                    @include panel-header-style("--dxbl-grid-header-bg", "--dxbl-grid-header-color");
+
+                    font-weight: var(--dxbl-grid-header-font-weight);
+                }
+            }
+
+            .dxbl-grid-filter-row {
+                background-color: inherit;
+
+                & > td {
+                    background-color: inherit;
+                }
+
+                &:first-child > td {
+                    border-top: 0;
+                }
+
+                & > td.dxbl-grid-empty-cell {
+                    border-bottom: 0;
+                }
+
+                & > td.dxbl-grid-indent-cell {
+                    border-left: 0;
+                }
+            }
+        }
+
+        & > tbody {
+            & > tr > td {
+                .dxSafari & { // stylelint-disable-line selector-class-pattern
+                    z-index: 0;
+                }
+            }
+
+            & > tr:first-child > td {
+                border-top-width: 0;
+            }
+
+            & > .dxbl-grid-empty-row {
+                height: 100%;
+
+                & > td {
+                    padding: 0;
+                }
+            }
+
+            & > tr > td .dxbl-grid-highlighted-text {
+                padding: 0;
+            }
+        }
+
+        .dxbl-grid-empty-header {
+            padding: var(--dxbl-grid-empty-header-panel-padding-y) var(--dxbl-grid-empty-header-panel-padding-x);
+        }
+
+        .dxbl-grid-indent-cell-size {
+            width: calc(var(--dxbl-grid-group-indent-cell-width) - var(--dxbl-grid-border-width));
+        }
+
+        .dxbl-grid-indent-cell-size:not(:first-child) {
+            width: var(--dxbl-grid-group-indent-cell-width);
+        }
+
+        .dxbl-grid-indent-cell,
+        .dxbl-grid-empty-cell {
+            background-color: transparent;
+        }
+
+        .dxbl-grid-header-indent-cell {
+            border-left: 0;
+            border-right: 0;
+        }
+
+        tr:not(.dxbl-grid-footer-row):not(.dxbl-grid-filter-row) {
+            .dxbl-grid-indent-cell {
+                border-top-width: 0;
+                border-right-width: 0;
+            }
+        }
+
+        .dxbl-grid-expand-button-cell {
+            border-right: 0;
+            padding: 0;
+            text-align: center;
+
+            + td {
+                border-left: 0;
+            }
+
+            .dxbl-grid-expand-button {
+                --dxbl-btn-bg: var(--dxbl-grid-expand-btn-bg);
+                --dxbl-btn-color: var(--dxbl-grid-expand-btn-color);
+                --dxbl-btn-padding-x: var(--dxbl-grid-expand-btn-padding-x);
+                --dxbl-btn-padding-y: var(--dxbl-grid-expand-btn-padding-y);
+
+                & > .dxbl-image {
+                    margin: 0;
+                }
+
+                @include embedded-image-color("--dxbl-grid-expand-btn-color", null, "--dxbl-grid-expand-btn-hover-color");
+
+                @include hover-state() {
+                    @include state-hover-style("--dxbl-grid-expand-btn-hover-bg", "--dxbl-grid-expand-btn-hover-color");
+                }
+
+                @include grid-inplace-button-style($dx-round-border-radius);
+            }
+        }
+
+        .dxbl-grid-skeleton-content {
+            display: inline-flex;
+            max-width: 100%;
+            border-radius: 10rem;
+            background-color: currentcolor;
+            animation: 2s linear infinite forwards dxbl-skeleton-opacity-animation;
+
+            &.dxbl-grid-skeleton-content-date {
+                width: 8rem;
+            }
+
+            &.dxbl-grid-skeleton-content-bool {
+                width: 4rem;
+            }
+
+            @for $i from 1 through 5 {
+                &.dxbl-grid-skeleton-content-string-#{$i} {
+                    width: (4 + $i) * 10%;
+                }
+
+                &.dxbl-grid-skeleton-content-number-#{$i} {
+                    width: #{(2 + $i)}em;
+                }
+            }
+        }
+
+        .dxbl-grid-empty-cell {
+            overflow: hidden;
+
+            &.dxbl-grid-hidden-empty-cell {
+                width: 0;
+            }
+        }
+
+        .dxbl-grid-selected-row:not(.dxbl-grid-focused-row):not(.dxbl-grid-touch-selection):not(.dxbl-grid-touch-selection-edge) > td:not(.dxbl-grid-empty-cell):not(.dxbl-grid-indent-cell) {
+            @include state-selected-style("--dxbl-grid-selection-bg", "--dxbl-grid-selection-color");
+        }
+
+        .dxbl-grid-focused-row:not(.dxbl-grid-touch-selection):not(.dxbl-grid-touch-selection-edge) > td:not(.dxbl-grid-empty-cell):not(.dxbl-grid-indent-cell) {
+            @include state-selected-primary-style("--dxbl-grid-focus-bg", "--dxbl-grid-focus-color");
+
+            .dxbl-btn {
+                @include link-buttons-style() {
+                    --dxbl-btn-color: var(--dxbl-grid-focus-color);
+                    --dxbl-btn-hover-color: var(--dxbl-grid-focus-color);
+
+                    @include hover-state() {
+                        opacity: #{$dx-state-hover-opacity};
+                    }
+                }
+            }
+        }
+
+        .dxbl-grid-focused-row.dxbl-grid-selected-row:not(.dxbl-grid-touch-selection):not(.dxbl-grid-touch-selection-edge) > td:not(.dxbl-grid-empty-cell):not(.dxbl-grid-indent-cell) {
+            @include state-selected-primary-dark-style("--dxbl-grid-selection-focus-bg", "--dxbl-grid-selection-focus-color");
+
+            .dxbl-btn {
+                @include link-buttons-style() {
+                    --dxbl-btn-color: var(--dxbl-grid-focus-color);
+                    --dxbl-btn-hover-color: var(--dxbl-grid-focus-color);
+
+                    @include hover-state() {
+                        opacity: #{$dx-state-hover-opacity};
+                    }
+                }
+            }
+        }
+
+        .dxbl-grid-touch-selection:not(.dxbl-grid-group-row) > td:not(.dxbl-grid-empty-cell):not(.dxbl-grid-indent-cell) {
+            @include state-selected-style("--dxbl-grid-selection-bg", "--dxbl-grid-selection-color");
+        }
+
+        .dxbl-grid-touch-selection-edge > td:not(.dxbl-grid-empty-cell):not(.dxbl-grid-indent-cell) {
+            @include state-selected-hover-style("--dxbl-grid-touch-bg", "--dxbl-grid-touch-color");
+        }
+
+        .dxbl-grid-footer-row {
+            font-weight: var(--dxbl-grid-footer-font-weight);
+
+            & > td:not(.dxbl-grid-empty-cell) {
+                @include panel-footer-style("--dxbl-grid-footer-bg", "--dxbl-grid-footer-color");
+
+                border-right: 0;
+                border-left: 0;
+            }
+        }
+
+        .dxbl-grid-group-footer-row {
+            font-weight: var(--dxbl-grid-group-footer-font-weight);
+
+            & > td:not(.dxbl-grid-empty-cell):not(.dxbl-grid-indent-cell) {
+                @include panel-footer-secondary-style("--dxbl-grid-group-footer-bg", "--dxbl-grid-group-footer-color");
+
+                border-right: 0;
+            }
+
+            & > td:not(.dxbl-grid-indent-cell) + td:not(.dxbl-grid-indent-cell):not(.dxbl-grid-empty-cell) {
+                border-left: 0;
+            }
+        }
+
+        .dxbl-grid-detail-cell {
+            padding: var(--dxbl-grid-detail-cell-padding-y) var(--dxbl-grid-detail-cell-padding-x);
+        }
+
+        &.dxbl-grid-table-no-scroll {
+            height: 100%;
+
+            // stylelint-disable selector-class-pattern
+
+            .dxFirefox & > thead,
+            .dxFirefox & > tfoot {
+                height: 1px;
+            }
+
+            .dxFirefox & > tbody {
+                & > .dxbl-grid-empty-row {
+                    height: auto;
+                }
+
+                & > :not(.dxbl-grid-empty-row):not(:only-child) {
+                    height: 1%;
+                }
+            }
+
+            // stylelint-enable selector-class-pattern
+        }
+
+        &:not(.dxbl-grid-table-no-scroll) > tbody > .dxbl-grid-empty-row {
+            display: none;
+        }
+    }
+
+    .dxbl-grid-columns-separator {
+        position: absolute;
+        z-index: 3;
+        width: 3px;
+        height: 100%;
+
+        @include active-state() {
+            background-color: $dx-primary;
+            transition: background-color 0.25s;
+            pointer-events: none;
+            box-shadow: inset 0 0 0 9999px rgb(255 255 255 / 20%);
+        }
+
+        & > div {
+            display: none;
+        }
+    }
+}
+
+.dxOpera { // stylelint-disable-line selector-class-pattern
+    .dxbl-grid {
+        .dxbl-scroll-viewer {
+            .dxbl-grid-table {
+                & > tfoot {
+                    & > tr > td {
+                        position: sticky;
+                        bottom: 0;
+                        z-index: 1;
+                    }
+                }
+
+                & > thead {
+                    & > .dxbl-grid-header-row > th {
+                        top: 0;
+                        position: sticky;
+                        z-index: 2;
+                    }
+
+                    & > .dxbl-grid-filter-row > td {
+                        top: 0;
+                        position: sticky;
+                        z-index: 2;
+                    }
+                }
+            }
+        }
+    }
+}

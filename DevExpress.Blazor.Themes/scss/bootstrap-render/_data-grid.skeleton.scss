@@ -1,0 +1,54 @@
+$opacity_low_treshold: 0.35 !default;
+
+@keyframes dynamic_opacity {
+    from {
+        opacity: $opacity_low_treshold;
+    }
+
+    to {
+        opacity: $opacity_low_treshold + 0.15;
+    }
+}
+
+.dxbs-gridview {
+    & tr {
+        transition: opacity linear #{$opacity_low_treshold}s;
+    }
+
+    & .dxbs-row-loading {
+        opacity: .15;
+
+        & td::before {
+            content: "|";
+            display: inline-flex;
+            min-width: 4rem;
+            width: 100%;
+            background-color: currentColor;
+            opacity: 0;
+            border-radius: 10rem;
+            animation: 1s linear #{$opacity_low_treshold}s infinite alternate both running dynamic_opacity;
+        }
+
+        & .dx-sk-bool::before {
+            max-width: 4rem;
+        }
+
+        & .dx-sk-date::before {
+            max-width: 8rem;
+        }
+
+        & .dx-sk-number::before {
+            min-width: 3rem;
+        }
+
+        @for $i from 1 through 5 {
+            & .dx-sk-str.dx-sk-#{$i}::before {
+                max-width: (4 + $i) * 10%;
+            }
+
+            & .dx-sk-number.dx-sk-#{$i}::before {
+                max-width: #{(2 + $i)}rem;
+            }
+        }
+    }
+}

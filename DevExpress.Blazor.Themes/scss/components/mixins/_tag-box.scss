@@ -1,0 +1,11 @@
+@import "common";
+
+@mixin tagbox-tag-style($bg-color-var, $color-var, $border-width-var) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-tag-box-tag-bg,
+        $dx-tag-box-tag-base-color, $dx-tag-box-tag-bg-alpha, $border-width-var);
+}
+
+@mixin tagbox-tag-disabled-style($bg-color-var, $color-var, $border-width-var) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-tag-box-tag-disabled-bg,
+        $dx-tag-box-tag-base-color, $dx-tag-box-tag-disabled-bg-alpha, $border-width-var);
+}

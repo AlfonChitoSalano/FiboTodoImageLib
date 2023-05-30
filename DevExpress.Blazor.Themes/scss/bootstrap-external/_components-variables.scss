@@ -1,0 +1,70 @@
+$dx-theme: false !default;
+
+$dx-white: var(--bs-white, var(--white)) !default;
+$dx-gray-100: var(--bs-gray-100, #f8f9fa) !default;
+$dx-gray-200: var(--bs-gray-200, #e9ecef) !default;
+$dx-gray-300: var(--bs-gray-300, #dee2e6) !default;
+$dx-gray-400: var(--bs-gray-400, #ced4da) !default;
+$dx-gray-500: var(--bs-gray-500, #adb5bd) !default;
+$dx-gray-600: var(--bs-gray-600, #6c757d) !default;
+$dx-gray-700: var(--bs-gray-700, #495057) !default;
+$dx-gray-800: var(--bs-gray-800, #343a40) !default;
+$dx-gray-900: var(--bs-gray-900, #212529) !default;
+$dx-black: var(--bs-black, var(--black)) !default;
+
+$dx-primary: var(--bs-primary, var(--primary)) !default;
+$dx-secondary: var(--bs-secondary, var(--secondary)) !default;
+$dx-success: var(--bs-success, var(--success)) !default;
+$dx-info: var(--bs-info, var(--info)) !default;
+$dx-warning: var(--bs-warning, var(--warning)) !default;
+$dx-danger: var(--bs-danger, var(--danger)) !default;
+$dx-light: var(--bs-light, var(--light)) !default;
+$dx-dark: var(--bs-dark, var(--dark)) !default;
+
+@function get-external-theme-color($render-style) {
+    $color: map-get($dx-theme-colors, #{$render-style});
+    @return if($color, $color, map-get($dx-theme-colors, primary));
+}
+
+@function get-external-theme-rgb-color($render-style) {
+    @if $dx-theme-rgb-colors {
+        $color: map-get($dx-theme-rgb-colors, #{$render-style});
+        @return if($color, $color, map-get($dx-theme-rgb-colors, primary));
+    }
+    @return null;
+}
+
+@function get-external-theme-base-fore-color($render-style) {
+    @if $render-style == "light" {
+        @return  #{$dx-gray-900};
+    }
+    @return #{$dx-white};
+}
+
+// Common
+$dx-bg: var(--bs-body-bg, var(--dxbl-body-bg, inherit)) !default;
+$dx-color: var(--bs-body-color, var(--dxbl-body-color, inherit)) !default;
+$dx-border-color: var(--bs-border-color, #{$dx-gray-400}) !default !default;
+
+$dx-state-base-bg: currentcolor !default;
+$dx-state-selected-bg-alpha: 15% !default;
+$dx-state-hover-bg-alpha: 10% !default;
+$dx-state-hover-secondary-bg-alpha: 7% !default;
+$dx-state-selected-hover-bg-alpha: 20% !default;
+
+$dx-panel-base-bg: currentcolor !default;
+
+// CheckBox
+$dx-checkbox-base-color: currentcolor !default;
+
+// TextEdit
+$dx-text-edit-state-base-color: currentcolor !default;
+
+// TagBox
+$dx-tag-box-tag-base-color: currentcolor !default;
+
+// Tabs
+$dx-tabs-tab-top-border-radius: 0.25rem !default;
+$dx-tabs-tab-border-color: $dx-border-color !default;
+$dx-tabs-tab-selected-element-height: 0 !default;
+

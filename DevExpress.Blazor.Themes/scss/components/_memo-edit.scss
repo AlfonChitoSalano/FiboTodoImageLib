@@ -1,0 +1,34 @@
+.dxbl-text-edit.dxbl-memo-edit {
+    position: relative;
+
+    & > textarea {
+        min-height: calc(var(--dxbl-text-edit-padding-y) * 2 + var(--dxbl-text-edit-line-height) * var(--dxbl-text-edit-font-size));
+        min-width: calc(var(--dxbl-text-edit-padding-x) * 2 + #{$dx-scroll-bar-width});
+    }
+
+    & > .dxbl-btn.dxbl-edit-btn-clear + textarea {
+        padding-right: $dx-text-edit-padding-x + $dx-image-size + $dx-scroll-bar-width;
+    }
+
+    & > .dxbl-btn.dxbl-edit-btn-clear {
+        height: 100%;
+        position: absolute;
+        right: $dx-scroll-bar-width;
+    }
+
+    & > .dxbl-resize {
+        resize: both;
+    }
+
+    & > .dxbl-v-resize {
+        resize: vertical;
+    }
+
+    & > .dxbl-h-resize {
+        resize: horizontal;
+    }
+
+    & > .dxbl-no-resize {
+        resize: none;
+    }
+}

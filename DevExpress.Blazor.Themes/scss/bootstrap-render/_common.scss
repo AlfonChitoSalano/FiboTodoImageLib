@@ -1,0 +1,50 @@
+.dx-d-none {
+    display: none!important;
+}
+
+.dx-prevent-selection {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
+
+@mixin sr-only() {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.sr-only,
+.visually-hidden {
+    @include sr-only()
+}
+
+.dxbs-preventsel {
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/*iOS click does not work - workaround*/
+.dxbs-clickable,
+.dxbs-clickable label {
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.dxbs-non-clickable {
+    pointer-events: none;
+}
+
+input.dx-blazor-hide-ms-button::-ms-reveal {
+    display: none;
+}

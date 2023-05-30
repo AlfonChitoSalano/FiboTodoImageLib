@@ -1,0 +1,41 @@
+﻿@use "sass:math";
+
+@mixin make-columns() {
+    @each $breakpoint in map-keys($dx-window-breakpoints) {
+        $breakpoint-name: "-#{$breakpoint}";
+
+        @include media-breakpoint-up($breakpoint) {
+            .dxbl-col#{$breakpoint-name} {
+                flex: 1 0 0;
+            }
+
+            @if $dx-row-columns > 0 {
+                @for $i from 1 through $dx-row-columns {
+                    .dxbl-col#{$breakpoint-name}-#{$i} {
+                        @include make-col($i);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin make-col($size: false) {
+    @if $size {
+        flex: 0 0 auto;
+        width: percentage(math.div($size, $dx-row-columns));
+    }
+
+    @else {
+        flex: 1 1 0;
+        max-width: 100%;
+    }
+}
+
+@mixin media-breakpoint-up($name) {
+    $width: map-get($dx-window-breakpoints, $name);
+
+    @media (min-width: $width) {
+        @content;
+    }
+}

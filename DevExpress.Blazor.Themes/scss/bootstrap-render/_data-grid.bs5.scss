@@ -1,0 +1,66 @@
+
+.dxbs-gridview {
+    .dxbs-data-row > td,
+    tr > th.dxbs-select-cell {
+        &> .dxbl-checkbox {
+            padding-left: 0;
+            margin-bottom: 0;
+            &> input {
+                margin-left: 0;
+            }
+        }
+    }
+    .dxbs-select-cell > .dxbs-checkbox > .custom-checkbox > .form-check-input {
+        opacity: 1;
+        position: relative;
+        z-index: auto;
+    }
+    .dxbs-fixed-header-content > span,
+    .dxbs-group-panel span {
+        &:not(:hover) {
+            text-decoration: none;
+        }
+    }
+    &> .card {
+        & > .dxbs-table > * {
+            border-style: none;
+        }
+        &> .dxbs-table:first-child > thead > tr:first-child,
+        &> .dxbs-grid-vsd > .dxbs-table > tbody > tr:first-child,
+        &> .dxbs-grid-hsd > .dxbs-table > tbody > tr:first-child,
+        &> .dxbs-grid-header-container > .dxbs-table:first-child > thead > tr:first-child {
+            border-top-width: 0;
+        }
+        &> .dxbs-table > tbody > tr:last-child {
+            border-bottom-width: 0;
+        }
+        &> .dxgvHSDC tr,
+        &> .dxgvCSD tr:first-child {
+            border-width: 0;
+        }
+        &> .dxbs-grid-pager {
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: inherit;
+        }
+        &> .dxbs-grid-header-container.dxbs-grid-gph > .dxbs-fixed > thead > tr:first-child > th {
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+            border-top-style: solid;
+            border-top-width: 1px;
+            border-top-color: inherit;
+        }
+        &> .grid-header-template + .dxbs-table {
+            & > thead > tr:first-child,
+            & > colgroup + tbody > tr:first-child {
+                border-top-width: 0;
+            }
+        }
+        > .dxgvHSDC > .dxbs-table > thead,
+        > .dxgvCSD > .dxbs-table > tbody {
+            border-top-width: 0;
+            border-top-style: solid;
+            border-top-color: inherit;
+        }
+    }
+}

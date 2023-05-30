@@ -1,0 +1,80 @@
+.dxbl-image {
+    --dxbl-image-height: #{$dx-image-size};
+    --dxbl-image-width: #{$dx-image-size};
+    --dxbl-image-margin-x: #{$dx-image-margin-x};
+    --dxbl-image-margin-y: #{$dx-image-margin-y};
+
+    margin: var(--dxbl-image-margin-y) var(--dxbl-image-margin-x);
+    width: auto;
+    height: auto;
+
+    &:not(svg) {
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        line-height: 1;
+    }
+
+    &:not(.dxbl-image-fill) {
+        fill: currentcolor;
+    }
+}
+
+svg.dxbl-image {
+    width: var(--dxbl-image-width);
+    height: var(--dxbl-image-height);
+}
+
+.dxbl-sm .dxbl-image {
+    --dxbl-image-height: #{$dx-image-size-sm};
+    --dxbl-image-width: #{$dx-image-size-sm};
+    --dxbl-image-margin-x: #{$dx-image-margin-x-sm};
+    --dxbl-image-margin-y: #{$dx-image-margin-y-sm};
+}
+
+.dxbl-lg .dxbl-image {
+    --dxbl-image-height: #{$dx-image-size-lg};
+    --dxbl-image-width: #{$dx-image-size-lg};
+    --dxbl-image-margin-x: #{$dx-image-margin-x-lg};
+    --dxbl-image-margin-y: #{$dx-image-margin-y-lg};
+}
+
+.dxbl-text {
+    --dxbl-text-font-family: inherit;
+    --dxbl-text-font-size: inherit;
+    --dxbl-text-line-height: inherit;
+    --dxbl-text-padding-x: #{$dx-size-box-padding-x};
+    --dxbl-text-padding-y: #{$dx-size-box-padding-y};
+    --dxbl-text-border-color: transparent;
+    --dxbl-text-border-style: solid;
+    --dxbl-text-border-width: #{$dx-border-width};
+
+    border: var(--dxbl-text-border-width) var(--dxbl-text-border-style) var(--dxbl-text-border-color);
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--dxbl-text-font-family);
+    font-size: var(--dxbl-text-font-size);
+    line-height: var(--dxbl-text-line-height);
+    padding: var(--dxbl-text-padding-y) var(--dxbl-text-padding-x);
+    margin: 0;
+}
+
+.dxbl-sm.dxbl-text,
+.dxbl-sm .dxbl-text {
+    --dxbl-text-padding-x: #{$dx-size-box-padding-x-sm};
+    --dxbl-text-padding-y: #{$dx-size-box-padding-y-sm};
+}
+
+.dxbl-lg.dxbl-text,
+.dxbl-lg .dxbl-text {
+    --dxbl-text-padding-x: #{$dx-size-box-padding-x-lg};
+    --dxbl-text-padding-y: #{$dx-size-box-padding-y-lg};
+}
+
+.dxbl-hint {
+    position: absolute;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 4;
+}

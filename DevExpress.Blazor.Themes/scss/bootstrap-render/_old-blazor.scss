@@ -1,0 +1,150 @@
+/* Blazor */
+
+/** Blazor Data Grid **/
+.dxbs-fixed-header-content > span:hover,
+.dxbs-fixed-header-content > span:focus {
+    text-decoration: underline;
+}
+
+.dxbs-fixed-header-content > button.dxbl-btn-link,
+td.dxbs-cmd-cell > button.dxbl-btn-link,
+th.dxbs-cmd-cell > button.dxbl-btn-link {
+    font-size: inherit;
+}
+
+th.dxbs-cmd-cell > button.dxbl-btn-link {
+    font-weight: 600;
+}
+/* Virtual Scrolling */
+
+.dxbs-gridview > div > .dxbs-grid-vsd {
+    height: 200px;
+    overflow-x: hidden;
+}
+
+.dxbs-gridview.dxbs-has-vertical-scrollbar.dxbs-vertical-scrollbar-visible > .card > .dxgvHSDC.dxbs-scrollbar-padding
+{
+    padding-right: var(--dx-scrollbar-width, 17px);
+}
+
+.dxgvHSDC > .dxbs-table.table-bordered {
+    border-width: 0;
+}
+
+.dxgvCSD {
+    -webkit-overflow-scrolling: touch;
+}
+/* There is not pager */
+.dxbs-gridview > .card > .dxgvHSDC + .dxgvCSD {
+    border-bottom: none;
+}
+
+.dxbs-gridview > .card > .dxgvCSD + .card-body {
+    border-color: inherit;
+    border-width: 0;
+    border-style: inherit;
+    border-top-width: inherit;
+}
+
+.dxbs-table > tbody > tr.dxbs-grid-first-level-group > td.dxbs-toggle-cell,
+table.dxbs-table:not(.dxbs-grouped) > tbody > tr > td:first-child:not(.dxbs-gridview-row-details) {
+    border-left: 0;
+}
+/* command cell buttons */
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > span > .dxbl-btn-link,
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > span > .dxgBCTC > .dxbl-btn-link, //lack (batch mode)
+.dxbs-gridview > .card .dxbs-table > thead > tr > th.dxbs-cmd-cell > span > .dxbl-btn-link {
+    border: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+/* Column Head Dragging */
+.dx-dragging-state {
+    position: absolute !important;
+    z-index: 20000;
+    will-change: transform;
+    /*animation: translating 4s linear infinite;*/
+    visibility: hidden;
+    cursor: move;
+    -webkit-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.12);
+    box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.12);
+    justify-content: center;
+    white-space: nowrap;
+}
+/*hidden*/
+.dxbs-th.dx-dragging-state > .card-body {
+    display: flex;
+    flex-flow: row nowrap;
+}
+.dxgv-target-marks {
+    position: absolute !important;
+    z-index: 19999;
+    display: flex;
+    flex-flow: column;
+}
+.dxbs-group-panel-empty {
+    border-color: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+/* Column Grouping */
+/*lack*/
+.dxbs-header-indent {
+    border-left-color: transparent !important;
+}
+/*lack*/
+.dxbs-header-indent:not(.dxbs-header-indent-last) {
+    border-right-color: transparent !important;
+}
+/*lack*/
+.dxgvArm > .dxbs-header-indent {
+    font-size: 0;
+}
+/*lack*/
+.dxgvArm > .dxbs-header-indent > .invisible {
+    height: 0;
+}
+/** Blazor ComboBox **/
+.dx-dropdown-list-container > .dropdown-menu {
+    padding: 0;
+}
+
+/*lack*/
+.dx-lb-datagrid > .card {
+    border: 0;
+}
+
+/*lack*/
+.dx-lb-datagrid > .card > table > tbody > tr:last-child > td {
+    border-bottom: 0;
+}
+
+/*lack*/
+.dx-lb-datagrid > .card > table.dxbs-table > tbody > tr.dropdown-item {
+    padding: 0;
+}
+/* Common for Blazor */
+.dxbs-border-radius-top-0 {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+.dx-border-radius-inherit {
+    border-radius: inherit !important;
+}
+
+.dx-border-radius-left-inherit {
+    border-top-left-radius: inherit !important;
+    border-bottom-left-radius: inherit !important;
+}
+
+.dx-border-radius-right-inherit {
+    border-top-right-radius: inherit !important;
+    border-bottom-right-radius: inherit !important;
+}
+
+.dx-border-radius-right-0 {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+

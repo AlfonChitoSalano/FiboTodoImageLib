@@ -1,0 +1,6 @@
+@import "../../bootstrap-compile/mixins/buttons";
+
+@mixin button-shadow($color, $button-main-color, $btn-focus-width) {
+    $shadow: 0 0 0 $btn-focus-width rgba(mix($color, $button-main-color, 15%), .5);
+    @include button-focused-shadow($shadow);
+}

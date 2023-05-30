@@ -1,0 +1,107 @@
+@import "mixins/scroll-viewer";
+
+.dxbl-scroll-viewer {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+
+    --dxbl-scroll-viewer-hor-scroll-bar-height: #{$dx-scroll-viewer-scroll-bar-size};
+    --dxbl-scroll-viewer-hor-scroll-bar-hover-height: #{$dx-scroll-viewer-scroll-bar-hover-size};
+    --dxbl-scroll-viewer-vert-scroll-bar-width: #{$dx-scroll-viewer-scroll-bar-size};
+    --dxbl-scroll-viewer-vert-scroll-bar-hover-width: #{$dx-scroll-viewer-scroll-bar-hover-size};
+
+    & > .dxbl-scroll-viewer-vert-scroll-bar,
+    .dxbl-scroll-viewer-hor-scroll-bar {
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        display: none;
+        align-items: flex-end;
+        z-index: $dx-scroll-viewer-scroll-bar-z-index;
+        background-color: transparent;
+
+        @include active-state() {
+            display: flex;
+        }
+
+        > .dxbl-scroll-viewer-scroll-thumb {
+            background-color: currentcolor;
+            opacity: 0.5;
+            border-radius: 0.1rem;
+            cursor: default;
+        }
+    }
+
+    & > .dxbl-scroll-viewer-vert-scroll-bar {
+        top: 0;
+        width: var(--dxbl-scroll-viewer-vert-scroll-bar-hover-width);
+        flex-direction: column;
+        transition: width 0.3s;
+
+        > .dxbl-scroll-viewer-scroll-thumb {
+            width: var(--dxbl-scroll-viewer-vert-scroll-bar-width);
+            transition: width 0.3s;
+        }
+
+        > .dxbl-scroll-viewer-scroll-thumb[data-qa-dxbl-dragging] {
+            @include active-thumb-x(var(--dxbl-scroll-viewer-vert-scroll-bar-hover-width));
+
+            .dxTouchUI & { // stylelint-disable-line selector-class-pattern
+                width: var(--dxbl-scroll-viewer-vert-scroll-bar-width);
+            }
+        }
+
+        @include hover-state() {
+            .dxbl-scroll-viewer-scroll-thumb {
+                @include active-thumb-x(var(--dxbl-scroll-viewer-vert-scroll-bar-hover-width));
+
+                .dxTouchUI & { // stylelint-disable-line selector-class-pattern
+                    width: var(--dxbl-scroll-viewer-vert-scroll-bar-width);
+                }
+            }
+        }
+    }
+
+    & > .dxbl-scroll-viewer-hor-scroll-bar {
+        left: 0;
+        height: var(--dxbl-scroll-viewer-hor-scroll-bar-hover-height);
+        flex-direction: row;
+        transition: height 0.3s;
+
+        > .dxbl-scroll-viewer-scroll-thumb {
+            height: var(--dxbl-scroll-viewer-hor-scroll-bar-height);
+            transition: height 0.3s;
+        }
+
+        > .dxbl-scroll-viewer-scroll-thumb[data-qa-dxbl-dragging] {
+            @include active-thumb-y(var(--dxbl-scroll-viewer-hor-scroll-bar-hover-height));
+
+            .dxTouchUI & { // stylelint-disable-line selector-class-pattern
+                height: var(--dxbl-scroll-viewer-hor-scroll-bar-height);
+            }
+        }
+
+        @include hover-state() {
+            .dxbl-scroll-viewer-scroll-thumb {
+                @include active-thumb-y(var(--dxbl-scroll-viewer-hor-scroll-bar-hover-height));
+
+                .dxTouchUI & { // stylelint-disable-line selector-class-pattern
+                    height: var(--dxbl-scroll-viewer-hor-scroll-bar-height);
+                }
+            }
+        }
+    }
+
+    & > .dxbl-scroll-viewer-content {
+        overflow: auto;
+        width: 100%;
+        scrollbar-width: none; // stylelint-disable-line property-no-unknown
+        scrollbar-height: none; // stylelint-disable-line property-no-unknown
+    }
+
+    & > .dxbl-scroll-viewer-content::-webkit-scrollbar {
+        display: none;
+    }
+}
+

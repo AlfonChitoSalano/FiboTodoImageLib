@@ -1,0 +1,41 @@
+@mixin navigation-filter-mark {
+    .dxbl-filter-content {
+        background-color: yellow;
+        color: #212529;
+    }
+}
+
+@mixin _expand_btn {
+    min-height: 1rem;
+    min-width: 1rem;
+    padding: 0;
+    display: inline-flex;
+    box-sizing: content-box;
+    font-size: inherit;
+
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+        box-shadow: none;
+        font-weight: inherit;
+        color: inherit;
+    }
+
+    & > .dxbl-image {
+        opacity: 0.7;
+    }
+
+    &:not(:hover),
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+@mixin _expand_button_backdrop {
+    top: -.25rem;
+    left: -.25rem;
+    height: calc(100% + .5rem);
+    width: calc(100% + .5rem);
+    opacity: 0.1;
+}

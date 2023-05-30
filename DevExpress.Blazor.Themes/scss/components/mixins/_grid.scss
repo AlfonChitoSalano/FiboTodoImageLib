@@ -1,0 +1,138 @@
+@import "common";
+@import "button";
+@import "text-edit";
+
+@mixin grid-inplace-button-style($border-radius, $use-text-cell-margin: false, $offset: $dx-min-spacing) {
+    border: 0;
+    border-radius: #{$border-radius};
+    position: relative;
+
+    @if $use-text-cell-margin {
+        margin: calc(var(--dxbl-grid-text-cell-padding-y) * -1) 0;
+    }
+
+    @include button-focus-state () {
+        @include button-inner-focus-style($border-radius, $offset);
+    }
+}
+
+@mixin grid-inplace-checkbox-style() {
+    border: 0;
+    display: inline-flex;
+    margin: calc(var(--dxbl-grid-text-cell-padding-y) * -1) 0;
+    vertical-align: top;
+}
+
+@mixin grid-inplace-focus-row-check-box-style() {
+    .dxbl-checkbox-check-element {
+        color: var(--dxbl-grid-color);
+        outline: 1px solid var(--dxbl-grid-bg);
+
+        @include checkbox-focus-state() {
+            outline: 0;
+
+            @include checkbox-checked-focus-style($dx-light, "light", $dx-checkbox-focus-on-primary-shadow-tint-amount, $dx-checkbox-focus-on-primary-shadow-shade-amount);
+            @include checkbox-unchecked-focus-style($dx-light, "light", $dx-checkbox-focus-on-primary-shadow-tint-amount, $dx-checkbox-focus-on-primary-shadow-shade-amount);
+        }
+    }
+}
+
+@mixin grid-inplace-text-edit-style($is-primary-bg: false) {
+    --dxbl-text-edit-border-radius: 0;
+    --dxbl-text-edit-box-shadow: none;
+
+    border-top: 0;
+    border-bottom: 0;
+    margin: calc(var(--dxbl-grid-editor-cell-padding-y) * -1) calc(var(--dxbl-grid-editor-cell-padding-x) * -1);
+    position: relative;
+
+    &:only-child {
+        border-left: 0;
+        border-right: 0;
+    }
+
+    @include text-edit-focus-state() {
+        @include grid-inplace-text-edit-state-style(#{$dx-primary}, #{$dx-grid-inline-edit-focus-border-opacity});
+    }
+
+    @include text-edit-not-focus-state() {
+        @include valid-state() {
+            @include grid-inplace-text-edit-state-style(var(--dxbl-text-edit-validation-valid-color), 1);
+        }
+
+        @include invalid-state() {
+            @include grid-inplace-text-edit-state-style(var(--dxbl-text-edit-validation-invalid-color), 1);
+        }
+    }
+
+    --dxbl-text-edit-bg: transparent;
+
+    @if $is-primary-bg {
+        --dxbl-text-edit-readonly-bg: transparent;
+        --dxbl-text-edit-disabled-bg: transparent;
+
+        @include readonly-state() {
+            @include state-disabled-primary-style("--dxbl-text-edit-readonly-bg", "--dxbl-text-edit-readonly-color", "--dxbl-text-edit-border-width", "--dxbl-text-edit-readonly-bg");
+        }
+
+        @include disabled-state() {
+            @include state-disabled-primary-style("--dxbl-text-edit-disabled-bg", "--dxbl-text-edit-disabled-color", "--dxbl-text-edit-border-width", "--dxbl-text-edit-disabled-bg");
+        }
+    }
+
+    & > .dxbl-btn-group,
+    & > .dxbl-btn-group-vertical {
+        background-color: transparent;
+    }
+
+    & > .dxbl-btn,
+    & > .dxbl-btn-group > .dxbl-btn,
+    & > .dxbl-btn-group-vertical > .dxbl-btn {
+        border: 0;
+
+        @include text-edit-default-btn() {
+            background-color: transparent;
+
+            @include hover-state() {
+                background-color: transparent;
+            }
+
+            @include disabled-state() {
+                background-color: transparent;
+            }
+
+            &::before,
+            &::after {
+                content: unset !important; // stylelint-disable-line declaration-no-important
+            }
+
+            @include embedded-image-color("--dxbl-text-edit-btn-image-color", "--dxbl-text-edit-btn-disabled-image-color", "--dxbl-text-edit-btn-hover-image-color", null, null, true);
+        }
+
+        @include text-edit-custom-btn() {
+            --dxbl-btn-bg: transparent;
+
+            @include button-focus-state() {
+                @include button-inner-focus-style(var(--dxbl-btn-border-radius), 2 * $dx-min-spacing);
+            }
+        }
+    }
+}
+
+@mixin grid-inplace-text-edit-state-style($border-color, $opacity) {
+    box-shadow: none;
+
+    &::after {
+        background-color: transparent;
+        border-bottom: calc(var(--dxbl-grid-inplace-edit-border-width)) var(--dxbl-text-edit-border-style) #{$border-color};
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: calc(var(--dxbl-grid-inplace-edit-border-width) * -1 + var(--dxbl-grid-border-width)) !important; // stylelint-disable-line declaration-no-important
+        opacity: $opacity;
+        z-index: 1;
+        pointer-events: none;
+    }
+}

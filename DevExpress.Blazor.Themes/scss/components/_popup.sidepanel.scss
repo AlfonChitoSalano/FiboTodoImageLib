@@ -1,0 +1,41 @@
+.dxbl-sidepanel {
+    .dxbl-modal-root {
+        > .dxbl-popup.dxbl-sidepanel-dialog {
+            &.dxbl-sidepanel-position-left {
+                margin-left: 0;
+
+                > .dxbl-modal-content {
+                    border-bottom-left-radius: unset;
+                    border-top-left-radius: unset;
+                }
+            }
+
+            &.dxbl-sidepanel-position-top {
+                margin-top: 0;
+
+                > .dxbl-modal-content {
+                    border-top-left-radius: unset;
+                    border-top-right-radius: unset;
+                }
+            }
+
+            &.dxbl-sidepanel-position-right {
+                margin-right: 0;
+
+                > .dxbl-modal-content {
+                    border-bottom-right-radius: unset;
+                    border-top-right-radius: unset;
+                }
+            }
+
+            &.dxbl-sidepanel-position-bottom {
+                margin-bottom: 0;
+
+                > .dxbl-modal-content {
+                    border-bottom-left-radius: unset;
+                    border-bottom-right-radius: unset;
+                }
+            }
+        }
+    }
+}

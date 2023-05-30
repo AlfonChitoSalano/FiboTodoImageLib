@@ -1,0 +1,24 @@
+.dx-gridlayout {
+    width: 100%;
+    height: 100%;
+}
+
+.dx-gridlayout > .dx-gridlayout-root {
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    display: -ms-grid;
+}
+
+.dx-stacklayout > .dx-stacklayout-root {
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    display: -ms-grid;
+}
+
+

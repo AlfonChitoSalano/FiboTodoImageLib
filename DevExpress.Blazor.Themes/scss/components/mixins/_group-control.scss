@@ -1,0 +1,27 @@
+﻿@mixin group-text-container-style() {
+    & > .dxbl-text {
+        --dxbl-text-padding-x: 0;
+
+        font-size: inherit;
+        line-height: inherit;
+        flex: 1 1 auto;
+
+        @content;
+    }
+}
+
+@mixin group-expand-button-style() {
+    & > .dxbl-btn.dxbl-group-expand-btn {
+        position: relative;
+        margin: 0 calc(var(--dxbl-btn-padding-x) * -1);
+
+        --dxbl-btn-box-shadow: none;
+        --dxbl-btn-color: var(--dxbl-group-header-btn-color);
+        --dxbl-btn-bg: transparent;
+        --dxbl-btn-border-color: transparent;
+        --dxbl-btn-border-hover-color: transparent;
+        --dxbl-btn-hover-border-color: transparent;
+
+        @content;
+    }
+}

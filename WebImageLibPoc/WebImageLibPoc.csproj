@@ -1,85 +1,67 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+		<PropertyGroup>
+				<TargetFramework>net6.0</TargetFramework>
+				<Nullable>enable</Nullable>
+				<ImplicitUsings>enable</ImplicitUsings>
+		</PropertyGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+		<ItemGroup>
+				<PackageReference Include="DevExpress.Blazor" Version="22.2.6" />
+				<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.16" />
+				<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.16" PrivateAssets="all" />
+				<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+				<PackageReference Include="Polly" Version="7.2.3" />
+				<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="5.0.0" />
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.16" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.16" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="5.0.0" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.4.0" />
-    <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="5.0.10" />
-    <PackageReference Include="Microsoft.NETCore.Platforms" Version="5.0.0" />
-    <PackageReference Include="Microsoft.NETCore.Targets" Version="1.1.0" />
-    <PackageReference Include="Microsoft.Win32.Registry" Version="4.5.0" />
-    <PackageReference Include="Microsoft.Win32.SystemEvents" Version="5.0.0" />
-    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Polly" Version="7.2.3" />
-    <PackageReference Include="runtime.any.System.IO" Version="4.3.0" />
-    <PackageReference Include="runtime.any.System.Reflection" Version="4.3.0" />
-    <PackageReference Include="runtime.any.System.Reflection.Primitives" Version="4.3.0" />
-    <PackageReference Include="runtime.any.System.Runtime" Version="4.3.0" />
-    <PackageReference Include="runtime.any.System.Text.Encoding" Version="4.3.0" />
-    <PackageReference Include="runtime.any.System.Threading.Tasks" Version="4.3.0" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
-    <PackageReference Include="System.Drawing.Common" Version="5.0.3" />
-    <PackageReference Include="System.Formats.Asn1" Version="5.0.0" />
-    <PackageReference Include="System.IO" Version="4.3.0" />
-    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
-    <PackageReference Include="System.Private.ServiceModel" Version="4.9.0" />
-    <PackageReference Include="System.Private.Uri" Version="4.3.0" />
-    <PackageReference Include="System.Reactive" Version="5.0.0" />
-    <PackageReference Include="System.Reflection" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.DispatchProxy" Version="4.7.1" />
-    <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
-    <PackageReference Include="System.Reflection.Primitives" Version="4.3.0" />
-    <PackageReference Include="System.Runtime" Version="4.3.0" />
-    <PackageReference Include="System.Security.AccessControl" Version="5.0.0" />
-    <PackageReference Include="System.Security.Cryptography.Cng" Version="5.0.0" />
-    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="5.0.0" />
-    <PackageReference Include="System.Security.Cryptography.Xml" Version="5.0.0" />
-    <PackageReference Include="System.Security.Permissions" Version="5.0.0" />
-    <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
-    <PackageReference Include="System.ServiceModel.Http" Version="4.9.0" />
-    <PackageReference Include="System.ServiceModel.Primitives" Version="4.9.0" />
-    <PackageReference Include="System.Text.Encoding" Version="4.3.0" />
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.4.0" />
-    <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
-    <PackageReference Include="System.Windows.Extensions" Version="5.0.0" />
-  </ItemGroup>
+				<!--Added for DevExpres
+				<PackageReference Include="DevExtreme.AspNet.Data" Version="2.8.6" />
+				<PackageReference Include="Microsoft.CSharp" Version="4.4.0" />
+				<PackageReference Include="Microsoft.Extensions.ObjectPool" Version="5.0.10" />
+				<PackageReference Include="Microsoft.NETCore.Platforms" Version="5.0.0" />
+				<PackageReference Include="Microsoft.NETCore.Targets" Version="1.1.0" />
+				<PackageReference Include="Microsoft.Win32.Registry" Version="4.5.0" />
+				<PackageReference Include="Microsoft.Win32.SystemEvents" Version="5.0.0" />
+				<PackageReference Include="NETStandard.Library" Version="2.0.3" />
+				<PackageReference Include="System.ComponentModel.Annotations" Version="4.4.0" />
+				<PackageReference Include="System.Drawing.Common" Version="5.0.3" />
+				<PackageReference Include="System.Formats.Asn1" Version="5.0.0" />
+				<PackageReference Include="System.IO" Version="4.3.0" />
+				<PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+				<PackageReference Include="System.Private.ServiceModel" Version="4.9.0" />
+				<PackageReference Include="System.Reflection" Version="4.3.0" />
+				<PackageReference Include="System.Reflection.DispatchProxy" Version="4.7.1" />
+				<PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
+				<PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.3.0" />
+				<PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
+				<PackageReference Include="System.Reflection.Primitives" Version="4.3.0" />
+				<PackageReference Include="System.Runtime" Version="4.3.0" />
+				<PackageReference Include="System.Security.AccessControl" Version="5.0.0" />
+				<PackageReference Include="System.Security.Cryptography.Cng" Version="5.0.0" />
+				<PackageReference Include="System.Security.Cryptography.Pkcs" Version="5.0.0" />
+				<PackageReference Include="System.Security.Cryptography.Xml" Version="5.0.0" />
+				<PackageReference Include="System.Security.Permissions" Version="5.0.0" />
+				<PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
+				<PackageReference Include="System.ServiceModel.Http" Version="4.9.0" />
+				<PackageReference Include="System.ServiceModel.Primitives" Version="4.9.0" />
+				<PackageReference Include="System.Text.Encoding" Version="4.3.0" />
+				<PackageReference Include="System.Text.Encoding.CodePages" Version="4.4.0" />
+				<PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
+				<PackageReference Include="System.Windows.Extensions" Version="5.0.0" />
+				<PackageReference Include="runtime.any.System.IO" Version="4.3.0" />
+				<PackageReference Include="runtime.any.System.Reflection" Version="4.3.0" />
+				<PackageReference Include="runtime.any.System.Reflection.Primitives" Version="4.3.0" />
+				<PackageReference Include="runtime.any.System.Runtime" Version="4.3.0" />
+				<PackageReference Include="runtime.any.System.Text.Encoding" Version="4.3.0" />
+				<PackageReference Include="runtime.any.System.Threading.Tasks" Version="4.3.0" />
+				<PackageReference Include="System.Private.Uri" Version="4.3.0" />
+				-->
 
-  <ItemGroup>
-    <ProjectReference Include="..\PocCommon\PocCommon.csproj" />
-  </ItemGroup>
+				<!--added because of error
+				<PackageReference Include="System.Reactive" Version="6.0.0" />
+				-->
+		</ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="DevExpress.Blazor.Server.WebAssembly.v22.2">
-      <HintPath>..\_DevExpress.DLLs\DevExpress.Blazor.Server.WebAssembly.v22.2.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Blazor.v22.2">
-      <HintPath>..\_DevExpress.DLLs\DevExpress.Blazor.v22.2.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Data.v22.2">
-      <HintPath>..\_DevExpress.DLLs\DevExpress.Data.v22.2.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Drawing.v22.2">
-      <HintPath>..\_DevExpress.DLLs\DevExpress.Drawing.v22.2.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Pdf.v22.2.Core">
-      <HintPath>..\_DevExpress.DLLs\DevExpress.Pdf.v22.2.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Pdf.v22.2.Drawing">
-      <HintPath>..\_DevExpress.DLLs\DevExpress.Pdf.v22.2.Drawing.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Printing.v22.2.Core">
-      <HintPath>..\_DevExpress.DLLs\DevExpress.Printing.v22.2.Core.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
+		<ItemGroup>
+				<ProjectReference Include="..\PocCommon\PocCommon.csproj" />
+		</ItemGroup>
 </Project>

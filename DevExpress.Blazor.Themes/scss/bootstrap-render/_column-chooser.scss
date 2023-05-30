@@ -1,0 +1,301 @@
+$column-chooser-label-padding-right: 24px;
+$column-chooser-drag-icon-width: 18px;
+$column-chooser-drag-icon-paddings: 16px;
+$column-chooser-border-width: 1px;
+
+@mixin columnChooserElementFreeze($translateY, $z-index) {
+    transform: translateY($translateY);
+    transition: transform .3s;
+    z-index: $z-index;
+}
+@mixin backgroundInherit {
+    background: inherit;
+    color: inherit;
+}
+@mixin flexCentered {
+    display: flex;
+    align-items: center;
+}
+@mixin userSelectNone {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+@mixin overrFlow($overflow: auto, $webkitScroling: touch) {
+    overflow: $overflow;
+    -webkit-overflow-scrolling: $webkitScroling;
+}
+@mixin withoutSideBorders {
+    border-left:  0;
+    border-right: 0;
+}
+@mixin borderTopRadius($val) {
+    border-top-left-radius: $val;
+    border-top-right-radius: $val;
+}
+@mixin borderBottomRadius($val) {
+    border-bottom-left-radius: $val;
+    border-bottom-right-radius: $val;
+}
+@mixin size($val) {
+    width: $val;
+    height: $val;
+}
+@mixin transition($val) {
+    transition: $val;
+    -webkit-transition: $val;
+    -moz-transition: $val;
+    -khtml-transition: $val;
+    -o-transition: $val;
+}
+@mixin textTruncate {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.column-chooser-elements-container .column-chooser-element-container.freeze.up {
+    @include columnChooserElementFreeze(calc(1px - 100%), 1006);
+}
+
+.column-chooser-elements-container .column-chooser-element-container.freeze.down {
+    @include columnChooserElementFreeze(calc(100% - 1px), 1004);
+}
+
+.column-chooser-elements-container .column-chooser-element-container.freeze {
+    @include columnChooserElementFreeze(0%, 1005);
+    pointer-events: none;
+}
+
+.column-chooser-elements-container {
+    @include overrFlow;
+    @include backgroundInherit;
+    display: none;
+    width: 100%;
+    max-height: 60vh;
+    border: inherit;
+}
+.column-chooser-elements-container:focus {
+    outline: none;
+}
+
+.column-chooser-element-container.page-link {
+    margin-left: unset !important;
+    line-height: unset !important;
+}
+
+.column-chooser-element-container.page-link:focus {
+    position: static;
+}
+
+.column-chooser-element-container.page-link:hover {
+    z-index: auto;
+}
+
+.column-chooser-element-container.page-link:focus::before {
+    content: " ";
+    pointer-events: none;
+    user-select: none;
+    position: absolute;
+    width: 100%;
+    height: var(--h, auto);
+    left: 0px;
+    top: calc(var(--t, auto) - var(--bt, auto));
+    box-shadow: inherit;
+    z-index: 1001;
+}
+
+.column-chooser-element-container.page-link:focus .column-chooser-drag-icon-owner {
+    top: var(--t, auto);
+    height: calc(var(--h, auto) - var(--bt, auto) * 2);
+}
+
+.column-chooser-elements-container:last-child {
+    display: block;
+}
+
+.column-chooser-header {
+    @include flexCentered;
+    @include userSelectNone;
+}
+
+.column-chooser-header {
+    justify-content: space-between;
+    border: inherit;
+    border-bottom-width: $column-chooser-border-width!important;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    width: 100%;
+}
+
+.column-chooser-element-container {
+    max-width: 325px;
+}
+
+.column-chooser-element-container.list-group-item {
+    @include withoutSideBorders;
+    @include backgroundInherit;
+    display: flex;
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+    border-top-width: $column-chooser-border-width;
+    border-bottom-width: $column-chooser-border-width;
+    border-color: inherit;
+    border-style: inherit;
+}
+.column-chooser-element-container.list-group-item.active,
+.column-chooser-element-container.list-group-item:hover,
+.column-chooser-element-container.list-group-item:focus {
+    @include backgroundInherit;
+}
+.column-chooser-container .custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow: none;
+}
+.column-chooser-element-container.list-group-item:first-child {
+    @include borderTopRadius(unset);
+    border-top-color: transparent;
+}
+.column-chooser-element-container.list-group-item:last-child {
+    @include borderBottomRadius(unset);
+    border-bottom-color: transparent;
+}
+
+.column-chooser-elements-container .column-chooser-element-container.in-drag {
+    @include userSelectNone;
+    border-top-color: inherit;
+    border-bottom-style: solid;
+    position: absolute;
+    pointer-events: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    z-index: 1008;
+}
+
+.column-chooser-element-checkbox {
+    @include userSelectNone;
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.column-chooser-elements-container.column-chooser-enable-drag-drop .column-chooser-element-container.list-group-item {
+    padding-right: 0;
+
+    & > .column-chooser-element-checkbox {
+        padding-right: calc(#{$column-chooser-label-padding-right} + #{$column-chooser-drag-icon-width} + #{$column-chooser-drag-icon-paddings});
+    }
+}
+
+.column-chooser-element-checkbox .dxbl-checkbox > label {
+    @include textTruncate;
+    width: 100%;
+    vertical-align: top;
+    pointer-events: none;
+}
+
+.column-chooser-element-checkbox .dxbl-checkbox input {
+    pointer-events: none;
+}
+
+.column-chooser-element-checkbox > .dxbl-checkbox .dxbs-checkbox-label.dxbs-checkbox-label-wrap {
+    white-space: nowrap;
+}
+
+.column-chooser-caption {
+    font-size: 0.925rem;
+    font-weight: 600;
+    margin-left: 8px;
+    padding-right: 24px;
+}
+
+.column-chooser-button {
+    @include flexCentered;
+
+    .column-chooser-button-icon {
+        @include size(16px);
+
+        margin-right: 0.5rem;
+    }
+}
+
+.column-chooser-drag-icon {
+    @include size(18px);
+}
+
+.column-chooser-drag-icon-owner {
+    @include flexCentered;
+    position: absolute;
+    cursor: move;
+    width: calc(#{$column-chooser-drag-icon-width} + #{$column-chooser-drag-icon-paddings});
+    height: 100%;
+    justify-content: center;
+    align-self: center;
+    right: 0;
+    top: 0;
+    -khtml-user-drag: element;
+    -webkit-user-drag: element;
+}
+
+.column-chooser-exit-icon {
+    @include size(18px);
+}
+
+.column-chooser-exit-button {
+    @include size(18px);
+    margin-right: 8px;
+    cursor: pointer;
+    display:flex;
+    justify-content:center;
+}
+
+.dxbl-toolbar-dropdown.border-inherit > .modal-body {
+    @include backgroundInherit;
+    border: inherit;
+    border-width: 0;
+}
+.dxbl-toolbar-dropdown.border-inherit > .modal-body > .column-chooser-elements-container {
+    @include backgroundInherit;
+    border: inherit;
+}
+
+.grid-toolbar.card-header {
+    padding: 6px;
+}
+
+.dxbl-toolbar-dropdown.dxbl-toolbar-dropdown-modal .column-chooser-element-container {
+    max-width: 100%;
+}
+
+.dxbl-toolbar-dropdown.dxbl-toolbar-dropdown-modal .column-chooser-element-checkbox {
+    margin-left: 0;
+}
+
+.dxbl-toolbar-dropdown.dxbl-toolbar-dropdown-modal .column-chooser-drag-icon {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.dxbl-toolbar-dropdown.dxbl-toolbar-dropdown-modal .column-chooser-elements-container {
+    @include overrFlow(unset, unset);
+    max-height: none;
+}
+.grid-header-template {
+    @include borderBottomRadius(0);
+    border: inherit;
+    @include withoutSideBorders;
+    border-top: 0;
+}
+.grid-header-template + .dxbs-table {
+    border-top-width: 0;
+}
+
+.dxbl-toolbar-no-item-text .dxbl-toolbar-group .column-chooser-button-label {
+    display: none;
+}
+.column-chooser-element-container.list-group-item+.list-group-item {
+    border-top-width: 0;
+}
+.dxIE .page-link.column-chooser-element-container:focus {
+    position: relative;
+}

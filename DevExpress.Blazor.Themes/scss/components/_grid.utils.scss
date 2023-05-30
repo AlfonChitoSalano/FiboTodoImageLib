@@ -1,0 +1,22 @@
+.dxbl-grid-dragging-target {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 1999;
+}
+
+.dxbl-grid-move-cursor,
+.dxbl-grid-move-cursor a:hover,
+.dxbl-grid-move-cursor .dxbl-grid-action,
+.dxbl-grid-move-cursor * {
+    cursor: move !important; // stylelint-disable-line declaration-no-important
+}
+
+.dxbl-resize-cursor,
+.dxbl-resize-cursor .dxbl-grid th.dxbl-grid-action {
+    cursor: col-resize;
+}
+
+.dxbl-grid-action {
+    cursor: pointer;
+}

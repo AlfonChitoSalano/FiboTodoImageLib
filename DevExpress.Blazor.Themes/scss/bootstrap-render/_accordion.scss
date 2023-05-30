@@ -1,0 +1,139 @@
+@import "state-decorations";
+@import 'navigation/common';
+
+$dx-accordion-header-padding: 0.75rem !default;
+$dx-accordion-group-body-padding: 0rem !default;
+$dx-accordion-left-indent: 1rem !default;
+
+@mixin _accordion_backdrop_hover {
+    @include _backdrop_base();
+    opacity: 0.05;
+}
+
+@mixin _accordion_backdrop_pressed {
+    @include _backdrop_base();
+    opacity: 0.2;
+}
+
+@mixin _accordion_backdrop_selected {
+    @include _backdrop_base();
+    opacity: 0.1;
+}
+
+.dxbl-accordion {
+    & > nav {
+        & > .dxbl-accordion-group {
+            & .dxbl-accordion-item {
+                & > .dxbl-accordion-item-content {
+                    display: flex;
+                    text-decoration: none;
+                    position: relative;
+                    transform: scale(1);
+                }
+            }
+
+
+            & > .dxbl-accordion-group-body {
+                & .dxbl-accordion-item {
+                    --dx-accordion-expand-width: 1rem;
+
+                    & .dxbl-accordion-item-indent {
+                        --dx-accordion-indent-calc: var(--dx-accordion-indent, calc(var(--dx-accordion-expand-width) + 0.5rem));
+                        padding: 1.875rem calc(var(--dx-accordion-indent-calc) * var(--dx-accordion-group-level, 0) ) 0 0;
+                    }
+
+                    & .dxbl-accordion-item-indent-end {
+                        --dx-accordion-indent-calc: var(--dx-accordion-indent, 0.75rem);
+                        padding: 1.875rem calc(var(--dx-accordion-indent-calc) * var(--dx-accordion-group-level, 0)) 0 0;
+                    }
+
+                    & .dxbl-accordion-item-text-container {
+                        padding-top: 0;
+                        padding-bottom: 0;
+                    }
+                }
+            }
+
+            .dxbl-accordion-item {
+                &.disabled > .dxbl-accordion-item-content {
+                    & .dxbl-accordion-item-text-container:not(.dxbl-accordion-item-text-tmpl) {
+                        opacity: 0.5;
+                    }
+                }
+
+                & > .dxbl-accordion-item-content {
+                    align-items: center;
+
+                    &:not(.disabled) {
+                        &.active,
+                        &:hover,
+                        &:active {
+                            color: inherit;
+                        }
+
+                        &:not(.active) {
+                            cursor: pointer;
+                            color: inherit;
+                        }
+
+                        &.active:before {
+                            @include _accordion_backdrop_selected;
+                        }
+
+                        &:hover:before {
+                            @include _accordion_backdrop_hover;
+                        }
+                    }
+                }
+            }
+
+            & .dxbl-accordion-item-text-container {
+                display: flex;
+                flex: 1 1 auto;
+                align-items: center;
+
+                &.form-control-sm {
+                    padding-left: 0;
+                    padding-right: 0;
+                    border-radius: unset;
+                }
+
+                & > .dxbl-accordion-item-text {
+                    flex: 1 1 auto;
+
+                    & + .badge {
+                        margin-left: 0.5rem;
+                    }
+                }
+
+                & > .dxbl-image:not(:last-child) {
+                    margin-right: 0.5rem;
+                }
+
+                & > .dxbl-image {
+                    flex: 0 0 auto;
+                }
+            }
+        }
+
+        & .dxbl-accordion-filter > .dxbl-accordion-group-header {
+            padding: 0.4375rem 0.75rem;
+
+            & .dxbl-navigation-filter {
+                border: none;
+                background: none;
+                width: 100%;
+
+                &.dxbl-text-edit {
+                    box-shadow: none;
+
+                    & > .dxbl-edit-btn-clear {
+                        padding: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    @include navigation-filter-mark();
+}

@@ -1,0 +1,13 @@
+@mixin button-focused-shadow($shadow) {
+    &:focus,
+    &.focus {
+        box-shadow: $shadow;
+    }
+
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled).active {
+        &:focus {
+            box-shadow: $shadow;
+        }
+    }
+}

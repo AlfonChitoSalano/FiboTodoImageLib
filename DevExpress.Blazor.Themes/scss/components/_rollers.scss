@@ -1,0 +1,146 @@
+@import "mixins/common";
+
+.dxbl-rollers-container {
+    --dxbl-roolers-container-padding-y: #{$dx-roolers-container-padding-y};
+    --dxbl-roolers-container-padding-x: #{$dx-roolers-container-padding-x};
+    --dxbl-rooler-item-padding-y: #{$dx-rooler-item-padding-y};
+    --dxbl-rooler-item-padding-x: #{$dx-rooler-item-padding-x};
+    --dxbl-rooler-title-padding-y: #{$dx-rooler-title-padding-y};
+    --dxbl-rooler-title-padding-x: #{$dx-rooler-title-padding-x};
+    --dxbl-rooler-title-font-weight: #{$dx-rooler-title-font-weight};
+
+    display: flex;
+    flex-flow: row nowrap;
+    padding: var(--dxbl-roolers-container-padding-y) var(--dxbl-roolers-container-padding-y);
+
+    .dxbl-roller-container {
+        display: inline-flex;
+        flex-flow: column nowrap;
+        flex: 1 1;
+        position: relative;
+
+        .dxbl-roller {
+            outline: 0;
+            overflow: hidden;
+            position: relative;
+            color: inherit;
+        }
+
+        .dxbl-roller-title {
+            font-size: 0.8125em;
+            font-weight: var(--dxbl-rooler-title-font-weight);
+            padding: var(--dxbl-rooler-title-padding-y) var(--dxbl-rooler-title-padding-x);
+            text-align: center;
+            opacity: $dx-rooler-title-opacity;
+        }
+    }
+
+    .dxbl-roller-item,
+    .dxbl-roller-after {
+        text-align: center;
+        padding: var(--dxbl-rooler-item-padding-y) var(--dxbl-rooler-item-padding-x);
+        will-change: transform, opacity;
+        white-space: nowrap;
+    }
+
+    .dxbl-roller-item,
+    .dxbl-roller-item.dxbl-roller-expander {
+        cursor: pointer;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+    }
+
+    .dxbl-roller-item.dxbl-roller-expander {
+        height: 0;
+        overflow: hidden;
+        visibility: hidden;
+        padding: 0 1rem;
+    }
+
+    .dxbl-roller-after {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+        transform: translateY(-50%);
+        border-color: currentcolor;
+        cursor: default;
+
+        & .dxbl-roller-item,
+        &::after {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 1;
+            font-weight: $dx-rooler-item-selection-font-weight;
+        }
+
+        &::after {
+            content: " ";
+            border-top: 1px solid currentcolor;
+            border-bottom: 1px solid currentcolor;
+            opacity: $dx-rooler-item-selection-opacity;
+            z-index: 2;
+        }
+    }
+
+    &.dxbl-roller-invalid-data .dxbl-roller-after > .dxbl-roller-item {
+        opacity: $dx-rooler-item-invalid-data-opacity;
+    }
+
+    .dxbl-roller:focus .dxbl-roller-after::after {
+        opacity: $dx-rooler-item-focus-opacity;
+    }
+}
+
+.dxbl-sm .dxbl-rollers-container {
+    --dxbl-roolers-container-padding-y: #{$dx-roolers-container-padding-y-sm};
+    --dxbl-roolers-container-padding-x: #{$dx-roolers-container-padding-x-sm};
+    --dxbl-rooler-item-padding-y: #{$dx-rooler-item-padding-y-sm};
+    --dxbl-rooler-item-padding-x: #{$dx-rooler-item-padding-x-sm};
+    --dxbl-rooler-title-padding-y: #{$dx-rooler-title-padding-y-sm};
+    --dxbl-rooler-title-padding-x: #{$dx-rooler-title-padding-x-sm};
+}
+
+.dxbl-lg .dxbl-rollers-container {
+    --dxbl-roolers-container-padding-y: #{$dx-roolers-container-padding-y-lg};
+    --dxbl-roolers-container-padding-x: #{$dx-roolers-container-padding-x-lg};
+    --dxbl-rooler-item-padding-y: #{$dx-rooler-item-padding-y-lg};
+    --dxbl-rooler-item-padding-x: #{$dx-rooler-item-padding-x-lg};
+    --dxbl-rooler-title-padding-y: #{$dx-rooler-title-padding-y-lg};
+    --dxbl-rooler-title-padding-x: #{$dx-rooler-title-padding-x-lg};
+}
+
+.dxbl-rollers-footer {
+    --dxbl-roolers-footer-bg: #{$dx-roolers-footer-bg};
+    --dxbl-roolers-footer-color: #{$dx-roolers-footer-color};
+    --dxbl-roolers-border-color: #{$dx-border-color}; // TODO use dropdown vars
+    --dxbl-roolers-border-style: #{$dx-border-style};
+    --dxbl-roolers-border-width: #{$dx-border-width};
+    --dxbl-roolers-footer-padding-y: #{$dx-roolers-footer-padding-y};
+    --dxbl-roolers-footer-padding-x: #{$dx-roolers-footer-padding-x};
+    --dxbl-roolers-footer-btn-spacing: #{$dx-roolers-footer-btn-spacing};
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--dxbl-roolers-footer-padding-y) var(--dxbl-roolers-footer-padding-x);
+    border-top: var(--dxbl-roolers-border-width) var(--dxbl-roolers-border-style) var(--dxbl-roolers-border-color);
+
+    @include panel-footer-style("--dxbl-roolers-footer-bg", "--dxbl-roolers-footer-color");
+}
+
+.dxbl-sm .dxbl-rollers-footer {
+    --dxbl-roolers-footer-padding-y: #{$dx-roolers-footer-padding-y-sm};
+    --dxbl-roolers-footer-padding-x: #{$dx-roolers-footer-padding-x-sm};
+}
+
+.dxbl-lg .dxbl-rollers-footer {
+    --dxbl-roolers-footer-padding-y: #{$dx-roolers-footer-padding-y-lg};
+    --dxbl-roolers-footer-padding-x: #{$dx-roolers-footer-padding-x-lg};
+}

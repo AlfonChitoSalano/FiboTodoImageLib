@@ -1,0 +1,146 @@
+@import "common";
+
+@mixin text-edit-focus-state() {
+    &:focus-within,
+    &.dxbl-focused {
+        @content;
+    }
+
+    &:has(:focus) {
+        @content;
+    }
+}
+
+@mixin text-edit-not-focus-state() {
+    &:not(:focus-within):not(.dxbl-focused) {
+        @content;
+    }
+}
+
+@mixin text-edit-state-disabled-style($bg-color-var, $color-var, $border-width-var: null, $root-bg-color-var: null) {
+    @include element-calculated-style($bg-color-var, $color-var, $dx-text-edit-disabled-bg,
+        $dx-text-edit-state-base-color, $dx-state-disabled-bg-alpha, $border-width-var, $root-bg-color-var);
+}
+
+@mixin text-edit-focus-style($color, $render-style) {
+    @include contextual-focus-style(
+        "--dxbl-text-edit-focus-shadow-color", "--dxbl-text-edit-focus-shadow-spread", "--dxbl-text-edit-focus-shadow-blur", "--dxbl-text-edit-focus-border-color",
+        $color, $render-style, $dx-text-edit-focus-shadow-size,
+        $dx-text-edit-focus-shadow-tint-amount, $dx-text-edit-focus-shadow-shade-amount,
+        $dx-text-edit-focus-border-tint-amount, $dx-text-edit-focus-border-shade-amount
+    );
+}
+
+@mixin text-edit-validation-status() {
+    .dxbl-edit-validation-status {
+        display: none;
+        align-items: center;
+        padding: var(--dxbl-text-edit-validation-status-padding-y) var(--dxbl-text-edit-validation-status-spacing) var(--dxbl-text-edit-validation-status-padding-y) var(--dxbl-text-edit-validation-status-padding-x); // stylelint-disable-line  max-line-length
+
+        > .dxbl-image {
+            display: none;
+        }
+    }
+
+    @include valid-state() {
+        @include text-edit-focus-style($dx-validation-valid-color, "success");
+
+        --dxbl-text-edit-border-color: var(--dxbl-text-edit-validation-valid-color);
+        --dxbl-text-edit-focus-border-color: var(--dxbl-text-edit-validation-valid-color);
+
+        .dxbl-edit-validation-status {
+            display: inline-flex;
+
+            & > .dxbl-image.dxbl-edit-validation-status-icon-valid {
+                display: inline-flex;
+                color: var(--dxbl-text-edit-validation-valid-color);
+            }
+        }
+    }
+
+    @include invalid-state() {
+        @include text-edit-focus-style($dx-validation-invalid-color, "danger");
+
+        --dxbl-text-edit-border-color: var(--dxbl-text-edit-validation-invalid-color);
+        --dxbl-text-edit-focus-border-color: var(--dxbl-text-edit-validation-invalid-color);
+
+        .dxbl-edit-validation-status {
+            display: inline-flex;
+
+            & > .dxbl-image.dxbl-edit-validation-status-icon-invalid {
+                display: inline-flex;
+                color: var(--dxbl-text-edit-validation-invalid-color);
+            }
+        }
+    }
+}
+
+@mixin text-edit-preloader() {
+    .dxbl-edit-preloader-container {
+        position: absolute;
+        padding: var(--dxbl-text-edit-preloader-padding-y) var(--dxbl-text-edit-preloader-padding-x);
+
+        & > .dxbl-edit-preloader {
+            height: var(--dxbl-text-edit-preloader-image-size);
+            width: var(--dxbl-text-edit-preloader-image-size);
+            margin: var(--dxbl-text-edit-preloader-image-margin-y) 0;
+            border: 3px transparent solid;
+            border-top: 3px currentcolor solid;
+            border-radius: 50%;
+            animation: dxbl-preloader-spin 1s infinite linear;
+            opacity: 0.5;
+        }
+
+        & > .dxbl-edit-preloader::before {
+            position: absolute;
+            content: "";
+            top: -3px;
+            left: -3px;
+            height: 16px;
+            width: 16px;
+            opacity: 0.3;
+            border: 3px currentcolor solid;
+            border-top: 3px transparent solid;
+            border-radius: 50%;
+        }
+
+        @keyframes dxbl-preloader-spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(359deg);
+            }
+        }
+
+        @keyframes dxbl-preloader-fadeout {
+            to {
+                opacity: 0;
+            }
+        }
+
+        &.dxbl-edit-preloader-initial {
+            visibility: hidden;
+        }
+
+        &.dxbl-edit-preloader-success {
+            animation: dxbl-preloader-fadeout 0.2s cubic-bezier(0.55, 0.09, 0.68, 0.53) forwards;
+        }
+    }
+}
+
+@mixin text-edit-default-btn() {
+    &.dxbl-edit-btn-dropdown,
+    &.dxbl-spin-btn-dec,
+    &.dxbl-spin-btn-inc,
+    &.dxbl-btn-icon {
+        @content;
+    }
+}
+
+@mixin text-edit-custom-btn() {
+    &:not(.dxbl-edit-btn-dropdown):not(.dxbl-spin-btn-dec):not(.dxbl-spin-btn-inc) {
+        @content;
+    }
+}

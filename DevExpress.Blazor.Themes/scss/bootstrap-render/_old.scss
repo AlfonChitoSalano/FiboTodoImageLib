@@ -1,0 +1,254 @@
+/* Common */
+
+.dxbs-position-relative {
+    position: relative;
+}
+
+/* Accessibility */
+.dxAIFE,
+.dxAIFME {
+    clip: rect(1px, 1px, 1px, 1px);
+    -webkit-clip-path: polygon(0 0);
+    /* clip-path: polygon(0 0); */
+}
+
+.dxAIFE {
+    height: 1px;
+    overflow: hidden;
+    position: absolute !important;
+}
+
+.dxAIFME {
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+/* GridView */
+.dxbs-gridview {
+    display: table;
+    width: 100%;
+}
+
+.dxbs-gridview > .card .dxbs-table {
+    margin-bottom: 0;
+}
+
+.dxbs-gridview > .card > .card-body > .card-body {
+    padding: 0;
+}
+
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td,
+.dxbs-gridview > .card .dxbs-table > thead > tr > th {
+    vertical-align: middle;
+    height: 100%;
+}
+
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.bg-primary .btn-link {
+    color: white;
+}
+
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-indent-cell {
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    text-align: center;
+}
+
+.dxbs-gridview > .card .dxbs-table > tbody > .dxbs-empty-data-row > td {
+    padding: 1em;
+    text-align: center;
+}
+
+.dxbs-empty-data-row {
+    opacity: 0.5;
+}
+
+/* non-data-header */
+.dxbs-gridview > .card .dxbs-table > thead > tr > th.dxbs-cmd-cell,
+.dxbs-gridview > .card .dxbs-table > thead > tr > th.dxbs-select-cell {
+    cursor: default;
+}
+
+/* command cell buttons */
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td.dxbs-cmd-cell > .dxbl-btn-link,
+.dxbs-gridview > .card .dxbs-table > thead > tr > th.dxbs-cmd-cell > .dxbl-btn-link {
+    border: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    vertical-align: baseline;
+}
+
+.dxbs-gridview > .card .dxbs-table > tbody > tr > td mark {
+    padding: 0;
+}
+
+.dxbs-gridview .dxbs-cmd-cell,
+.dxbs-gridview .dxbs-select-cell {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.dxbs-gridview .dxbs-loading {
+    display: inline-block;
+}
+
+/* Fixed layout */
+
+.dxbs-gridview .dxbs-fixed {
+    table-layout: fixed;
+}
+
+.dxbs-gridview .dxbs-fixed > thead > tr > th,
+.dxbs-gridview .dxbs-fixed > tbody > tr > td {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+.dxbs-gridview .dxbs-fixed > thead > tr > th {
+    text-overflow: ellipsis;
+}
+
+/* Scrolling */
+.dxbs-gridview > .card > .dxgvHSDC,
+.dxbs-gridview > .card > .dxgvCSD {
+    border-radius: inherit;
+    border-left: 0;
+    border-right: 0;
+    margin-bottom: 0;
+    box-shadow: none;
+    box-sizing: content-box;
+    display: block;
+    position: static;
+}
+
+.dxbs-gridview > .card > .dxgvHSDC:first-child,
+.dxbs-gridview > .card > .dxgvHSDC + .dxgvCSD:not(.dxbs-grid-hsd),
+.dxbs-gridview > .card > .dxgvCSD:first-child {  /*hidden*/
+    border-top: 0;
+}
+
+/* Borders */
+.dxbs-gridview > .card .dxbs-table > thead > tr:first-child > th,
+.dxbs-gridview > .card .dxbs-table > thead > tr:first-child > td {
+    border-top: 0;
+}
+
+.dxbs-gridview .dxbs-nlb,
+.dxbs-gridview > .card .dxbs-table > thead > tr > th:first-child,
+.dxbs-gridview > .card .dxbs-table > thead > tr > td:first-child {
+    border-left-style: none;
+}
+
+.dxbs-gridview .dxbs-nrb {
+    border-right: 0;
+}
+
+.dxbs-gridview > .card .dxbs-table > thead > tr > th,
+.dxbs-gridview > .card .dxbs-table > thead > tr > td {
+    border-bottom-width: 0;
+}
+
+.dxbs-gridview > .card > .dxgvCSD > table {
+    border-width: 0;
+}
+
+.dxbs-gridview > .card > .dxgvHSDC + .dxgvCSD:not(.dx-scrolling) > table > tbody > tr:first-child > td {
+    border-top: 0;
+}
+
+.dxbs-gridview.dxbs-vertical-scrollbar-visible:not(.dxbs-fm-details) > .card > .dxgvCSD:not(.dx-scrolling) > table > tbody > tr:last-child > td {
+    border-bottom: 0;
+}
+
+/* GridView and CardView headers (cells and blocks) */
+.dxbs-th.card {
+    margin: 0 0.5em 0 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.dxbs-th.card > .card-body {
+    padding: .3rem .75rem;
+}
+
+.dxbs-gridview > .card .dxbs-table > thead > tr > th,
+.dxbs-th.card > .card-body {
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.dxbs-gridview > .card .dxbs-table > thead > tr.dxbs-filter-row > td,
+.dxbs-th.card > .card-body.dxbs-noclick {
+    cursor: default;
+}
+
+.dxbs-th.card > .card-body > span {
+    font-weight: 600;
+}
+
+.dxbs-th.card > .card-body > span:not(:last-child) {
+    display: table-cell;
+    width: 99.9%;
+    vertical-align: middle;
+}
+
+.dxbs-gridview > .card .dxbs-table > thead > tr > th > button:not(.dxbs-cmd-btn),
+.dxbs-th.card > .card-body > button {
+    padding: 0 .2rem;
+    border-top: none;
+    border-bottom: none;
+}
+
+.dxbs-fixed-header-content {
+    display: flex;
+    display: -ms-flexbox;
+    align-items: center;
+    -ms-flex-align: center;
+}
+
+.dxbs-fixed-header-content > span {
+    flex-grow: 1;
+    font-weight: 600;
+}
+
+.dxbs-fixed-header-content > button {
+    padding: 0 .2rem;
+    text-decoration: none;
+    border-top: none;
+    border-bottom: none;
+}
+
+.dxbs-gridview .dxbs-fixed .dxbs-fixed-header-content > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dxbs-gridview td.table-active.bg-primary.text-white > .dxbl-checkbox > label {
+    mix-blend-mode: screen;
+}
+/* PopupControl */
+
+.dxbs-fast-nav.dropdown-menu,
+.dxbs-dropdown-area.dropdown-menu {
+    position: absolute;
+    margin-bottom: 0px;
+    padding: 0px;
+}
+
+.dxbs-gridview > .card {
+    display: block;
+}
+
+.dxbs-gridview .dxbs-th.card > .card-body {
+    display: flex;
+    display: -ms-flexbox;
+    flex-flow: row nowrap;
+    -ms-flex-flow: row nowrap;
+    align-items: center;
+    -ms-flex-align: center;
+}
+
+.dxbs-gridview .dxbs-th.card > .card-body > span:not(:last-child) {
+    display: inline-block;
+}

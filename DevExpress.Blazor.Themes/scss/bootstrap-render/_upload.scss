@@ -1,0 +1,80 @@
+
+.dxbs-uc .progress {
+    height: 1rem
+}
+.dxbs-uc .dxuc-file-list-view .progress {
+    height: 0.4375rem;
+}
+.dxbs-uc .progress-bar {
+    -webkit-transition: width .1s ease;
+    -o-transition: width .1s ease;
+    transition: width .1s ease;
+}
+.dxbs-uc .dxuc-button-container {
+    height: 3rem;
+}
+
+.dxbs-uc .dxuc-file-extension.badge {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 14px;
+    padding: 0.25em 0.4em;
+    font-size: 11px;
+}
+
+.dxbs-uc > .row > .col > .dxuc-file-view td {
+    border: none !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+.dxbs-uc > .dxuc-file-list-view .dxuc-file-view td {
+    border: none !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.dxuc-button-icon-container {
+    position: relative;
+    z-index: 1;
+    color: inherit;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+.dxuc-button-icon-container:hover:before {
+    content: " ";
+    position: absolute;
+    z-index: -1;
+    background-color: currentColor;
+    right: 2px;
+    opacity: 0.1;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+}
+
+.dxuc-hide,
+.dxuc-file-container {
+    display: none;
+}
+
+@media (min-width: 600px) {
+    .dxuc-file-container {
+        display: inherit;
+    }
+}
+
+.dxuc-cancel-icon,
+.dxuc-pause-icon,
+.dxuc-reload-icon,
+.dxuc-continue-icon,
+.dxuc-upload-icon {
+    cursor: pointer;
+}
+
+.dxbl-image.dxuc-file-icon {
+    width: 48px;
+    height: 48px;
+}

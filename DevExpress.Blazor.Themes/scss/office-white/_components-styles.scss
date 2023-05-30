@@ -1,0 +1,41 @@
+// Buttons
+.dxbl-btn-secondary {
+    --dxbl-btn-bg: white;
+    --dxbl-btn-color: #{$dx-gray-900};
+    --dxbl-btn-border-color: white;
+    --dxbl-btn-active-bg: #{$dx-gray-300};
+    --dxbl-btn-active-color: #{$dx-gray-900};
+    --dxbl-btn-active-border-color: #{$dx-gray-300};
+    --dxbl-btn-hover-bg: #{$dx-gray-100};
+    --dxbl-btn-hover-color: #{$dx-gray-900};
+    --dxbl-btn-hover-border-color: #{$dx-gray-100};
+    --dxbl-btn-disabled-bg: white;
+    --dxbl-btn-disabled-color: #{$dx-gray-600};
+    --dxbl-btn-disabled-border-color: white;
+
+    --dxbl-btn-box-shadow: #{$dx-btn-special-box-shadow};
+}
+
+.dxbl-btn-outline-secondary {
+    --dxbl-btn-color: #{$dx-gray-900};
+    --dxbl-btn-border-color: #{$dx-gray-900};
+    --dxbl-btn-active-bg: #{$dx-gray-300};
+    --dxbl-btn-active-color: #{$dx-gray-900};
+    --dxbl-btn-active-border-color: #{$dx-gray-900};
+    --dxbl-btn-hover-bg: #{$dx-gray-100};
+    --dxbl-btn-hover-color: #{$dx-gray-900};
+    --dxbl-btn-hover-border-color: #{$dx-gray-900};
+}
+
+.dxbl-btn-text-secondary {
+    --dxbl-btn-active-bg: #{$dx-gray-300};
+    --dxbl-btn-active-color: #{$dx-gray-900};
+    --dxbl-btn-active-border-color: #{$dx-gray-900};
+    --dxbl-btn-hover-bg: #{$dx-gray-100};
+    --dxbl-btn-hover-color: #{$dx-gray-900};
+    --dxbl-btn-hover-border-color: #{$dx-gray-900};
+}
+
+.dxbl-btn-light {
+    --dxbl-btn-box-shadow: #{$dx-btn-special-box-shadow};
+}

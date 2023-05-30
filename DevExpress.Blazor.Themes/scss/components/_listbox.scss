@@ -1,0 +1,267 @@
+@import "mixins/common";
+
+.dxbl-listbox {
+    --dxbl-listbox-font-family: #{$dx-listbox-font-family};
+    --dxbl-listbox-font-size: #{$dx-listbox-font-size};
+    --dxbl-listbox-line-height: #{$dx-listbox-line-height};
+    --dxbl-listbox-bg: #{$dx-listbox-bg};
+    --dxbl-listbox-color: #{$dx-listbox-color};
+    --dxbl-listbox-border-width: #{$dx-listbox-border-width};
+    --dxbl-listbox-border-style: #{$dx-listbox-border-style};
+    --dxbl-listbox-border-color: #{$dx-listbox-border-color};
+    --dxbl-listbox-border-radius: #{$dx-listbox-border-radius};
+    --dxbl-listbox-readonly-bg: #{$dx-listbox-disabled-bg};
+    --dxbl-listbox-readonly-color: #{$dx-listbox-disabled-color};
+    --dxbl-listbox-disabled-bg: #{$dx-listbox-disabled-bg};
+    --dxbl-listbox-disabled-color: #{$dx-listbox-disabled-color};
+    --dxbl-listbox-disabled-opacity: #{$dx-listbox-disabled-opacity};
+    --dxbl-listbox-item-border-color: #{$dx-listbox-item-border-color};
+    --dxbl-listbox-item-border-style: #{$dx-listbox-item-border-style};
+    --dxbl-listbox-item-border-width: #{$dx-listbox-item-border-width};
+    --dxbl-listbox-item-selected-bg: #{$dx-listbox-item-selected-bg};
+    --dxbl-listbox-item-selected-color: #{$dx-listbox-item-selected-color};
+    --dxbl-listbox-item-multi-selected-bg: #{$dx-listbox-item-multi-selected-bg};
+    --dxbl-listbox-item-multi-selected-color: #{$dx-listbox-item-multi-selected-color};
+    --dxbl-listbox-item-active-bg: #{$dx-listbox-item-active-bg};
+    --dxbl-listbox-item-active-color: #{$dx-listbox-item-active-color};
+    --dxbl-listbox-item-hover-bg: #{$dx-listbox-item-hover-bg};
+    --dxbl-listbox-item-hover-color: #{$dx-listbox-item-hover-color};
+    --dxbl-listbox-item-selected-hover-bg: #{$dx-listbox-item-selected-hover-bg};
+    --dxbl-listbox-item-selected-hover-color: #{$dx-listbox-item-selected-hover-color};
+    --dxbl-listbox-item-multi-selected-hover-bg: #{$dx-listbox-item-multi-selected-hover-bg};
+    --dxbl-listbox-item-multi-selected-hover-color: #{$dx-listbox-item-multi-selected-hover-color};
+    --dxbl-listbox-item-disabled-bg: #{$dx-listbox-item-disabled-bg};
+    --dxbl-listbox-item-disabled-color: #{$dx-listbox-item-disabled-color};
+    --dxbl-listbox-item-padding-x: #{$dx-listbox-item-padding-x};
+    --dxbl-listbox-item-padding-y: #{$dx-listbox-item-padding-y};
+    --dxbl-listbox-empty-item-padding-x: #{$dx-listbox-empty-item-padding-x};
+    --dxbl-listbox-empty-item-padding-y: #{$dx-listbox-empty-item-padding-y};
+    --dxbl-listbox-column-header-bg: #{$dx-listbox-column-header-bg};
+    --dxbl-listbox-column-header-color: #{$dx-listbox-column-header-color};
+    --dxbl-listbox-validation-valid-color: #{$dx-validation-valid-color};
+    --dxbl-listbox-validation-invalid-color: #{$dx-validation-invalid-color};
+
+    display: flex;
+    flex-direction: column;
+    font-family: var(--dxbl-listbox-font-family);
+    font-size: var(--dxbl-listbox-font-size);
+    line-height: var(--dxbl-listbox-line-height);
+    background-color: var(--dxbl-listbox-bg);
+    border: var(--dxbl-listbox-border-width) var(--dxbl-listbox-border-style) var(--dxbl-listbox-border-color);
+    border-radius: var(--dxbl-listbox-border-radius);
+    color: var(--dxbl-listbox-color);
+    height: $dx-listbox-default-height;
+
+    @include safari-line-height("--dxbl-listbox-line-height", $dx-listbox-line-height-safari);
+
+    &:not([is-multiple-columns]) {
+        overflow-y: auto;
+
+        & > div {
+            display: flex;
+            flex-shrink: 0;
+        }
+    }
+
+    & > ul {
+        display: flex;
+        flex-direction: column;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        z-index: 0;
+        min-width: 100%;
+        width: fit-content;
+
+        & > li {
+            display: block;
+        }
+    }
+
+    div.dxbl-listbox-item {
+        border: var(--dxbl-listbox-item-border-width) var(--dxbl-listbox-item-border-style) var(--dxbl-listbox-item-border-color);
+        padding: var(--dxbl-listbox-item-padding-y) var(--dxbl-listbox-item-padding-x);
+
+        &.dxbl-listbox-item-loading::before {
+            content: "|";
+            display: inline-flex;
+            min-width: 4rem;
+            width: 100%;
+            background-color: currentcolor;
+            opacity: 0;
+            border-radius: 10rem;
+            animation: 1s linear 0.35s infinite alternate both running dynamic_opacity;
+        }
+    }
+
+    div.dxbl-listbox-empty-data-item,
+    tr.dxbl-listbox-empty-data-item > td {
+        opacity: #{$dx-state-disabled-opacity};
+        padding: var(--dxbl-listbox-empty-item-padding-y) var(--dxbl-listbox-empty-item-padding-x) !important; // stylelint-disable-line declaration-no-important
+        text-align: center;
+    }
+
+    div.dxbl-listbox-item-selected,
+    tr.dxbl-listbox-item-selected > td {
+        @include state-selected-primary-style("--dxbl-listbox-item-selected-bg", "--dxbl-listbox-item-selected-color", "--dxbl-listbox-item-border-width");
+    }
+
+    &.dxbl-listbox-multi-select {
+        div.dxbl-listbox-item-selected,
+        tr.dxbl-listbox-item-selected > td {
+            @include state-selected-style("--dxbl-listbox-item-multi-selected-bg", "--dxbl-listbox-item-multi-selected-color", "--dxbl-listbox-item-border-width");
+        }
+    }
+
+    div.dxbl-listbox-item-active:not(.dxbl-listbox-item-selected),
+    tr.dxbl-listbox-item-active:not(.dxbl-listbox-item-selected) > td {
+        @include state-selected-style("--dxbl-listbox-item-active-bg", "--dxbl-listbox-item-active-color", "--dxbl-listbox-item-border-width");
+    }
+
+    &.dxbl-listbox-checked {
+        &:not([is-multiple-columns]) {
+            --dxbl-listbox-item-padding-y: 0;
+        }
+
+        .dxbl-checkbox {
+            --dxbl-checkbox-border-width: 0;
+
+            & > label.dxbl-text {
+                pointer-events: none;
+            }
+        }
+    }
+
+    @include not-disabled-state() {
+        @include not-readonly-state() {
+            .dxbl-listbox-item:not(.dxbl-listbox-item-disabled) {
+                cursor: pointer;
+                pointer-events: auto;
+            }
+
+            div.dxbl-listbox-item-disabled,
+            tr.dxbl-listbox-item-disabled > td {
+                @include state-disabled-style("--dxbl-listbox-item-disabled-bg", "--dxbl-listbox-item-disabled-color", "--dxbl-listbox-item-border-width");
+
+                opacity: var(--dxbl-listbox-disabled-opacity);
+            }
+
+            div.dxbl-listbox-item,
+            tr.dxbl-listbox-item {
+                @include hover-state() {
+                    &:not(.dxbl-listbox-item-selected):not(.dxbl-listbox-item-disabled):not(.dxbl-listbox-empty-data-item):not(tr),
+                    &:not(.dxbl-listbox-item-selected):not(.dxbl-listbox-item-disabled):not(.dxbl-listbox-empty-data-item) > td {
+                        @include state-hover-style("--dxbl-listbox-item-hover-bg", "--dxbl-listbox-item-hover-color", "--dxbl-listbox-item-border-width");
+                    }
+
+                    &.dxbl-listbox-item-selected:not(.dxbl-listbox-item-disabled):not(.dxbl-listbox-empty-data-item):not(tr),
+                    &.dxbl-listbox-item-selected:not(.dxbl-listbox-item-disabled):not(.dxbl-listbox-empty-data-item) > td {
+                        @include state-selected-primary-hover-style("--dxbl-listbox-item-selected-hover-bg", "--dxbl-listbox-item-selected-hover-color", "--dxbl-listbox-item-border-width");
+                    }
+                }
+            }
+
+            &.dxbl-listbox-multi-select {
+                div.dxbl-listbox-item,
+                tr.dxbl-listbox-item {
+                    @include hover-state() {
+                        &.dxbl-listbox-item-selected:not(.dxbl-listbox-item-disabled):not(.dxbl-listbox-empty-data-item):not(tr),
+                        &.dxbl-listbox-item-selected:not(.dxbl-listbox-item-disabled):not(.dxbl-listbox-empty-data-item) > td {
+                            @include state-selected-hover-style("--dxbl-listbox-item-multi-selected-hover-bg", "--dxbl-listbox-item-multi-selected-hover-color", "--dxbl-listbox-item-border-width");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @include readonly-state() {
+        & > * {
+            @include state-disabled-style("--dxbl-listbox-readonly-bg", "--dxbl-listbox-readonly-color");
+        }
+    }
+
+    @include disabled-state() {
+        & > * {
+            @include state-disabled-style("--dxbl-listbox-disabled-bg", "--dxbl-listbox-disabled-color");
+
+            opacity: var(--dxbl-listbox-disabled-opacity);
+        }
+    }
+
+    // stylelint-disable selector-class-pattern
+    & > .dxbs-gridview {
+        .card {
+            background-color: transparent;
+        }
+
+        .dxgvHSDC,
+        .dxgvCSD {
+            border-bottom: 0;
+        }
+
+        .dxbs-grid-vsd {
+            height: auto;
+        }
+
+        .dxbs-empty-data-row {
+            opacity: 1;
+        }
+
+        .table {
+            border-color: var(--dxbl-listbox-border-color);
+            position: relative;
+            z-index: 0;
+
+            & > thead > tr > th {
+                @include panel-header-style("--dxbl-listbox-column-header-bg", "--dxbl-listbox-column-header-color");
+
+                cursor: default;
+            }
+
+            & > thead > tr > th,
+            & > tbody > tr > td {
+                font-family: var(--dxbl-listbox-font-family);
+                font-size: var(--dxbl-listbox-font-size);
+                line-height: var(--dxbl-listbox-line-height);
+                padding: var(--dxbl-listbox-item-padding-y) var(--dxbl-listbox-item-padding-x);
+
+                &.dxbs-select-cell {
+                    padding-top: 0;
+                    padding-bottom: 0;
+                }
+            }
+        }
+    }
+
+    // stylelint-enable selector-class-pattern
+
+    @include valid-state() {
+        --dxbl-listbox-border-color: var(--dxbl-listbox-validation-valid-color);
+    }
+
+    @include invalid-state() {
+        --dxbl-listbox-border-color: var(--dxbl-listbox-validation-invalid-color);
+    }
+
+    &.dxbl-sm {
+        --dxbl-listbox-font-size: #{$dx-listbox-font-size-sm};
+        --dxbl-listbox-line-height: #{$dx-listbox-line-height-sm};
+        --dxbl-listbox-border-radius: #{$dx-listbox-border-radius-sm};
+        --dxbl-listbox-item-padding-x: #{$dx-listbox-item-padding-x-sm};
+        --dxbl-listbox-item-padding-y: #{$dx-listbox-item-padding-y-sm};
+        --dxbl-listbox-empty-item-padding-x: #{$dx-listbox-empty-item-padding-x-sm};
+        --dxbl-listbox-empty-item-padding-y: #{$dx-listbox-empty-item-padding-y-sm};
+    }
+
+    &.dxbl-lg {
+        --dxbl-listbox-font-size: #{$dx-listbox-font-size-lg};
+        --dxbl-listbox-line-height: #{$dx-listbox-line-height-lg};
+        --dxbl-listbox-border-radius: #{$dx-listbox-border-radius-lg};
+        --dxbl-listbox-item-padding-x: #{$dx-listbox-item-padding-x-lg};
+        --dxbl-listbox-item-padding-y: #{$dx-listbox-item-padding-y-lg};
+        --dxbl-listbox-empty-item-padding-x: #{$dx-listbox-empty-item-padding-x-lg};
+        --dxbl-listbox-empty-item-padding-y: #{$dx-listbox-empty-item-padding-y-lg};
+    }
+}

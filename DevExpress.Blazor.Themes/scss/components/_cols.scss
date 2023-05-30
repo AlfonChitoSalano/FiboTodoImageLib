@@ -1,0 +1,23 @@
+﻿@import "mixins/cols";
+
+.dxbl-row {
+    --dxbl-row-item-spacing-x: #{$dx-row-item-spacing-x};
+    --dxbl-row-item-spacing-y: #{$dx-row-item-spacing-y};
+
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * var(--dxbl-row-item-spacing-y));
+    margin-right: calc(-0.5 * var(--dxbl-row-item-spacing-x));
+    margin-left: calc(-0.5 * var(--dxbl-row-item-spacing-x));
+}
+
+.dxbl-col {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--dxbl-row-item-spacing-x) * 0.5);
+    padding-left: calc(var(--dxbl-row-item-spacing-x) * 0.5);
+    margin-top: var(--dxbl-row-item-spacing-y);
+}
+
+@include make-columns();

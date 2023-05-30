@@ -1,0 +1,32 @@
+.dxbl-btn-tool.dxbl-btn-secondary,
+.dxbl-btn-split > .dxbl-btn-tool.dxbl-btn-secondary {
+    @include button-secondary-tool-style();
+    @include button-focus-style($dx-primary, "primary");
+}
+
+.dxbl-btn-tool.dxbl-btn-outline-secondary,
+.dxbl-btn-split > .dxbl-btn-tool.dxbl-btn-outline-secondary {
+    @include button-secondary-outline-tool-style();
+    @include button-focus-style($dx-primary, "primary");
+}
+
+.dxbl-btn-tool.dxbl-btn-text-secondary,
+.dxbl-btn-split > .dxbl-btn-tool.dxbl-btn-text-secondary {
+    @include button-secondary-text-tool-style();
+    @include button-focus-style($dx-primary, "primary");
+}
+
+.dxbl-btn-tool,
+.dxbl-btn-split > .dxbl-btn-tool {
+    @include button-tool-paddings();
+}
+
+.dxbl-btn-tool.dxbl-sm,
+.dxbl-btn-split > .dxbl-btn-tool.dxbl-sm {
+    @include button-tool-paddings-sm();
+}
+
+.dxbl-btn-tool.dxbl-lg,
+.dxbl-btn-split > .dxbl-btn-tool.dxbl-lg {
+    @include button-tool-paddings-lg();
+}

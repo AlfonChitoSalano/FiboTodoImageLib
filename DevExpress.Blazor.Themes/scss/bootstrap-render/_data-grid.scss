@@ -1,0 +1,342 @@
+@import 'dx-blazor.params.scss';
+
+.dxbs-gridview {
+    & .dxbs-page-size-selector {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        & .dxbl-text-edit {
+            margin-left: 4px;
+            width: 5em;
+        }
+
+        & .col-form-label {
+            margin-right: 4px;
+        }
+    }
+
+    & .btn-toggle.dxbs-cmd-btn {
+        width: unset;
+        height: unset;
+        padding: 0;
+        position: relative;
+        z-index: 1;
+        color: inherit;
+        border: 0;
+    }
+
+    & .dxbs-toggle-cell {
+        vertical-align: top !important; /*review and drop all !importants*/
+    }
+
+    & .dxbs-table > thead> tr > th,
+    & .dxbs-table > tbody > tr > td {
+        .dxbl-checkbox {
+            border: 0;
+
+            .dxbl-checkbox-check-element {
+                margin: 0;
+            }
+        }
+    }
+
+    & .dxbs-data-row > td.table-active {
+        background-image: repeating-linear-gradient(0, var(--selection-bg), var(--selection-bg));
+    }
+    & .dxbs-data-row > .dxbs-toggle-cell { // temp, merge with .dxbs-toggle-cell after T953211
+        vertical-align: middle !important; /*review and drop all !importants*/
+        border-bottom: 0;
+    }
+
+    & .dxbs-toggle-cell,
+    & .dxbs-grid-group-cell-offset {
+        border-right: 0;
+    }
+
+    & .dxbs-toggle-cell + td,
+    & .dxbs-grid-group-cell-offset + .dxbs-grid-group-cell-offset {
+        border-left: 0;
+    }
+
+    & .dxbs-grid-cols-togglebtn {
+        min-width: 1.5rem;
+        width: var(--button-w, 1.5rem);
+    }
+
+    & .dxbs-grid-group-span-row {
+        visibility: hidden;
+    }
+
+    & .dxbs-grid-group-span-row > td {
+        padding: 0;
+        border: 0;
+    }
+
+
+    & > .card > .card-body {
+        padding: 0.5em;
+    }
+
+    & .dxbs-grid-cell-loading::before {
+        content: "|";
+        visibility: hidden;
+        display: inline-flex;
+        width: 0;
+        font-size: inherit;
+        overflow: hidden;
+    }
+
+    & .dxbs-select-cell > .custom-control:only-child {
+        display: inline-block;
+        margin-right: -0.5rem;
+
+        & .custom-control-label {
+            vertical-align: top;
+            cursor: pointer;
+        }
+
+        & input:disabled ~ .custom-control-label {
+            cursor: not-allowed;
+        }
+    }
+
+    & .dxbs-fixed > thead > tr > th.dxbs-select-cell,
+    & .dxbs-fixed > tbody > tr > td.dxbs-select-cell {
+        text-overflow: clip;
+
+        & > .custom-control:only-child > .custom-control-input {
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 0;
+        }
+    }
+
+    th.dxbs-grid-checkbox-col {
+        text-align: center;
+    }
+
+    > .card .dxbs-table > tbody > tr {
+        > td.dx-grid-summary-cell:not(:first-child) {
+            border-left-style: hidden;
+        }
+
+        > td.dx-grid-summary-cell:not(:last-child) {
+            border-right-style: hidden;
+        }
+
+        > td.dx-grid-summary-cell {
+            font-weight: 700;
+            position: relative;
+            vertical-align: top;
+            /*max-width: 1px;*/
+            & div {
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                display: block;
+            }
+        }
+    }
+
+    & td.dx-grid-summary-cell:before {
+        content: "";
+        background-color: $ColorGray;
+        position: absolute;
+        opacity: 0.035;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+
+    & > .card {
+        & > .dxbs-table,
+        & > * > .dxbs-table {
+            & > thead > tr:last-child {
+                & > td,
+                & > th {
+                    border-bottom-width: 1px;
+                }
+            }
+        }
+
+        &,
+        & > div:not(.dxgvHSDC):not(.dxgvCSD) {
+            & > .table-bordered {
+                border-left-width: 0;
+                border-right-width: 0;
+
+                & > thead {
+                    border-color: inherit;
+                }
+                & > thead > tr,
+                & > tbody > tr,
+                & > tfoot > tr {
+                    & > th:last-child,
+                    & > td:last-child {
+                        border-right: 0;
+                    }
+                }
+
+                &:last-child {
+                    &,
+                    & > tbody:last-child > tr:last-child > td {
+                        border-bottom-width: 0;
+                    }
+                }
+            }
+        }
+
+        &,
+        & > div:not(.dxgvHSDC):not(.dxgvCSD):not(.dxbs-grid-gph) {
+            & > .table-bordered {
+                &:first-child {
+                    &,
+                    & > thead > tr:first-child > th,
+                    & > tbody:first-child > tr:first-child > td {
+                        border-top-width: 0;
+                    }
+                }
+            }
+        }
+
+        &,
+        & > .card,
+        .dxbs-grid-edit-form > .dxbl-fl .row > div {
+            position: static;
+        }
+
+        & > .dxgvHSDC.card,
+        & > .dxgvCSD.card {
+            &:not(:first-child) {
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+            }
+
+            &:not(:last-child) {
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+        }
+
+        .dxbs-grid-header-container {
+            > .dxbs-grid-fixed-table {
+                position: absolute;
+            }
+        }
+    }
+
+    .dx-btn.btn-link {
+        &:focus,
+        &.focus,
+        &.active,
+        &:active {
+            box-shadow: none !important;
+        }
+    }
+}
+
+.dxbs-table > tbody > tr > td.dx-rowtemplate-padding {
+    padding: 0;
+}
+
+.dxbs-fixed > tbody > tr > td.dxbs-grid-edit-form {
+    overflow: visible;
+}
+
+.dxbs-gridview > .card > .card-header {
+    padding: 0.375rem !important;
+}
+
+@media (max-width: 767px), (hover: none) {
+    .dxbs-group-panel-container > .dxbs-group-panel {
+        white-space: nowrap;
+        overflow-x: hidden;
+    }
+
+    .dxbs-group-panel-container {
+        display: grid;
+    }
+}
+
+.dxbs-gridview .dxbs-fixed-header-content .dxbs-sort-order-indicator,
+.dxbs-gridview .dxbs-group-panel-container .dxbs-group-panel .dxbs-sort-order-indicator {
+    display: inline-block;
+    border: 0;
+    padding: 0;
+    color: inherit;
+    margin-left: 0.5em;
+}
+
+.dxbs-gridview .dxbs-fixed-header-content .dxbs-sort-order-indicator > .dxbl-image,
+.dxbs-gridview .dxbs-group-panel-container .dxbs-group-panel .dxbs-sort-order-indicator > .dxbl-image {
+    display: block;
+}
+
+.dxbs-gridview .dxbs-group-panel-container .dxbs-group-panel > .card > .card-body > span[data-toggle="gridview-column-sort"],
+.dx-dragging-state > .card-body > span[data-toggle="gridview-column-sort"],
+.dx-dragging-state > .card-body > .dxbs-sort-order-indicator {
+    color: inherit;
+}
+
+.dxbs-gridview.dxbs-has-vertical-scrollbar:not(.dxbs-vertical-scrollbar-visible) > .card > .dxgvHSDC > table > thead > tr > th:last-child,
+.dxbs-gridview.dxbs-has-vertical-scrollbar:not(.dxbs-vertical-scrollbar-visible) > .card > .dxgvCSD > table > tbody > tr > td:last-child {
+    border-right-width: 0;
+}
+.dxbs-gridview > .card > .dxbs-grid-vsd > table > tbody > tr > td.dx-grid-summary-cell
+{
+    position: sticky;
+    bottom: 0;
+    z-index: inherit;
+}
+.dxbs-popup-edit-row,
+.dxbs-popup-edit-row > td {
+    padding: 0;
+    background: none;
+    outline: none;
+    box-shadow: none;
+    max-height: 0;
+    min-height: 0;
+}
+
+.dxbs-popup-edit-row,
+.dxbs-popup-edit-row > td,
+.dxbs-popup-edit-row + tr,
+.dxbs-popup-edit-row + tr > td {
+    border-width: 0 !important;
+    border-style: solid !important;
+}
+
+.dxbs-grid-pager {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+
+    & .pagination {
+        margin: 0;
+
+        & > li > button:not(.disabled),
+        & > li > div.page-link:not(.disabled){
+            cursor: pointer;
+        }
+    }
+}
+
+
+.dxbs-gridview .dxbs-editform {
+
+    & .dxbs-datagrid-inplace-edit-area {
+        overflow: hidden;
+        width: 100%;
+
+        & > div {
+            padding: 1em 0.5em;
+            max-width: var(--component-width);
+
+            will-change: transform;
+            transform: translateX(var(--scroll-left));
+        }
+    }
+}

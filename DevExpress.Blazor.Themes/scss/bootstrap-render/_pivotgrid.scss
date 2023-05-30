@@ -1,0 +1,140 @@
+/** Blazor PivotGrid **/
+.dx-pivotgrid.card {
+    user-select: none;
+    overflow: auto;
+    border-right-width: 0;
+    border-bottom-width: 0;
+}
+
+.dx-pivotgrid table {
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 0;
+}
+
+.dx-pivotgrid table,
+.dx-pivotgrid thead,
+.dx-pivotgrid tbody,
+.dx-pivotgrid tr,
+.dx-pivotgrid .table tr td,
+.dx-pivotgrid .table tr th,
+.dx-pivotgrid .dxpg-container {
+    border-color: inherit;
+}
+
+.dx-pivotgrid .table td,
+.dx-pivotgrid .table th {
+    border-style: none;
+    border-width: 0;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+.dx-pivotgrid .table thead th.dxpg-area-data {
+    border-style: none;
+}
+
+.dx-pivotgrid .table thead th.dxpg-area-row {
+    vertical-align: bottom;
+}
+
+.dx-pivotgrid .table .dxpg-data {
+    text-align: right;
+}
+
+.dx-pivotgrid .table tr th,
+.dx-pivotgrid .table tr td,
+.dxpg-total-text {
+    white-space: nowrap;
+    font-weight: inherit;
+    padding: 0.5em 1em;
+    vertical-align: top;
+    height: 100%;
+    position: relative;
+}
+
+th[rowspan] .dxpg-total-text {
+    position: absolute;
+}
+
+.dx-pivotgrid .table tr th.dxpg-area-column {
+    padding-left: 0;
+}
+
+.dx-pivotgrid .table tr th.dxpg-area-row,
+.dx-pivotgrid .table tr th.dxpg-area-data,
+.dx-pivotgrid .table tfoot tr td {
+    padding-left: 0.5em;
+}
+
+.dx-pivotgrid .table tr .dxpg-npc {
+    padding: 0;
+}
+
+.dx-pivotgrid .dxpg-header .dxbl-btn {
+    color: inherit;
+    border-width: 1px;
+    text-align: left;
+    text-decoration: none;
+    width: 100%;
+    pointer-events: auto;
+    display: inline-block;
+}
+
+.dx-pivotgrid .dxpg-field-cell .dxbl-btn {
+    color: inherit;
+    border-radius: 0;
+    border-color: inherit;
+    border-style: solid;
+    border-width: 1px;
+    font-weight: 600;
+    display: inline-block;
+
+    span:not(.dxbl-image) {
+        text-decoration: none;
+    }
+
+    &:not(.dxbl-disabled):not(:disabled):hover {
+        border-radius: 0;
+        border-color: inherit;
+        border-style: solid;
+    }
+}
+
+.dx-pivotgrid .dxpg-field-cell .dxbl-btn,
+.dx-pivotgrid .dxpg-header .dxbl-btn {
+    & > span {
+        vertical-align: middle;
+    }
+}
+
+.dx-pivotgrid .dxpg-npc,
+.dx-pivotgrid .dxpg-header,
+.dx-pivotgrid .dxpg-field-cell {
+    .dxbl-btn {
+        &:focus,
+        &.focus,
+        &.active,
+        &:active {
+            box-shadow: none !important;
+        }
+    }
+}
+
+.dx-pivotgrid .dxpg-field-cell .dxbl-btn .image {
+    margin-left: 0.5rem;
+}
+
+.dx-pivotgrid .dxpg-field-cell .dxbl-btn.inactive {
+    cursor: default;
+    color: inherit;
+    text-decoration: none;
+}
+
+.dxpg-total-text {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}

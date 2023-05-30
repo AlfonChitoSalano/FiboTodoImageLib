@@ -82,9 +82,14 @@ a, .btn-link {
 .upload-btn {
     background-color: white;
     color: black;
-    width: 100px;
+    width:100px;
+    border: 1px;
     border-color: black;
     border-radius: 20px;
+}
+
+.upload-btn:hover {
+    background-color: #e6e6e6;
 }
 
 button {

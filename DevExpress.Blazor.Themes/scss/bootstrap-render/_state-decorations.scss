@@ -1,0 +1,45 @@
+@mixin _backdrop_base {
+    content: " ";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background-color: currentColor;
+    left: 0;
+    top: 0;
+}
+
+%_backdrop {
+    @include _backdrop_base;
+    opacity: 0.1;
+}
+
+%_backdrop_focus_hover {
+    opacity: 0.2;
+}
+
+@mixin state_backdrop($selector, $attributes, $backdrop_postfix: "", $has_focus_state: true) {
+    #{$selector} {
+        &:hover#{$backdrop_postfix}:before {
+            @extend %_backdrop;
+
+            @each $name, $value in $attributes {
+                #{$name}: $value;
+            }
+        }
+
+        @if ($has_focus_state) {
+            &:focus#{$backdrop_postfix}:before {
+                @extend %_backdrop;
+
+                @each $name, $value in $attributes {
+                    #{$name}: $value;
+                }
+            }
+
+            &:focus:hover#{$backdrop_postfix}:before {
+                @extend %_backdrop_focus_hover;
+            }
+        }
+    }
+}

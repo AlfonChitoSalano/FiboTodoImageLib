@@ -1,0 +1,20 @@
+.dxbl-btn-container {
+    --dxbl-btn-container-padding-x: #{$dx-btn-container-padding-x};
+    --dxbl-btn-container-padding-y: #{$dx-btn-container-padding-y};
+
+    padding: var(--dxbl-btn-container-padding-y) var(--dxbl-btn-container-padding-x) 0 var(--dxbl-btn-container-padding-x);
+
+    & > * {
+        margin-bottom: var(--dxbl-btn-container-padding-y);
+    }
+
+    &.dxbl-sm {
+        --dxbl-btn-container-padding-x: #{$dx-btn-container-padding-x-sm};
+        --dxbl-btn-container-padding-y: #{$dx-btn-container-padding-y-sm};
+    }
+
+    &.dxbl-lg {
+        --dxbl-btn-container-padding-x: #{$dx-btn-container-padding-x-lg};
+        --dxbl-btn-container-padding-y: #{$dx-btn-container-padding-y-lg};
+    }
+}

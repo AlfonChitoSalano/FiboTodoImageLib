@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>DevExpress.Blazor.Themes</RootNamespace>
+    <AppendTargetFrameworkToOutputPath>False</AppendTargetFrameworkToOutputPath>
+    <EnableDefaultItems>False</EnableDefaultItems>
+  </PropertyGroup>
+  <PropertyGroup>
+    <_PowershellCmdName Condition="$([MSBuild]::IsOSPlatform('OSX'))">pwsh</_PowershellCmdName>
+    <_PowershellCmdName Condition="$([MSBuild]::IsOSPlatform('Windows'))">powershell.exe</_PowershellCmdName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="NpmUtils.ps1" />
+    <Content Include="RestoreNpm.ps1" />
+    <Content Include="scss\**\*.scss" />
+    <Content Include="gulpfile.js" />
+    <Content Include="package.json" />
+    <Content Include="package-lock.json" />
+    <Content Include=".stylelintrc.json" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VsNodeJsPath>$(MSBuildToolsPath)\..\..\Microsoft\VisualStudio\NodeJs\node.exe</VsNodeJsPath>
+    <VsNpmPath>$(MSBuildToolsPath)\..\..\Microsoft\VisualStudio\NodeJs\npm.cmd</VsNpmPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="Exists('$(VsNodeJsPath)')">
+    <NodeJsPath>"$(VsNodeJsPath)"</NodeJsPath>
+    <NpmPath>"$(VsNpmPath)"</NpmPath>
+    <VsNode>True</VsNode>
+  </PropertyGroup>
+  <PropertyGroup Condition="!Exists('$(VsNodeJsPath)')">
+    <NodeJsPath>node</NodeJsPath>
+    <NpmPath>npm</NpmPath>
+    <VsNode>False</VsNode>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NpmPrefixPath>"$(MSBuildProjectDirectory)"</NpmPrefixPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <WwwRootFiles Include="$(ProjectDir)wwwroot\**\*.*" />
+  </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\Bin\Framework\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\Bin\Framework\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot" />
+  </ItemGroup>
+  <Target Name="PreBuild" BeforeTargets="BeforeBuild">
+    <Exec Command="cd $(MSBuildProjectDirectory) &amp;&amp; $(_PowershellCmdName) -ExecutionPolicy Bypass -File RestoreNpm.ps1 -BuildType $(Configuration)" />
+  </Target>
+<!--  <Target Name="RestoreNpmPackages" Condition="!Exists('node_modules/')">-->
+<!--    <Message Text="Restoring NPM packages" Importance="High" />-->
+<!--    <Exec Command="$(NpmPath) &#45;&#45;scripts-prepend-node-path=auto &#45;&#45;prefer-offline &#45;&#45;no-audit &#45;&#45;progress=false ci" ContinueOnError="True" />-->
+<!--  </Target>-->
+<!--  <Target Name="BuildThemes" BeforeTargets="BeforeBuild" DependsOnTargets="RestoreNpmPackages">-->
+<!--    <Exec Command="$(NpmPath) &#45;&#45;scripts-prepend-node-path=auto &#45;&#45;prefix $(NpmPrefixPath) run build" />-->
+<!--  </Target>-->
+  <Target Name="CopyStaticFilesToDestinations" BeforeTargets="AfterBuild">
+    <RemoveDir Directories="$(ProjectDir)..\..\Bin\NetCore\staticwebassets\DevExpress.Blazor.Themes\wwwroot" />
+    <Copy UseHardlinksIfPossible="true" ContinueOnError="True" SourceFiles="@(WwwRootFiles)" DestinationFiles="$(ProjectDir)..\..\Bin\NetCore\staticwebassets\DevExpress.Blazor.Themes\wwwroot\%(WwwRootFiles.RecursiveDir)%(WwwRootFiles.Filename)%(WwwRootFiles.Extension)" />
+  </Target>
+</Project>

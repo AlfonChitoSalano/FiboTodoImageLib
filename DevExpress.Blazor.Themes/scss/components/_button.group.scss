@@ -1,0 +1,119 @@
+@import "mixins/button";
+@import "mixins/text-edit";
+
+.dxbl-btn-group,
+.dxbl-btn-group-vertical {
+    display: inline-flex;
+
+    & > .dxbl-btn,
+    & > .dxbl-btn-split > .dxbl-btn,
+    & > .dxbl-text-edit {
+        position: relative;
+    }
+
+    & > .dxbl-btn {
+        @include button-focus-state() {
+            z-index: 1;
+        }
+    }
+
+    & > .dxbl-btn-split > .dxbl-btn {
+        @include button-focus-state() {
+            z-index: 1;
+        }
+    }
+
+    & > .dxbl-text-edit {
+        @include text-edit-focus-state() {
+            z-index: 1;
+        }
+    }
+
+    & > .dxbl-btn.dxbl-btn-secondary,
+    & > .dxbl-btn-split > .dxbl-btn.dxbl-btn-secondary {
+        @include button-secondary-tool-style();
+        @include button-focus-style($dx-primary, "primary");
+    }
+
+    & > .dxbl-btn.dxbl-btn-outline-secondary,
+    & > .dxbl-btn-split > .dxbl-btn.dxbl-btn-outline-secondary {
+        @include button-secondary-outline-tool-style();
+        @include button-focus-style($dx-primary, "primary");
+    }
+
+    & > .dxbl-btn.dxbl-btn-text-secondary,
+    & > .dxbl-btn-split > .dxbl-btn.dxbl-btn-text-secondary {
+        @include button-secondary-text-tool-style();
+        @include button-focus-style($dx-primary, "primary");
+    }
+
+    & > .dxbl-btn,
+    & > .dxbl-btn-split > .dxbl-btn {
+        @include button-tool-paddings();
+    }
+
+    & > .dxbl-btn.dxbl-sm,
+    & > .dxbl-btn-split > .dxbl-btn.dxbl-sm {
+        @include button-tool-paddings-sm();
+    }
+
+    & > .dxbl-btn.dxbl-lg,
+    & > .dxbl-btn-split > .dxbl-btn.dxbl-lg {
+        @include button-tool-paddings-lg();
+    }
+}
+
+:not(.dxbl-btn-plain-toolbar) {
+    & > .dxbl-btn-group,
+    & > .dxbl-btn-group > .dxbl-btn-group {
+        & > .dxbl-btn:not(:first-child):not(.dxbl-btn-first),
+        & > .dxbl-btn-split:not(:first-child) > .dxbl-btn:first-child,
+        & > .dxbl-text-edit:not(:first-child),
+        & > .dxbl-text-edit:not(:first-child) > .dxbl-btn-group-left > .dxbl-btn:first-child,
+        &.dxbl-btn-group-right > .dxbl-btn {
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+        }
+
+        & > .dxbl-btn:not(:last-child):not(.dxbl-btn-last),
+        & > .dxbl-btn-split:not(:last-child):not(.dxbl-btn-last) > .dxbl-btn:last-child,
+        & > .dxbl-text-edit:not(:last-child),
+        & > .dxbl-text-edit:not(:last-child) > .dxbl-btn-group-right > .dxbl-btn:last-child,
+        &.dxbl-btn-group-left > .dxbl-btn {
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        & > .dxbl-btn:not(:last-child):not(.dxbl-btn-last),
+        & > .dxbl-btn-split:not(:last-child):not(.dxbl-btn-last) {
+            margin-right: -$dx-btn-border-width;
+        }
+    }
+}
+
+.dxbl-btn-group-vertical {
+    flex-direction: column;
+
+    & > .dxbl-btn:not(:first-child),
+    & > .dxbl-text-edit:not(:first-child) {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    &.dxbl-btn-group-right > .dxbl-btn {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+    }
+
+    & > .dxbl-btn:not(:last-child),
+    & > .dxbl-text-edit:not(:last-child) {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        margin-bottom: -$dx-btn-border-width;
+    }
+
+    &.dxbl-btn-group-left > .dxbl-btn {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+    }
+}

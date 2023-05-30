@@ -1,0 +1,11 @@
+@mixin active-thumb-x($width) {
+    opacity: $dx-scroll-viewer-scroll-bar-opacity;
+    width: $width;
+    border-radius: $dx-scroll-viewer-scroll-bar-border-radius;
+}
+
+@mixin active-thumb-y($height) {
+    opacity: $dx-scroll-viewer-scroll-bar-opacity;
+    height: $height;
+    border-radius: $dx-scroll-viewer-scroll-bar-border-radius;
+}

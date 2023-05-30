@@ -1,0 +1,68 @@
+$dx-primary: #9b17e2 !default;
+$dx-primary-alt: #c86afa !default;
+$dx-danger: #f31446 !default;
+$dx-warning: #fc781b !default;
+$dx-success: #31bd3d !default;
+$dx-info: #1381f3 !default;
+$dx-secondary: #2b2a2f !default;
+$dx-dark: #46444a !default;
+$dx-light: #e5e5e5 !default;
+
+$dx-gray-100: #f7f8f9 !default;
+$dx-gray-200: #e5e5e5 !default;
+$dx-gray-300: #adb5bd !default;
+$dx-gray-400: #615f63 !default;
+$dx-gray-500: #444444 !default;
+$dx-gray-600: #495057 !default;
+$dx-gray-700: #46444a !default;
+$dx-gray-800: #37353d !default;
+$dx-gray-900: #2b2a2f !default;
+
+$dx-min-contrast-ratio: 1.8 !default;
+
+$dx-state-selected-bg-alpha: 30% !default;
+$dx-state-hover-bg-alpha: 15% !default;
+$dx-state-hover-secondary-bg-alpha: 10% !default;
+$dx-state-selected-hover-bg-alpha: 50% !default;
+$dx-state-disabled-bg-alpha: 5% !default;
+
+$dx-panel-header-bg-alpha: 10% !default;
+$dx-panel-footer-bg-alpha: 7% !default;
+$dx-panel-footer-secondary-bg-alpha: 5% !default;
+
+// Common
+$dx-bg: $dx-gray-800 !default;
+$dx-color: white !default;
+$dx-border-color: $dx-gray-400 !default;
+
+// Button
+$dx-btn-box-shadow: 0px 1px 4px 0px rgb(0 0 0 / 20%) !default;
+
+// Calendar
+$dx-calendar-bg: $dx-gray-700 !default;
+
+// CheckBox
+$dx-checkbox-base-color: #fff !default;
+
+// ListBox
+$dx-listbox-bg: $dx-gray-700 !default;
+
+// TagBox
+$dx-tag-box-tag-base-color: #fff !default;
+
+// TextEdit
+$dx-text-edit-bg: $dx-gray-900 !default;
+$dx-text-edit-btn-disabled-bg: rgba(255, 255, 255, 0.03) !default;
+$dx-text-edit-state-base-color: #fff !default;
+
+// Pager
+$dx-pager-btn-bg: $dx-gray-700 !default;
+
+// Grid
+$dx-grid-bg: $dx-gray-700 !default;
+
+//GroupControl
+$dx-group-bg: $dx-gray-700 !default;
+
+// Tabs
+$dx-tabs-tab-selected-color: $dx-color !default;

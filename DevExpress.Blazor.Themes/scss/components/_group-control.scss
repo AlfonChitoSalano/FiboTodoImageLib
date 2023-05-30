@@ -1,0 +1,113 @@
+@import "mixins/common";
+@import "mixins/group-control";
+
+.dxbl-group {
+    --dxbl-group-border-width: #{$dx-group-border-width};
+    --dxbl-group-border-color: #{$dx-group-border-color};
+    --dxbl-group-border-radius: #{$dx-group-border-radius};
+    --dxbl-group-color: #{$dx-group-color};
+    --dxbl-group-bg: #{$dx-group-bg};
+    --dxbl-group-font-family: #{$dx-group-font-family};
+    --dxbl-group-font-size: #{$dx-group-font-size};
+    --dxbl-group-line-height: #{$dx-group-line-height};
+    --dxbl-group-header-line-height: #{$dx-group-header-line-height};
+    --dxbl-group-header-font-size: #{$dx-group-header-font-size};
+    --dxbl-group-header-padding-x: #{$dx-group-header-padding-x};
+    --dxbl-group-header-padding-y: #{$dx-group-header-padding-y};
+    --dxbl-group-header-spacing: #{$dx-group-header-spacing};
+    --dxbl-group-header-bg: #{$dx-group-header-bg};
+    --dxbl-group-header-color: #{$dx-group-header-color};
+    --dxbl-group-header-font-weight: #{$dx-group-header-font-weight};
+    --dxbl-group-header-border-radius: #{$dx-group-header-border-radius};
+    --dxbl-group-header-btn-bg: #{$dx-group-header-btn-bg};
+    --dxbl-group-header-btn-color: #{$dx-group-header-btn-color};
+    --dxbl-group-header-btn-hover-bg: #{$dx-group-header-btn-hover-bg};
+    --dxbl-group-header-btn-hover-color: #{$dx-group-header-btn-hover-color};
+
+    position: relative;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+    background-color: var(--dxbl-group-bg);
+    color: var(--dxbl-group-color);
+    border: var(--dxbl-group-border-width) solid var(--dxbl-group-border-color);
+    border-radius: var(--dxbl-group-border-radius);
+    font-family: var(--dxbl-group-font-family);
+    font-size: var(--dxbl-group-font-size);
+    line-height: var(--dxbl-group-line-height);
+
+    @include safari-line-height("--dxbl-group-line-height", $dx-group-line-height-safari);
+
+    // stylelint-disable selector-class-pattern
+    &:not(.expanded):not([is-animating]) > .dxbl-group-header {
+        border-bottom: none;
+        border-radius: var(--dxbl-group-header-border-radius);
+    }
+
+    &:not([data-qa-dxbl-loaded]):not(.expanded) > .dxbl-group-body {
+        visibility: hidden;
+    }
+
+    // stylelint-enable selector-class-pattern
+
+    &.dxbl-sm {
+        --dxbl-group-font-size: #{$dx-group-font-size-sm};
+        --dxbl-group-line-height: #{$dx-group-line-height-sm};
+        --dxbl-group-header-padding-x: #{$dx-group-header-padding-x-sm};
+        --dxbl-group-header-padding-y: #{$dx-group-header-padding-y-sm};
+        --dxbl-group-header-spacing: #{$dx-group-header-spacing-sm};
+        --dxbl-group-header-font-size: #{$dx-group-header-font-size-sm};
+        --dxbl-group-header-line-height: #{$dx-group-header-line-height-sm};
+    }
+
+    &.dxbl-lg {
+        --dxbl-group-font-size: #{$dx-group-font-size-lg};
+        --dxbl-group-line-height: #{$dx-group-line-height-lg};
+        --dxbl-group-header-padding-x: #{$dx-group-header-padding-x-lg};
+        --dxbl-group-header-padding-y: #{$dx-group-header-padding-y-lg};
+        --dxbl-group-header-spacing: #{$dx-group-header-spacing-lg};
+        --dxbl-group-header-font-size: #{$dx-group-header-font-size-lg};
+        --dxbl-group-header-line-height: #{$dx-group-header-line-height-lg};
+    }
+
+    & > .dxbl-group-body {
+        flex: 1 1 auto;
+        padding: 0;
+        color: var(--dxbl-group-color);
+    }
+
+    & > .dxbl-group-header {
+        display: flex;
+        align-items: center;
+        font-size: var(--dxbl-group-header-font-size);
+        line-height: var(--dxbl-group-header-line-height);
+        font-weight: var(--dxbl-group-header-font-weight);
+        padding: var(--dxbl-group-header-padding-y) var(--dxbl-group-header-padding-x);
+        margin-bottom: 0;
+        border-bottom: var(--dxbl-group-border-width) solid var(--dxbl-group-border-color);
+        border-radius: var(--dxbl-group-header-border-radius) var(--dxbl-group-header-border-radius) 0 0;
+
+        @include panel-header-style("--dxbl-group-header-bg", "--dxbl-group-header-color");
+
+        & .dxbl-btn.dxbl-group-expand-btn + * {
+            margin-left: var(--dxbl-group-header-spacing);
+        }
+
+        @include group-expand-button-style() {
+            --dxbl-btn-border-radius: 50%;
+
+            @include embedded-image-color("--dxbl-group-header-btn-color", null, "--dxbl-group-header-btn-hover-color");
+
+            @include hover-state() {
+                @include state-hover-style("--dxbl-group-header-btn-hover-bg", "--dxbl-group-header-btn-hover-color", "--dxbl-group-border-width");
+            }
+
+            @include button-focus-state () {
+                @include button-inner-focus-style(var(--dxbl-btn-border-radius), -1px);
+            }
+        }
+
+        @include group-text-container-style();
+    }
+}

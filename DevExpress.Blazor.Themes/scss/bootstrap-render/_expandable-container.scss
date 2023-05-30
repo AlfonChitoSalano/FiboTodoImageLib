@@ -1,0 +1,10 @@
+.dxbl-expandable-container {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+
+    &[is-animating] {
+        transition: max-height .35s ease;
+        will-change: max-height;
+    }
+}

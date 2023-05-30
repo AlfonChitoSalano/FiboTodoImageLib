@@ -1,0 +1,140 @@
+@import "mixins/button";
+@import "mixins/text-edit";
+@import "mixins/toolbar";
+
+.dxbl-btn-toolbar {
+    --dxbl-btn-toolbar-spacing: #{$dx-btn-toolbar-spacing};
+    --dxbl-btn-toolbar-item-spacing: #{$dx-btn-toolbar-item-spacing};
+    --dxbl-btn-toolbar-separator-height: calc(100% - 2 * #{$dx-border-width});
+    --dxbl-btn-toolbar-separator-width: #{$dx-border-width};
+    --dxbl-btn-toolbar-separator-margin-y: #{$dx-border-width};
+    --dxbl-btn-toolbar-separator-color: #{$dx-border-color};
+
+    & > :not(:first-child) {
+        margin-left: var(--dxbl-btn-toolbar-spacing);
+    }
+
+    & > .dxbl-btn.dxbl-btn-secondary,
+    & > .dxbl-btn-split > .dxbl-btn.dxbl-btn-secondary,
+    & > .dxbl-btn-group > .dxbl-btn.dxbl-btn-secondary,
+    & > .dxbl-btn-group > .dxbl-btn-split > .dxbl-btn.dxbl-btn-secondary,
+    & > .dxbl-btn-group > .dxbl-btn-group > .dxbl-btn.dxbl-btn-secondary,
+    & > .dxbl-btn-group > .dxbl-btn-group > .dxbl-btn-split > .dxbl-btn.dxbl-btn-secondary {
+        @include button-secondary-tool-style();
+        @include button-secondary-tool-state-styles();
+    }
+
+    & > .dxbl-btn.dxbl-btn-outline-secondary,
+    & > .dxbl-btn-split > .dxbl-btn.dxbl-btn-outline-secondary,
+    & > .dxbl-btn-group > .dxbl-btn.dxbl-btn-outline-secondary,
+    & > .dxbl-btn-group > .dxbl-btn-split > .dxbl-btn.dxbl-btn-outline-secondary,
+    & > .dxbl-btn-group > .dxbl-btn-group > .dxbl-btn.dxbl-btn-outline-secondary,
+    & > .dxbl-btn-group > .dxbl-btn-group > .dxbl-btn-split > .dxbl-btn.dxbl-btn-outline-secondary {
+        @include button-secondary-outline-tool-style();
+        @include button-secondary-outline-tool-state-styles();
+    }
+
+    & > .dxbl-btn.dxbl-btn-text-secondary,
+    & > .dxbl-btn-split > .dxbl-btn.dxbl-btn-text-secondary,
+    & > .dxbl-btn-group > .dxbl-btn.dxbl-btn-text-secondary,
+    & > .dxbl-btn-group > .dxbl-btn-split > .dxbl-btn.dxbl-btn-text-secondary,
+    & > .dxbl-btn-group > .dxbl-btn-group > .dxbl-btn.dxbl-btn-text-secondary,
+    & > .dxbl-btn-group > .dxbl-btn-group > .dxbl-btn-split > .dxbl-btn.dxbl-btn-text-secondary {
+        @include button-secondary-text-tool-style();
+        @include button-secondary-text-tool-state-styles();
+    }
+
+    & > .dxbl-btn,
+    & > .dxbl-btn-split > .dxbl-btn {
+        @include button-tool-paddings();
+    }
+
+    & > .dxbl-btn.dxbl-sm,
+    & > .dxbl-btn-split > .dxbl-btn.dxbl-sm {
+        @include button-tool-paddings-sm();
+    }
+
+    & > .dxbl-btn.dxbl-lg,
+    & > .dxbl-btn-split > .dxbl-btn.dxbl-lg {
+        @include button-tool-paddings-lg();
+    }
+
+    & > .dxbl-btn-toolbar-separator {
+        @include btn-toolbar-separator();
+    }
+
+    &.dxbl-btn-plain-toolbar {
+        & > .dxbl-btn-group,
+        & > .dxbl-btn-group > .dxbl-btn-group {
+            @include btn-plain-toolbar-edit-item();
+
+            & > .dxbl-btn:not(:first-child):not(.dxbl-btn-first),
+            & > .dxbl-btn-split:not(:first-child):not(.dxbl-btn-first) > .dxbl-btn:first-child {
+                margin-left: var(--dxbl-btn-toolbar-item-spacing);
+            }
+
+            & > .dxbl-text-edit:not(:first-child) {
+                margin-left: var(--dxbl-btn-toolbar-item-spacing);
+            }
+        }
+
+        & > .dxbl-btn-group:not(:first-child):not(.dxbl-btn-group-first),
+        & > .dxbl-btn-group > .dxbl-btn-group:not(:first-child):not(.dxbl-btn-group-first) {
+            @include btn-plain-toolbar-group-separator();
+        }
+
+        &,
+        & > .dxbl-btn-group,
+        & > .dxbl-btn-group > .dxbl-btn-group {
+            & > .dxbl-btn-split {
+                @include btn-plain-toolbar-split();
+            }
+        }
+    }
+
+    &:not(.dxbl-btn-plain-toolbar) {
+        & > .dxbl-btn-split,
+        & > .dxbl-btn-group > .dxbl-btn-split {
+            & > .dxbl-btn:not(:first-child) {
+                border-bottom-left-radius: 0 !important; // stylelint-disable-line declaration-no-important
+                border-top-left-radius: 0 !important; // stylelint-disable-line declaration-no-important
+            }
+
+            & > .dxbl-btn:not(:last-child) {
+                border-bottom-right-radius: 0 !important; // stylelint-disable-line declaration-no-important
+                border-top-right-radius: 0 !important; // stylelint-disable-line declaration-no-important
+                border-right-color: transparent !important; // stylelint-disable-line declaration-no-important
+            }
+        }
+
+        & > .dxbl-btn-group,
+        & > .dxbl-btn-group > .dxbl-btn-group {
+            & > .dxbl-btn:not(:last-child):not(.dxbl-btn-last),
+            & > .dxbl-btn-split:not(:last-child) {
+                border-right-color: transparent;
+            }
+
+            & > .dxbl-btn-split:not(:last-child):not(.dxbl-btn-last) > .dxbl-btn:last-child {
+                border-right-color: transparent;
+            }
+        }
+
+        & > .dxbl-btn-group {
+            & > .dxbl-text-edit:not(:last-child) {
+                margin-right: -$dx-btn-border-width;
+            }
+        }
+    }
+
+    .dxbl-sm &,
+    &.dxbl-sm {
+        --dxbl-btn-toolbar-spacing: #{$dx-btn-toolbar-spacing-sm};
+        --dxbl-btn-toolbar-item-spacing: #{$dx-btn-toolbar-item-spacing-sm};
+    }
+
+    .dxbl-lg &,
+    &.dxbl-lg {
+        --dxbl-btn-toolbar-spacing: #{$dx-btn-toolbar-spacing-lg};
+        --dxbl-btn-toolbar-item-spacing: #{$dx-btn-toolbar-item-spacing-lg};
+    }
+}

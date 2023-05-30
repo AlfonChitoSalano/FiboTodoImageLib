@@ -1,0 +1,114 @@
+$black: #222 !default;
+$blue: #5f368d !default;
+$cyan: #00a9e6 !default;
+$green: #28a745 !default;
+
+$gray-100: #ececec !default;
+$gray-600: #888 !default;
+
+$font-size-base: 0.875rem !default;
+$font-size-lg: 1.125rem !default;
+$font-size-sm: 0.8125rem !default;
+
+$border-radius: .2rem !default;
+$border-radius-sm: .15rem !default;
+$border-radius-lg: .3rem !default;
+
+$min-contrast-ratio: 2.2 !default;
+
+// Custom Variables
+
+$theme-box-shadow-sm: 0px 1px 4px 0px rgba(0, 0, 0, 0.2) !default;
+$theme-box-shadow-lg: 0px 2px 12px 0px rgba(0, 0, 0, 0.25) !default;
+
+// Alert
+
+$alert-border-radius: .25rem !default;
+
+// Badges
+
+$badge-font-size: 80% !default;
+
+// Breadcrumb
+
+$breadcrumb-bg: $gray-100;
+$breadcrumb-divider-color: #AAA !default;
+$breadcrumb-active-color: #AAA !default;
+$breadcrumb-item-padding: .75rem !default;
+$breadcrumb-padding-y: 0.75rem !default;
+$breadcrumb-padding-x: 1rem !default;
+$breadcrumb-border-radius: $border-radius !default;
+
+// Buttons
+
+$btn-padding-x: .75rem !default;
+$btn-box-shadow: $theme-box-shadow-sm !default;
+$btn-active-box-shadow: $theme-box-shadow-sm !default;
+
+// Cards
+
+$card-border-radius: .25rem !default;
+$card-spacer-x: 1.25rem !default;
+$card-border-color: rgba(34, 34, 34, .125) !default;
+
+// Dropdowns
+
+$dropdown-border-radius: .25rem !default;
+$dropdown-item-padding-x: 1rem !default;
+$dropdown-box-shadow: $theme-box-shadow-lg !default;
+
+// Forms
+
+$input-btn-padding-y: .40625rem !default;
+$input-btn-padding-y-lg: .65625rem !default;
+$input-btn-padding-y-sm: .203125rem !default;
+$btn-padding-y-sm: .203125rem !default;
+$custom-control-indicator-size: 1.25rem !default;
+$custom-control-indicator-bg-size: 100% 100% !default;
+$custom-radio-indicator-icon-checked: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%%3ccircle r='2.3' fill='%23fff'/%3e%3c/svg%3e") !default;
+$custom-checkbox-indicator-icon-checked: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 12 12'%3E%3Cpath fill='%23fff' d='M7,1L3,5L1,3L0,4l3,3l5-5L7,1z'/%3E%3C/svg%3E") !default;
+$custom-checkbox-indicator-icon-indeterminate: url("data:image/svg+xml,%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 12 12' style='enable-background:new 0 0 12 12;' xml:space='preserve'%3E%3Cstyle type='text/css'%3E .st0%7Bfill:%23FFFFFF;%7D%0A%3C/style%3E%3Crect id='_x31_' x='2' y='5' class='st0' width='8' height='2'/%3E%3C/svg%3E%0A") !default;
+
+// Jumbotron
+
+$jumbotron-bg: #F9F8FC !default;
+
+// List groups
+
+$list-group-border-radius: .25rem !default;
+$list-group-item-padding-y: .59375rem !default;
+
+// Navs
+
+$nav-tabs-border-radius: 0 !default;
+$nav-tabs-link-active-border-color: $blue;
+
+// Modals
+
+$modal-content-box-shadow-xs: $theme-box-shadow-lg !default;
+$modal-content-box-shadow-sm-up: $theme-box-shadow-lg !default;
+
+// Pagination
+
+$pagination-padding-y-sm: .2195rem !default;
+
+// Progress bars
+
+$progress-border-radius: .5rem !default;
+
+// Switches
+
+$custom-switch-width: 1.875rem !default;
+$custom-switch-indicator-size: 1.25rem !default;
+
+// Tables
+
+$table-cell-padding: .5rem !default;
+$table-cell-padding-sm: .25rem !default;
+
+// Thumbnail
+
+$thumbnail-border-radius: .25rem !default;
+
+// Tooltips
+$tooltip-border-radius: .25rem !default;

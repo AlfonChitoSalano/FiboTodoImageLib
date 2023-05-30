@@ -1,0 +1,95 @@
+@import 'navigation/common';
+@import 'state-decorations';
+$treeViewLinkSelector: ".dxbs-tree ul.nav > .nav-item > .nav-link";
+
+.dxbs-tree {
+    & > .dxbl-navigation-filter {
+        margin-bottom: 0.75rem;
+        width: 100%;
+    }
+
+    @include navigation-filter-mark();
+}
+
+.dxbs-tree ul.flex-column {
+    /*from _old*/
+    flex-wrap: nowrap;
+}
+
+.dxbs-tree > ul.nav ul.nav {
+    margin: 0.2em 0 0.2em 2em;
+}
+
+#{$treeViewLinkSelector} {
+    display: flex;
+    align-items: center;
+    padding: 0 .625rem 0 .125rem;
+
+    &.no-expand-button {
+        padding: .325rem .625rem;
+    }
+
+    & > .expand-btn:not(.disabled) .dxbl-image {
+        opacity: 0.7;
+    }
+
+    .image + .treeview-item-text-container {
+        padding-left: 0.7em;
+    }
+
+    &:not(.disabled):not(.active) {
+        cursor: pointer;
+        color: inherit;
+        position: relative;
+        transform: scale(1);
+    }
+
+    & > span + .badge {
+        /*from _old*/
+        margin-left: 0.3em;
+    }
+
+    & > span.image:not(:last-child),
+    & > .badge > span.image:not(:last-child),
+    & > span.node-lp:not(:last-child) {
+        /*from _old*/
+        padding: 0.4em;
+        margin: -0.4em;
+        margin-right: 0;
+    }
+
+    & > span:not(.image):not(.badge):not(.expand-btn) {
+        flex: 1 1 auto;
+    }
+}
+
+@include state_backdrop("#{$treeViewLinkSelector}:not(.disabled):not(.active)", (border-radius: inherit), "", false);
+
+.dxbs-tree .expand-btn.btn {
+    display: inline-flex;
+    box-sizing: content-box;
+    padding: .5rem;
+    font-size: inherit;
+
+    &.btn-link {
+        text-decoration: none;
+    }
+
+    &:not(:last-child) {
+        margin-right: .25rem;
+    }
+
+    &,
+    & > .dxbl-image {
+        margin: 0;
+    }
+
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+        box-shadow: none !important;
+        font-weight: inherit;
+        color: inherit;
+    }
+}

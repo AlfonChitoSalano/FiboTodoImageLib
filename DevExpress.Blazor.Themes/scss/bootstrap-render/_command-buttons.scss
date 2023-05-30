@@ -1,0 +1,49 @@
+@import 'state-decorations';
+$commandBtnPadding: .5rem !default;
+
+@mixin commandButtonSize($iconSize) {
+    width: $iconSize;
+    height: $iconSize;
+    padding: $commandBtnPadding;
+    flex: 0 0 ($iconSize);
+}
+
+.btn.dxbs-cmd-btn {
+    @include commandButtonSize(1rem);
+    font-size: 0;
+    display: inline-flex;
+    box-sizing: content-box;
+    color: inherit !important;
+    box-shadow: unset;
+
+    &:not(:focus) {
+        color: inherit;
+    }
+}
+
+@include state_backdrop(".btn.dxbs-cmd-btn", ( border-radius: 50%));
+
+@media (hover: none) {
+    .dxbs-cmd-btn {
+        color: inherit !important;
+
+        &:before {
+            opacity: 0 !important;
+        }
+    }
+}
+
+.dxbs-cmd-btn.btn-link {
+    &:focus,
+    &.focus,
+    &.active,
+    &:active {
+        box-shadow: none !important;
+    }
+}
+
+.dxbs-calendar .btn.dxbs-cmd-btn {
+    @include commandButtonSize(.7em);
+}
+
+
