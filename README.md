@@ -1,5 +1,10 @@
 # FiboTodoImageLib
-Fibonacci, To do ex, ImageLib (Please note can't deploy in static web app azure because the DevExpress is Trial only https://supportcenter.devexpress.com/ticket/details/t1144872/devexpress-blazor-components-and-azure-static-web-apps)
+Fibonacci, To do ex, ImageLib 
+
+## Notes
+1. Note can't deploy in static web app azure because the DevExpress is Trial only https://supportcenter.devexpress.com/ticket/details/t1144872/devexpress-blazor-components-and-azure-static-web-apps. The github actions fail because of this.
+
+2. DevExpress control is used for real world.
 
 ## Running via VS
 1. PLease install first DevExpress Free Trial here https://demos.devexpress.com/blazor/
