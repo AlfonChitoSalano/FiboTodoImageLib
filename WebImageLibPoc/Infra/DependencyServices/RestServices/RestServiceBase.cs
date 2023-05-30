@@ -7,7 +7,7 @@ namespace WebImageLibPoc.Infra
 {
     public abstract class RestServiceBase
     {
-        private const string BaseApi = "http://localhost:7198/api/";//"https://az-func-storage-poc.azurewebsites.net/api/";
+        private const string BaseApi = "https://az-func-storage-poc.azurewebsites.net/api/";
 
         protected readonly string BaseFunctionApi;
 
